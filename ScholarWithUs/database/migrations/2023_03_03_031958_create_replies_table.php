@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('replies', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('discussion_id');
+            $table->text('comment');
         });
     }
 

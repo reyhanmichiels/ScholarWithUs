@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId("program_id");
+            $table->string('name');
         });
     }
 

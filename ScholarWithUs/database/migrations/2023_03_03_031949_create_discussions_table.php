@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('discussions', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('user_id');
+            $table->string('tag');
+            $table->string('title');
+            $table->text('comment');
         });
     }
 
