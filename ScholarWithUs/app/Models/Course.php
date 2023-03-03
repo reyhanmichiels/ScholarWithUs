@@ -13,4 +13,7 @@ class Course extends Model
     {
         return $this->belongsToMany(Program::class);
     }
+
+    public $timestamps = false;
+
 }

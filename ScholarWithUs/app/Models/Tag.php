@@ -13,4 +13,6 @@ class Tag extends Model
     {
         return $this->hasMany(Discussion::class);
     }
+
+    public $timestamps = false;
 }

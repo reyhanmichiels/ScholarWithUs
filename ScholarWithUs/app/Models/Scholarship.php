@@ -13,4 +13,6 @@ class Scholarship extends Model
     {
         return $this->hasOne(Program::class);
     }
+
+    public $timestamps = false;
 }

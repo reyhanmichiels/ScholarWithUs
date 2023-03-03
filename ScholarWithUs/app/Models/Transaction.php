@@ -2,28 +2,23 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Discussion extends Model
+class Transaction extends Model
 {
-    use HasFactory;
-
-    public function replies()
-    {
-        return $this->hasMany(Reply::class);
-    }
+    use HasFactory, HasUuids;
 
     public function users()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function tags()
+    public function programs()
     {
-        return $this->belongsTo(Tag::class);
+        return $this->belongsTo(Program::class);
     }
 
     public $timestamps = false;
-
 }
