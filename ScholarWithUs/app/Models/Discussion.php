@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Discussion extends Model
 {
     use HasFactory;
+
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

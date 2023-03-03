@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Scholarship extends Model
 {
     use HasFactory;
+
+    public function programs()
+    {
+        return $this->hasOne(Program::class);
+    }
 }
