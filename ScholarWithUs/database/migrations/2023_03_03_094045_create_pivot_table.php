@@ -20,11 +20,6 @@ return new class extends Migration
             $table->foreignId('course_id');
             $table->foreignId('program_id');
         });
-
-        Schema::create('discussion_tag', function (Blueprint $table) {
-            $table->foreignId('discussion_id');
-            $table->foreignId('tag_id');
-        });
     }
 
     /**

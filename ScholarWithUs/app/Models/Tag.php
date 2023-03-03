@@ -11,6 +11,6 @@ class Tag extends Model
 
     public function discussions()
     {
-        return $this->belongsToMany(Discussion::class);
+        return $this->hasMany(Discussion::class);
     }
 }

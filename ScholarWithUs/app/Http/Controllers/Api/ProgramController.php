@@ -1,20 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Libraries\ApiResponse;
-use App\Models\Article;
+use App\Models\Program;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class ArticleController extends Controller
+class ProgramController extends Controller
 {
-    public function index(Article $article)
+    public function index(Program $program)
     {
         try {
             $data = [
-                'message' => "Get all article",
-                'data' => $article->all()
+                'message' => "Get all program",
+                'data' => $program->all()
             ];
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
@@ -23,12 +24,12 @@ class ArticleController extends Controller
         return ApiResponse::success($data, 200);
     }
 
-    public function show(Article $article)
+    public function show(Program $program)
     {
         try {
             $data = [
-                'message' => "Article with id $article->id",
-                'data' => $article
+                'message' => "Program with id $program->id",
+                'data' => $program
             ];
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
@@ -40,7 +41,8 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $validate = Validator::make($request->all(), [
-            'title' => 'string|required',
+            'scholarship_id' => 'int|required',
+            'name' => 'string|required',
             'description' => 'string|required'
         ]);
 
@@ -49,26 +51,28 @@ class ArticleController extends Controller
         }
 
         try {
-            $article = new Article;
-            $article->title = $request->title;
-            $article->description = $request->description;
-            $article->save();
+            $program = new Program;
+            $program->scholarship_id = $request->scholarship_id;
+            $program->name = $request->name;
+            $program->description = $request->description;
+            $program->save();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
         }
 
         $data = [
-            'message' => 'Article created',
-            'data' => $article
+            'message' => 'Program created',
+            'data' => $program
         ];
 
         return ApiResponse::success($data, 201);
     }
 
-    public function update(Request $request, Article $article)
+    public function update(Request $request, Program $program)
     {
         $validate = Validator::make($request->all(), [
-            'title' => 'string|required',
+            'scholarship_id' => 'int|required',
+            'name' => 'string|required',
             'description' => 'string|required'
         ]);
 
@@ -77,32 +81,32 @@ class ArticleController extends Controller
         }
 
         try {
-            $article->title = $request->title;
-            $article->description = $request->description;
-            $article->save();
+            $program->scholarship_id = $request->scholarship_id;
+            $program->name = $request->name;
+            $program->description = $request->description;
+            $program->save();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
         }
 
         $data = [
-            'message' => 'Article updated',
-            'data' => $article
+            'message' => 'Program updated',
+            'data' => $program
         ];
 
         return ApiResponse::success($data, 200);
     }
 
-    public function destroy(Article $article)
+    public function destroy(Program $program)
     {
         try {
-            $article->delete();
+            $program->delete();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
         }
 
-        $data['message'] = "Article Deleted";
+        $data['message'] = "Program Deleted";
 
         return ApiResponse::success($data, 200);
-        
     }
 }

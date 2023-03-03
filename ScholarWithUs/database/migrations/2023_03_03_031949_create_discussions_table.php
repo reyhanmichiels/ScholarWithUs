@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('discussions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
+            $table->foreignId('tag_id');
             $table->string('title');
             $table->text('comment');
         });
