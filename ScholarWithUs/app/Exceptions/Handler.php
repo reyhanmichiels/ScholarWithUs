@@ -2,7 +2,6 @@
 
 namespace App\Exceptions;
 
-use App\Libraries\ApiResponse;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
@@ -44,9 +43,12 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->renderable(function (Exception $e) {
-            $code = isset($e->getCode()) ? $e->getCode() : 400;
-            
-            return ApiResponse::error($e->getMessage(), $code);
+            $code = $e->getCode();
+            $code =  isset($code) ? $code : 400;
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ],);
         });
     }
 }
