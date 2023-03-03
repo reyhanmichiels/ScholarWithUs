@@ -95,6 +95,46 @@ class DatabaseSeeder extends Seeder
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
         ]);
 
+        DB::table('course_program')->insert([
+            'course_id' => '1',
+            'program_id' => '1',
+        ]);
 
+        DB::table('course_program')->insert([
+            'program_id' => '1',
+            'course_id' => '2',
+        ]);
+
+        DB::table('course_program')->insert([
+            'program_id' => '2',
+            'course_id' => '1',
+        ]);
+        
+        DB::table('course_program')->insert([
+            'program_id' => '2',
+            'course_id' => '3',
+        ]);
+
+        DB::table('course_program')->insert([
+            'program_id' => '3',
+            'course_id' => '1',
+        ]);
+        
+        DB::table('course_program')->insert([
+            'program_id' => '3',
+            'course_id' => '4',
+        ]);
+
+        DB::table('tags')->insert([
+            'name' => 'Tag A',
+        ]);
+
+        DB::table('tags')->insert([
+            'name' => 'Tag B',
+        ]);
+
+        DB::table('tags')->insert([
+            'name' => 'Tag C',
+        ]);
     }
 }
