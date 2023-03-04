@@ -41,7 +41,8 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $validate = Validator::make($request->all(), [
-            'name' => 'string|required'
+            'name' => 'string|required',
+            'mentor_id' => 'int|required'
         ]);
 
         if ($validate->fails()) {
@@ -51,6 +52,7 @@ class CourseController extends Controller
         try {
             $course = new Course;
             $course->name = $request->name;
+            $course->mentor_id = $request->mentor_id;
             $course->save();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
@@ -67,7 +69,9 @@ class CourseController extends Controller
     public function update(Request $request, Course $course)
     {
         $validate = Validator::make($request->all(), [
-            'name' => 'string|required'
+            'name' => 'string|required',
+            'mentor_id' => 'int|required'
+
         ]);
 
         if ($validate->fails()) {
@@ -76,6 +80,7 @@ class CourseController extends Controller
 
         try {
             $course->name = $request->name;
+            $course->mentor_id = $request->mentor_id;
             $course->save();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);

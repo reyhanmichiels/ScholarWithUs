@@ -20,6 +20,11 @@ return new class extends Migration
             $table->foreignId('course_id');
             $table->foreignId('program_id');
         });
+
+        Schema::create('mentor_program', function (Blueprint $table) {
+            $table->foreignId('mentor_id');
+            $table->foreignId('program_id');
+        });
     }
 
     /**

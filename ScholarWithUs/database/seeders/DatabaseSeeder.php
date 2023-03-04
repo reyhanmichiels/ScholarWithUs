@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Article;
 use App\Models\Course;
+use App\Models\Mentor;
 use App\Models\Program;
 use App\Models\Scholarship;
 use App\Models\Tag;
@@ -75,20 +76,44 @@ class DatabaseSeeder extends Seeder
             'price' => 3000000
         ]);
 
-        Course::create([
-            'name' => 'course A',
+        Mentor::create([
+            'name' => 'Mentor A',
+            'description' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque exceptur'
+        ]);
+
+        Mentor::create([
+            'name' => 'Mentor B',
+            'description' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque exceptur'
+        ]);
+
+        Mentor::create([
+            'name' => 'Mentor C',
+            'description' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque exceptur'
+        ]);
+
+        Mentor::create([
+            'name' => 'Mentor C',
+            'description' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque exceptur'
         ]);
 
         Course::create([
-            'name' => 'course B',
+            'mentor_id' => 1,
+            'name' => 'course A'
         ]);
 
         Course::create([
-            'name' => 'course C',
+            'mentor_id' => 2,
+            'name' => 'course B'
         ]);
 
         Course::create([
-            'name' => 'course D',
+            'mentor_id' => 3,
+            'name' => 'course C'
+        ]);
+
+        Course::create([
+            'mentor_id' => 4,
+            'name' => 'course D'
         ]);
 
         Article::create([
