@@ -152,7 +152,7 @@ class ProgramController extends Controller
             $response = $program->sortBy('created_at')->take(9);
             
             $data = [
-                'message' => "9 newest scholarship",
+                'message' => "9 newest program",
                 'data' => $response
             ];
         } catch (\Exception $e) {
