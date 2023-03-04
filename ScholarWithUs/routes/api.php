@@ -78,9 +78,11 @@ Route::get('/replies/{reply}', [ReplyController::class, 'show']);
 
 Route::get('/scholarships', [ScholarshipController::class, 'index']);
 Route::get('/scholarships/{scholarship}', [ScholarshipController::class, 'show']);
+Route::get('/scholarships/new', [ScholarshipController::class, 'showNew']);
 
 Route::get('/tags', [TagController::class, 'index']);
 Route::get('/tags/{tag}', [TagController::class, 'show']);
 
 Route::get('/programs', [ProgramController::class, 'index']);
 Route::get('/programs/{program}', [ProgramController::class, 'show']);
+Route::get('/programs/new', [ProgramController::class, 'showNew']);
