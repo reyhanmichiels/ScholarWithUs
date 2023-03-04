@@ -31,6 +31,11 @@ class Program extends Model
         return $this->belongsToMany(User::class);
     }
 
+    public function mentors()
+    {
+        return $this->belongsToMany(Mentor::class);
+    }
+
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
