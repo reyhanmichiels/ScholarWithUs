@@ -105,4 +105,20 @@ class ScholarshipController extends Controller
 
         return ApiResponse::success($data, 200);
     }
+
+    public function showNew(Scholarship $scholarship)
+    {
+        try {
+            $response = $scholarship->sortBy('created_at')->take(9);
+            
+            $data = [
+                'message' => "9 newest scholarship",
+                'data' => $response
+            ];
+        } catch (\Exception $e) {
+            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+        }
+
+        return ApiResponse::success($data, 200);
+    }
 }

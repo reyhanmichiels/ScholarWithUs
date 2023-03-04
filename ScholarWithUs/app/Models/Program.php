@@ -9,6 +9,13 @@ class Program extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'scholarship',
+        'description',
+        'price'
+    ];
+
     public function scholarships()
     {
         return $this->belongsTo(Scholarship::class);
@@ -28,6 +35,4 @@ class Program extends Model
     {
         return $this->hasMany(Transaction::class);
     }
-
-    public $timestamps = false;
 }

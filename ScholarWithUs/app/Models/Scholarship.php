@@ -9,10 +9,13 @@ class Scholarship extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'description'
+    ];
+
     public function programs()
     {
         return $this->hasOne(Program::class);
     }
-
-    public $timestamps = false;
 }

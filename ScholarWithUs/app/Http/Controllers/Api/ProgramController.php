@@ -146,6 +146,22 @@ class ProgramController extends Controller
         return ApiResponse::success($data, 200);
     }
 
+    public function showNew(Program $program)
+    {
+        try {
+            $response = $program->sortBy('created_at')->take(9);
+            
+            $data = [
+                'message' => "9 newest scholarship",
+                'data' => $response
+            ];
+        } catch (\Exception $e) {
+            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+        }
+
+        return ApiResponse::success($data, 200);
+    }
+
     public function buy(Request $request, Program $program)
     {
         $validate = Validator::make($request->all(), [
