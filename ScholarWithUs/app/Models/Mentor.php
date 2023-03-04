@@ -19,8 +19,6 @@ class Mentor extends Model
         return $this->hasOne(Course::class);
     }
 
-    public $timestamps = false;
-
     protected $fillable = [
         'name',
         'description'
