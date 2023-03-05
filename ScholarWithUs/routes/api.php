@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\ReplyController;
 use App\Http\Controllers\Api\ScholarshipController;
 use App\Http\Controllers\Api\TagController;
 use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\Api\ArticleController;
 use App\Models\Course;
 use App\Models\Discussion;
 use Illuminate\Http\Request;
