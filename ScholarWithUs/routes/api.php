@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\ScholarshipController;
 use App\Http\Controllers\Api\TagController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ArticleController;
+use App\Http\Controllers\Api\CourseController;
+use App\Http\Controllers\Api\DiscussionController;
 use App\Models\Course;
 use App\Models\Discussion;
 use Illuminate\Http\Request;
@@ -24,11 +26,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth')->group(function () {
-    Route::get('/courses', [Course::class, 'index']);
-    Route::get('/courses/{course}', [Course::class, 'show']);
-    Route::post('/courses', [Course::class, 'store']);
-    Route::put('/courses/{course}', [Course::class, 'update']);
-    Route::delete('/courses/{course}', [Course::class, 'destroy']);
+    Route::get('/courses', [CourseController::class, 'index']);
+    Route::get('/courses/{course}', [CourseController::class, 'show']);
+    Route::post('/courses', [CourseController::class, 'store']);
+    Route::put('/courses/{course}', [CourseController::class, 'update']);
+    Route::delete('/courses/{course}', [CourseController::class, 'destroy']);
 
     Route::get('/users', [UserController::class, 'index']);
     Route::get('/users/{user}', [UserController::class, 'show']);
@@ -53,9 +55,9 @@ Route::middleware('auth')->group(function () {
     Route::put('/replies/{reply}', [ReplyController::class, 'update']);
     Route::delete('/replies/{reply}', [ReplyController::class, 'destroy']);
 
-    Route::post('/discussions', [Discussion::class, 'store']);
-    Route::put('/discussions/{discussion}', [Discussion::class, 'update']);
-    Route::delete('/discussions/{discussion}', [Discussion::class, 'destroy']);
+    Route::post('/discussions', [DiscussionController::class, 'store']);
+    Route::put('/discussions/{discussion}', [DiscussionController::class, 'update']);
+    Route::delete('/discussions/{discussion}', [DiscussionController::class, 'destroy']);
 
     Route::post('/articles', [ArticleController::class, 'store']);
     Route::put('/articles/{article}', [ArticleController::class, 'update']);
@@ -70,19 +72,19 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/articles', [ArticleController::class, 'index']);
 Route::get('/articles/{article}', [ArticleController::class, 'show']);
 
-Route::get('/discussions', [Discussion::class, 'index']);
-Route::get('/discussions/{discussion}', [Discussion::class, 'show']);
+Route::get('/discussions', [DiscussionController::class, 'index']);
+Route::get('/discussions/{discussion}', [DiscussionController::class, 'show']);
 
 Route::get('/replies', [ReplyController::class, 'index']);
 Route::get('/replies/{reply}', [ReplyController::class, 'show']);
 
 Route::get('/scholarships', [ScholarshipController::class, 'index']);
 Route::get('/scholarships/{scholarship}', [ScholarshipController::class, 'show']);
-Route::get('/scholarships/new', [ScholarshipController::class, 'showNew']);
+Route::get('/newScholarships', [ScholarshipController::class, 'showNew']);
 
 Route::get('/tags', [TagController::class, 'index']);
 Route::get('/tags/{tag}', [TagController::class, 'show']);
 
 Route::get('/programs', [ProgramController::class, 'index']);
 Route::get('/programs/{program}', [ProgramController::class, 'show']);
-Route::get('/programs/new', [ProgramController::class, 'showNew']);
+Route::get('/newPrograms', [ProgramController::class, 'showNew']);

@@ -41,7 +41,7 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $validate = Validator::make($request->all(), [
-            'title' => 'string|required',
+            'title' => 'string|required|unique:articles',
             'description' => 'string|required'
         ]);
 
@@ -69,7 +69,7 @@ class ArticleController extends Controller
     public function update(Request $request, Article $article)
     {
         $validate = Validator::make($request->all(), [
-            'title' => 'string|required',
+            'title' => 'string|required|unique:articles,title,' . $article->id,
             'description' => 'string|required'
         ]);
 

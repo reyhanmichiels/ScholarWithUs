@@ -41,7 +41,7 @@ class TagController extends Controller
     public function store(Request $request)
     {
         $validate = Validator::make($request->all(), [
-            'name' => 'string|required'
+            'name' => 'string|required|unique:tags'
         ]);
 
         if ($validate->fails()) {
@@ -67,7 +67,7 @@ class TagController extends Controller
     public function update(Request $request, Tag $tag)
     {
         $validate = Validator::make($request->all(), [
-            'name' => 'string|required'
+            'name' => 'string|required:unique:tags'
         ]);
 
         if ($validate->fails()) {

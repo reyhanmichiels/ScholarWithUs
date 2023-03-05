@@ -78,8 +78,10 @@ class ProgramController extends Controller
     {
         $validate = Validator::make($request->all(), [
             'scholarship_id' => 'int|required',
-            'name' => 'string|required',
-            'description' => 'string|required'
+            'name' => 'string|required|unique:programs',
+            'description' => 'string|required',
+            'price' => 'int|required'
+
         ]);
 
         if ($validate->fails()) {
@@ -91,6 +93,7 @@ class ProgramController extends Controller
             $program->scholarship_id = $request->scholarship_id;
             $program->name = $request->name;
             $program->description = $request->description;
+            $program->price = $request->price;
             $program->save();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
@@ -108,8 +111,9 @@ class ProgramController extends Controller
     {
         $validate = Validator::make($request->all(), [
             'scholarship_id' => 'int|required',
-            'name' => 'string|required',
-            'description' => 'string|required'
+            'name' => 'string|required|unique:programs,name,' . $program->id,
+            'description' => 'string|required',
+            'price' => 'int|required'
         ]);
 
         if ($validate->fails()) {
@@ -120,6 +124,7 @@ class ProgramController extends Controller
             $program->scholarship_id = $request->scholarship_id;
             $program->name = $request->name;
             $program->description = $request->description;
+            $program->price = $request->price;
             $program->save();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
@@ -149,7 +154,7 @@ class ProgramController extends Controller
     public function showNew(Program $program)
     {
         try {
-            $response = $program->sortBy('created_at')->take(9);
+            $response = $program->all()->sortByDesc('created_at')->take(9);
             
             $data = [
                 'message' => "9 newest program",

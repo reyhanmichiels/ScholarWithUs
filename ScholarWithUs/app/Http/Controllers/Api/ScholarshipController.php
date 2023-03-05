@@ -41,7 +41,7 @@ class ScholarshipController extends Controller
     public function store(Request $request)
     {
         $validate = Validator::make($request->all(), [
-            'name' => 'string|required',
+            'name' => 'string|required|unique:scholarships',
             'description' => 'string|required'
         ]);
 
@@ -69,7 +69,7 @@ class ScholarshipController extends Controller
     public function update(Request $request, Scholarship $scholarship)
     {
         $validate = Validator::make($request->all(), [
-            'name' => 'string|required',
+            'name' => 'string|required|unique:scholarships,name,' . $scholarship->id,
             'description' => 'string|required'
         ]);
 
@@ -109,7 +109,7 @@ class ScholarshipController extends Controller
     public function showNew(Scholarship $scholarship)
     {
         try {
-            $response = $scholarship->sortBy('created_at')->take(9);
+            $response = $scholarship->all()->sortByDesc('created_at')->take(9);
             
             $data = [
                 'message' => "9 newest scholarship",
