@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('programs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('scholarship_id');
+            $table->foreignId('tag_level_id');
+            $table->foreignId('tag_cost_id');
             $table->string('name');
             $table->mediumText('description');
             $table->integer('price');

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('scholarships', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('tag_level_id');
+            $table->foreignId('tag_cost_id');
             $table->string('name');
             $table->mediumText('description');
             $table->timestamps();

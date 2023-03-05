@@ -18,4 +18,19 @@ class Scholarship extends Model
     {
         return $this->hasOne(Program::class);
     }
+    
+    public function tagCosts()
+    {
+        return $this->belongsTo(TagCost::class);
+    }
+
+    public function tagLevels()
+    {
+        return $this->belongsTo(TagLevel::class);
+    }
+    
+    public function tagCountries()
+    {
+        return $this->belongsToMany(TagCountry::class);
+    }
 }

@@ -13,10 +13,5 @@ class Tag extends Model
         'name'
     ];
 
-    public function discussions()
-    {
-        return $this->hasMany(Discussion::class);
-    }
-
     public $timestamps = false;
 }

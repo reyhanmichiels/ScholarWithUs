@@ -10,6 +10,9 @@ use App\Models\Mentor;
 use App\Models\Program;
 use App\Models\Scholarship;
 use App\Models\Tag;
+use App\Models\TagCost;
+use App\Models\TagCountry;
+use App\Models\TagLevel;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -38,23 +41,71 @@ class DatabaseSeeder extends Seeder
             'email' => 'james@gmail.com',
             'password' => bcrypt('rahasia')
         ]);
+
+        TagCost::create([
+            'name' => 'Fully Funded'
+        ]);
        
+        TagCost::create([
+            'name' => 'Half Funded'
+        ]);
+
+        TagLevel::create([
+            'name' => 'S1'
+        ]);
+       
+        TagLevel::create([
+            'name' => 'S2'
+        ]);
+       
+        TagLevel::create([
+            'name' => 'S3'
+        ]);
+       
+        TagCountry::create([
+            'name' => "Germany"
+        ]);
+        
+        TagCountry::create([
+            'name' => "Korean"
+        ]);
+
+        TagCountry::create([
+            'name' => "Japan"
+        ]);
+
+        TagCountry::create([
+            'name' => "English"
+        ]);
+
+        TagCountry::create([
+            'name' => "USA"
+        ]);
+
         Scholarship::create([
+            'tag_level_id' => 1,
+            'tag_cost_id' => 1,
             'name' => "scholarship A",
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
         ]);
 
         Scholarship::create([
+            'tag_level_id' => 2,
+            'tag_cost_id' => 2,
             'name' => "scholarship B",
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
         ]);
 
         Scholarship::create([
+            'tag_level_id' => 3,
+            'tag_cost_id' => 2,
             'name' => "scholarship C",
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
         ]);
 
         Program::create([
+            'tag_level_id' => 1,
+            'tag_cost_id' => 1,
             'name' => "program A",
             'scholarship_id' => 1,
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?",
@@ -62,6 +113,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Program::create([
+            'tag_level_id' => 2,
+            'tag_cost_id' => 2,
             'name' => "program B",
             'scholarship_id' => 2,
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?",
@@ -70,10 +123,62 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Program::create([
+            'tag_level_id' => 3,
+            'tag_cost_id' => 2,
             'name' => "program C",
             'scholarship_id' => 3,
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?",
             'price' => 3000000
+        ]);
+
+        DB::table('program_tag_country')->insert([
+            'program_id' => '1',
+            'tag_country_id' => '1',
+        ]);
+
+        DB::table('program_tag_country')->insert([
+            'program_id' => '2',
+            'tag_country_id' => '2',
+        ]);
+
+        DB::table('program_tag_country')->insert([
+            'program_id' => '2',
+            'tag_country_id' => '3',
+        ]);
+
+        DB::table('program_tag_country')->insert([
+            'program_id' => '3',
+            'tag_country_id' => '4',
+        ]);
+
+        DB::table('program_tag_country')->insert([
+            'program_id' => '3',
+            'tag_country_id' => '5',
+        ]);
+
+        DB::table('scholarship_tag_country')->insert([
+            'scholarship_id' => '1',
+            'tag_country_id' => '1',
+        ]);
+
+        DB::table('scholarship_tag_country')->insert([
+            'scholarship_id' => '2',
+            'tag_country_id' => '2',
+        ]);
+
+        DB::table('scholarship_tag_country')->insert([
+            'scholarship_id' => '2',
+            'tag_country_id' => '3',
+        ]);
+
+        DB::table('scholarship_tag_country')->insert([
+            'scholarship_id' => '3',
+            'tag_country_id' => '4',
+        ]);
+
+        DB::table('scholarship_tag_country')->insert([
+            'scholarship_id' => '3',
+            'tag_country_id' => '5',
         ]);
 
         Mentor::create([

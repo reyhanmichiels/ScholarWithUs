@@ -40,4 +40,19 @@ class Program extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+
+    public function tagCosts()
+    {
+        return $this->belongsTo(TagCost::class);
+    }
+
+    public function tagLevels()
+    {
+        return $this->belongsTo(TagLevel::class);
+    }
+    
+    public function tagCountries()
+    {
+        return $this->belongsToMany(TagCountry::class);
+    }
 }

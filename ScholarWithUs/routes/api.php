@@ -86,5 +86,5 @@ Route::get('/tags', [TagController::class, 'index']);
 Route::get('/tags/{tag}', [TagController::class, 'show']);
 
 Route::get('/programs', [ProgramController::class, 'index']);
+Route::get('/programs/new', [ProgramController::class, 'showNew']);
 Route::get('/programs/{program}', [ProgramController::class, 'show']);
-Route::get('/newPrograms', [ProgramController::class, 'showNew']);

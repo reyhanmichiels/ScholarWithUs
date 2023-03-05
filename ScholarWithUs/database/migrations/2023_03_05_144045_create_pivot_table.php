@@ -25,6 +25,16 @@ return new class extends Migration
             $table->foreignId('mentor_id');
             $table->foreignId('program_id');
         });
+
+        Schema::create('program_tag_country', function (Blueprint $table) {
+            $table->foreignId('tag_country_id');
+            $table->foreignId('program_id');
+        });
+
+        Schema::create('scholarship_tag_country', function (Blueprint $table) {
+            $table->foreignId('tag_country_id');
+            $table->foreignId('scholarship_id');
+        });
     }
 
     /**
