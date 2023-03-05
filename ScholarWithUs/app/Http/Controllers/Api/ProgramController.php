@@ -265,16 +265,124 @@ class ProgramController extends Controller
             return ApiResponse::error($validate->errors(), 409);
         }
 
-        if (isset($request->tag_level_id) && isset($request->tag_cost_id)) {
-            $response = $program->where('tag_level_id', $request->tag_level_id)->where('tag_cost_id', $request->tag_level_id)->get();
-        } else if (isset($request->tag_level_id)) {
-            $response = $program->where('tag_level_id', $request->tag_level_id)->get();
-        } else if (isset($request->tag_cost_id)){
-            $response = $program->where('tag_cost_id', $request->tag_cost_id)->get();
-        } else {
-            $response = $program->all();
+        $country_boolean = $request->tag_country_id;
+        $cost_boolean = $request->tag_cost_id;
+        $level_boolean = $request->tag_level_id;
+
+        if ($country_boolean && $cost_boolean && $level_boolean) {
+            $country = $this->tag_country($request, $program);
+            $cost = $this->tag_cost($request, $program);
+            $level = $this->tag_level($request, $program);
+
+            $data = [
+                'message' => 'Programs after filter',
+                'data' => $program->all()->only($country->intersect($cost)->intersect($level)->toArray())
+            ];
+
+            return ApiResponse::success($data, 200);
         }
 
-        return response()->json($response);
+        if ($country_boolean && $cost_boolean) {
+            $country = $this->tag_country($request, $program);
+            $cost = $this->tag_cost($request, $program);
+
+            $data = [
+                'message' => 'Programs after filter',
+                'data' => $program->all()->only($country->intersect($cost)->toArray())
+            ];
+
+            return ApiResponse::success($data, 200);
+        }
+
+        if ($country_boolean && $level_boolean) {
+            $country = $this->tag_country($request, $program);
+            $level = $this->tag_level($request, $program);
+
+            $data = [
+                'message' => 'Programs after filter',
+                'data' => $program->all()->only($country->intersect($level)->toArray())
+            ];
+
+            return ApiResponse::success($data, 200);
+        }
+
+        if ($cost_boolean && $level_boolean) {
+            $cost = $this->tag_cost($request, $program);
+            $level = $this->tag_level($request, $program);
+
+            $data = [
+                'message' => 'Programs after filter',
+                'data' => $program->all()->only($cost->intersect($level)->toArray())
+            ];
+
+            return ApiResponse::success($data, 200);
+        }
+
+        if ($country_boolean) {
+            $country = $this->tag_country($request, $program);
+
+            $data = [
+                'message' => 'Programs after filter',
+                'data' => $program->all()->only($country->toArray())
+            ];
+
+            return ApiResponse::success($data, 200);
+        }
+
+        if ($cost_boolean) {
+            $cost = $this->tag_cost($request, $program);
+
+            $data = [
+                'message' => 'Programs after filter',
+                'data' => $program->all()->only($cost->toArray())
+            ];
+
+            return ApiResponse::success($data, 200);
+        }
+
+        if ($level_boolean) {
+            $level = $this->tag_level($request, $program);
+
+            $data = [
+                'message' => 'Programs after filter',
+                'data' => $program->all()->only($level->toArray())
+            ];
+
+            return ApiResponse::success($data, 200);
+        }
+
+        $data = [
+            'message' => 'You dont have any filter',
+            'data' => $program->all()
+        ];
+        return ApiResponse::success($data, 200);
+    }
+
+    private function tag_level($request, $program)
+    {
+        $response = $program->where('tag_level_id', $request->tag_level_id)->get('id');
+        return $response->pluck('id');
+    }
+
+    private function tag_cost($request, $program)
+    {
+        $response = $program->where('tag_cost_id', $request->tag_cost_id)->get('id');
+        return $response->pluck('id');
+    }
+
+    private function tag_country($request, $program)
+    {
+        $country = collect();
+        foreach ($program->all() as $pro) {
+
+            foreach ($pro->tagCountries as $tag) {
+
+                if ($tag->pivot->tag_country_id == $request->tag_country_id) {
+                    $country->push($tag->pivot->program_id);
+                }
+            }
+        }
+
+        return $country;
     }
 }
