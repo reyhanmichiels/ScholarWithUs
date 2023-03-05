@@ -223,4 +223,33 @@ class ProgramController extends Controller
             return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
         }
     }
+
+    public function searchByName(Request $request, Program $program)
+    {
+        $validate = Validator::make($request->all(), [
+            'name' => "string|required"
+        ]);
+
+        if ($validate->fails()) {
+            return ApiResponse::error($validate->errors(), 409);
+        }
+
+        $id = collect();
+
+        foreach ($program->all() as $p) {
+            $name = strtolower($p->name);
+            $nameFromUser = strtolower($request->name);
+
+            if (str_contains($name, $nameFromUser)) {
+                $id->push($p->id);
+            }
+        }
+
+        $data = [
+            'message' => "Search Successed",
+            'data' => $program->all()->only($id->toArray())
+        ];
+
+        return ApiResponse::success($data, 200);
+    }
 }
