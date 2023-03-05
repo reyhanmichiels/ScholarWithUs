@@ -155,7 +155,7 @@ class ProgramController extends Controller
     {
         try {
             $response = $program->all()->sortByDesc('created_at')->take(9);
-            
+
             $data = [
                 'message' => "9 newest program",
                 'data' => $response
@@ -251,5 +251,30 @@ class ProgramController extends Controller
         ];
 
         return ApiResponse::success($data, 200);
+    }
+
+    public function filterByTag(Request $request, Program $program)
+    {
+        $validate = Validator::make($request->all(), [
+            'tag_country_id' => "int",
+            'tag_cost_id' => "int",
+            'tag_level_id' => "int"
+        ]);
+
+        if ($validate->fails()) {
+            return ApiResponse::error($validate->errors(), 409);
+        }
+
+        if (isset($request->tag_level_id) && isset($request->tag_cost_id)) {
+            $response = $program->where('tag_level_id', $request->tag_level_id)->where('tag_cost_id', $request->tag_level_id)->get();
+        } else if (isset($request->tag_level_id)) {
+            $response = $program->where('tag_level_id', $request->tag_level_id)->get();
+        } else if (isset($request->tag_cost_id)){
+            $response = $program->where('tag_cost_id', $request->tag_cost_id)->get();
+        } else {
+            $response = $program->all();
+        }
+
+        return response()->json($response);
     }
 }
