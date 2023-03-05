@@ -16,7 +16,7 @@ jobs:
       - name: 📁 Send files via Rsyncc
         uses: Burnett01/rsync-deployments@5.2.1
         with:
-            switches: -avzr
+            switches: -avzr --no-perms
             path: ./ScholarWithUs/* ./ScholarWithUs/.*
             remote_path: /var/www/reyhan-hafiz
             remote_host: ${{ secrets.SSH_HOST }}
@@ -31,6 +31,8 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /var/www/reyhan-hafiz
+            chmod -R 777 storage/
+            chmod -R 777 bootstrap/
             composer install --no-dev --optimize-autoloader
             php artisan migrate --force
             php artisan config:cache
