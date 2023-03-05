@@ -41,7 +41,8 @@ class MentorController extends Controller
     {
         $validate = Validator::make($request->all(), [
             'name' => 'string|required',
-            'description' => 'string|required'
+            'study_track' => 'string|required',
+            'scholar_history' => 'string|required'
         ]);
 
         if ($validate->fails()) {
@@ -51,7 +52,8 @@ class MentorController extends Controller
         try {
             $mentor = new Mentor;
             $mentor->name = $request->name;
-            $mentor->description = $request->description;
+            $mentor->study_track = $request->study_track;
+            $mentor->scholar_history = $request->scholar_history;
             $mentor->save();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
@@ -69,7 +71,8 @@ class MentorController extends Controller
     {
         $validate = Validator::make($request->all(), [
             'name' => 'string|required',
-            'description' => 'string|required'
+            'study_track' => 'string|required',
+            'scholar_history' => 'string|required'
         ]);
 
         if ($validate->fails()) {
@@ -78,7 +81,8 @@ class MentorController extends Controller
 
         try {
             $mentor->name = $request->name;
-            $mentor->description = $request->description;
+            $mentor->study_track = $request->study_track;
+            $mentor->scholar_history = $request->scholar_history;
             $mentor->save();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
@@ -108,7 +112,7 @@ class MentorController extends Controller
     public function showNew(Mentor $mentor)
     {
         try {
-            $response = $mentor->sortBy('created_at')->take(9);
+            $response = $mentor->all()->sortByDesc('created_at')->take(9);
             
             $data = [
                 'message' => "9 newest mentor",

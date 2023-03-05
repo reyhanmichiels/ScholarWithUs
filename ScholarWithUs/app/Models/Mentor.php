@@ -21,6 +21,7 @@ class Mentor extends Model
 
     protected $fillable = [
         'name',
-        'description'
+        'study_track',
+        'scholar_history'
     ];
 }
