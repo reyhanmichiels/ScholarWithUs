@@ -183,22 +183,26 @@ class DatabaseSeeder extends Seeder
 
         Mentor::create([
             'name' => 'Mentor A',
-            'description' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque exceptur'
+            'study_track' => 'Computer Science, Harvard',
+            'scholar_history' => 'Sholarship A'
         ]);
 
         Mentor::create([
             'name' => 'Mentor B',
-            'description' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque exceptur'
+            'study_track' => 'Computer Science, Cambridge',
+            'scholar_history' => 'Sholarship B'
         ]);
 
         Mentor::create([
             'name' => 'Mentor C',
-            'description' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque exceptur'
+            'study_track' => 'Computer Science, Stanford',
+            'scholar_history' => 'Sholarship A'
         ]);
 
         Mentor::create([
-            'name' => 'Mentor C',
-            'description' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque exceptur'
+            'name' => 'Mentor D',
+            'study_track' => 'Computer Science, Waseda',
+            'scholar_history' => 'Sholarship A'
         ]);
 
         Course::create([

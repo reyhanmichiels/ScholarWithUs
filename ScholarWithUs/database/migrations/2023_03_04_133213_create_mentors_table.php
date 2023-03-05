@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('mentors', function (Blueprint $table) {
             $table->id();
             $table->string('name');  
-            $table->text('description');  
+            $table->string('study_track');  
+            $table->string('scholar_history');  
             $table->timestamps();
         });
         
