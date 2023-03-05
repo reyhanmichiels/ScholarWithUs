@@ -9,8 +9,9 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\DiscussionController;
-use App\Models\Course;
-use App\Models\Discussion;
+use App\Http\Controllers\Api\TagCostController;
+use App\Http\Controllers\Api\TagCountryController;
+use App\Http\Controllers\Api\TagLevelController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -90,3 +91,9 @@ Route::get('/programs/new', [ProgramController::class, 'showNew']);
 Route::get('/programs/search', [ProgramController::class, 'searchByName']);
 Route::get('/programs/filter', [ProgramController::class, 'filterByTag']);
 Route::get('/programs/{program}', [ProgramController::class, 'show']);
+
+Route::get('/tagCountries/{tagCountry}', [TagCountryController::class, 'show']);
+
+Route::get('/tagLevels/{tagLevel}', [TagLevelController::class, 'show']);
+
+Route::get('/tagCosts/{tagCost}', [TagCostController::class, 'show']);
