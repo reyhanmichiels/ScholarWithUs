@@ -1,4 +1,4 @@
-name: Deploy Laravel Backend
+name: Deploy Laravel Backendd
 on:
   workflow_dispatch:
   push:
