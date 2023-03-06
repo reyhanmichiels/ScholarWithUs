@@ -23,12 +23,12 @@ class Scholarship extends Model
     
     public function tagCosts()
     {
-        return $this->belongsTo(TagCost::class);
+        return $this->belongsTo(TagCost::class, 'tag_cost_id');
     }
 
     public function tagLevels()
     {
-        return $this->belongsTo(TagLevel::class);
+        return $this->belongsTo(TagLevel::class, 'tag_level_id');
     }
     
     public function tagCountries()

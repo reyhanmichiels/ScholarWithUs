@@ -42,8 +42,8 @@ class ScholarshipController extends Controller
     {
         $validate = Validator::make($request->all(), [
             'name' => 'string|required|unique:scholarships',
-            'tag_level_id' => 'int|required', 
-            'tag_cost_id' => 'int|required', 
+            'tag_level_id' => 'int|required',
+            'tag_cost_id' => 'int|required',
             'scholarship_provider' => "string|required",
             'open_registration' => 'date|required',
             'close_registration' => 'date|required',
@@ -78,8 +78,8 @@ class ScholarshipController extends Controller
     {
         $validate = Validator::make($request->all(), [
             'name' => 'string|required|unique:scholarships,name,' . $scholarship->id,
-            'tag_level_id' => 'int|required', 
-            'tag_cost_id' => 'int|required', 
+            'tag_level_id' => 'int|required',
+            'tag_cost_id' => 'int|required',
             'scholarship_provider' => "string|required",
             'open_registration' => 'date|required',
             'close_registration' => 'date|required',
@@ -133,6 +133,30 @@ class ScholarshipController extends Controller
             ];
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+        }
+
+        return ApiResponse::success($data, 200);
+    }
+
+    public function seeTag(Scholarship $scholarship)
+    {
+        try {
+            $data = [
+                'message' => "Tag for scholarship with $scholarship->id",
+                'data' => [
+                    'tag_level' => [
+                        'id' => $scholarship->tag_level_id,
+                        'name' => $scholarship->tagLevels->name,
+                    ],
+                    'tag_cost' => [
+                        'id' => $scholarship->tag_cost_id,
+                        'name' => $scholarship->tagCosts->name,
+                    ],
+                    'tag_country' => $scholarship->tagCountries
+                ]
+            ];
+        } catch (\Exception $e) {
+            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 500);
         }
 
         return ApiResponse::success($data, 200);

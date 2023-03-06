@@ -86,6 +86,7 @@ Route::get('/replies/{reply}', [ReplyController::class, 'show']);
 
 Route::get('/scholarships', [ScholarshipController::class, 'index']);
 Route::get('/scholarships/new', [ScholarshipController::class, 'showNew']);
+Route::get('/scholarships/{scholarship}/tag', [ScholarshipController::class, 'seeTag']);
 Route::get('/scholarships/{scholarship}', [ScholarshipController::class, 'show']);
 
 Route::get('/mentors', [MentorController::class, 'index']);
