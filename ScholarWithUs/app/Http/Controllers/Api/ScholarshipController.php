@@ -109,7 +109,7 @@ class ScholarshipController extends Controller
     public function showNew(Scholarship $scholarship)
     {
         try {
-            $response = $scholarship->all()->sortByDesc('created_at')->take(9);
+            $response = $scholarship->all()->sortBy('open_registration')->take(9);
             
             $data = [
                 'message' => "9 newest scholarship",

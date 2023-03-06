@@ -17,7 +17,8 @@ return new class extends Migration
             $table->foreignId('tag_cost_id');
             $table->string('name');
             $table->mediumText('description');
-            $table->timestamps();
+            $table->date('open_registration');
+            $table->date('close_registration');
         });
     }
 
