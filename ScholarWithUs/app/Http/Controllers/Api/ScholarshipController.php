@@ -42,7 +42,11 @@ class ScholarshipController extends Controller
     {
         $validate = Validator::make($request->all(), [
             'name' => 'string|required|unique:scholarships',
-            'description' => 'string|required'
+            'tag_level_id' => 'int|required', 
+            'tag_cost_id' => 'int|required', 
+            'scholarship_provider' => "string|required",
+            'open_registration' => 'date|required',
+            'close_registration' => 'date|required',
         ]);
 
         if ($validate->fails()) {
@@ -52,7 +56,11 @@ class ScholarshipController extends Controller
         try {
             $scholarship = new Scholarship;
             $scholarship->name = $request->name;
-            $scholarship->description = $request->description;
+            $scholarship->tag_level_id = $request->tag_level_id;
+            $scholarship->tag_cost_id = $request->tag_cost_id;
+            $scholarship->scholarship_provider = $request->scholarship_provider;
+            $scholarship->open_registration = $request->open_registration;
+            $scholarship->close_registration = $request->close_registration;
             $scholarship->save();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
@@ -70,7 +78,11 @@ class ScholarshipController extends Controller
     {
         $validate = Validator::make($request->all(), [
             'name' => 'string|required|unique:scholarships,name,' . $scholarship->id,
-            'description' => 'string|required'
+            'tag_level_id' => 'int|required', 
+            'tag_cost_id' => 'int|required', 
+            'scholarship_provider' => "string|required",
+            'open_registration' => 'date|required',
+            'close_registration' => 'date|required',
         ]);
 
         if ($validate->fails()) {
@@ -79,7 +91,11 @@ class ScholarshipController extends Controller
 
         try {
             $scholarship->name = $request->name;
-            $scholarship->description = $request->description;
+            $scholarship->tag_level_id = $request->tag_level_id;
+            $scholarship->tag_cost_id = $request->tag_cost_id;
+            $scholarship->scholarship_provider = $request->scholarship_provider;
+            $scholarship->open_registration = $request->open_registration;
+            $scholarship->close_registration = $request->close_registration;
             $scholarship->save();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
@@ -110,7 +126,7 @@ class ScholarshipController extends Controller
     {
         try {
             $response = $scholarship->all()->sortBy('open_registration')->take(9);
-            
+
             $data = [
                 'message' => "9 newest scholarship",
                 'data' => $response

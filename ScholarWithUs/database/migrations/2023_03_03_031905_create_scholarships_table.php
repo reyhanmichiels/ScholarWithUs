@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('tag_level_id');
             $table->foreignId('tag_cost_id');
             $table->string('name');
-            $table->mediumText('description');
+            $table->string('scholarship_provider');
             $table->date('open_registration');
             $table->date('close_registration');
         });
