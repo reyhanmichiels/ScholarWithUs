@@ -100,6 +100,7 @@ Route::get('/programs', [ProgramController::class, 'index']);
 Route::get('/programs/new', [ProgramController::class, 'showNew']);
 Route::get('/programs/search', [ProgramController::class, 'searchByName']);
 Route::get('/programs/filter', [ProgramController::class, 'filterByTag']);
+Route::get('/programs/{program}/tag', [ProgramController::class, 'seeTag']);
 Route::get('/programs/{program}', [ProgramController::class, 'show']);
 
 Route::get('/tagCountries/{tagCountry}', [TagCountryController::class, 'show']);

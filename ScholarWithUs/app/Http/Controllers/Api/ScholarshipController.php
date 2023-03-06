@@ -142,7 +142,7 @@ class ScholarshipController extends Controller
     {
         try {
             $data = [
-                'message' => "Tag for scholarship with $scholarship->id",
+                'message' => "Tag for scholarship with id $scholarship->id",
                 'data' => [
                     'tag_level' => [
                         'id' => $scholarship->tag_level_id,

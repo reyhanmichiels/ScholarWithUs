@@ -358,6 +358,30 @@ class ProgramController extends Controller
         return ApiResponse::success($data, 200);
     }
 
+    public function seeTag(Program $program)
+    {
+        try {
+            $data = [
+                'message' => "Tag for program with id $program->id",
+                'data' => [
+                    'tag_level' => [
+                        'id' => $program->tag_level_id,
+                        'name' => $program->tagLevels->name,
+                    ],
+                    'tag_cost' => [
+                        'id' => $program->tag_cost_id,
+                        'name' => $program->tagCosts->name,
+                    ],
+                    'tag_country' => $program->tagCountries
+                ]
+            ];
+        } catch (\Exception $e) {
+            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 500);
+        }
+
+        return ApiResponse::success($data, 200);
+    }
+
     private function tag_level($request, $program)
     {
         $response = $program->where('tag_level_id', $request->tag_level_id)->get('id');
