@@ -137,6 +137,140 @@ class ScholarshipController extends Controller
 
         return ApiResponse::success($data, 200);
     }
+    
+    public function filterByTag(Request $request, Scholarship $scholar)
+    {
+        $validate = Validator::make($request->all(), [
+            'tag_country_id' => "int",
+            'tag_cost_id' => "int",
+            'tag_level_id' => "int"
+        ]);
+
+        if ($validate->fails()) {
+            return ApiResponse::error($validate->errors(), 409);
+        }
+
+        $country_boolean = $request->tag_country_id;
+        $cost_boolean = $request->tag_cost_id;
+        $level_boolean = $request->tag_level_id;
+
+        if ($country_boolean && $cost_boolean && $level_boolean) {
+            $country = $this->tag_country($request, $scholar);
+            $cost = $this->tag_cost($request, $scholar);
+            $level = $this->tag_level($request, $scholar);
+
+            $data = [
+                'message' => 'Scholarship after filter',
+                'data' => $scholar->all()->only($country->intersect($cost)->intersect($level)->toArray())
+            ];
+
+            return ApiResponse::success($data, 200);
+        }
+
+        if ($country_boolean && $cost_boolean) {
+            $country = $this->tag_country($request, $scholar);
+            $cost = $this->tag_cost($request, $scholar);
+
+            $data = [
+                'message' => 'Scholarship after filter',
+                'data' => $scholar->all()->only($country->intersect($cost)->toArray())
+            ];
+
+            return ApiResponse::success($data, 200);
+        }
+
+        if ($country_boolean && $level_boolean) {
+            $country = $this->tag_country($request, $scholar);
+            $level = $this->tag_level($request, $scholar);
+
+            $data = [
+                'message' => 'Scholarship after filter',
+                'data' => $scholar->all()->only($country->intersect($level)->toArray())
+            ];
+
+            return ApiResponse::success($data, 200);
+        }
+
+        if ($cost_boolean && $level_boolean) {
+            $cost = $this->tag_cost($request, $scholar);
+            $level = $this->tag_level($request, $scholar);
+
+            $data = [
+                'message' => 'Scholarship after filter',
+                'data' => $scholar->all()->only($cost->intersect($level)->toArray())
+            ];
+
+            return ApiResponse::success($data, 200);
+        }
+
+        if ($country_boolean) {
+            $country = $this->tag_country($request, $scholar);
+
+            $data = [
+                'message' => 'Scholarship after filter',
+                'data' => $scholar->all()->only($country->toArray())
+            ];
+
+            return ApiResponse::success($data, 200);
+        }
+
+        if ($cost_boolean) {
+            $cost = $this->tag_cost($request, $scholar);
+
+            $data = [
+                'message' => 'Scholarship after filter',
+                'data' => $scholar->all()->only($cost->toArray())
+            ];
+
+            return ApiResponse::success($data, 200);
+        }
+
+        if ($level_boolean) {
+            $level = $this->tag_level($request, $scholar);
+
+            $data = [
+                'message' => 'Scholarship after filter',
+                'data' => $scholar->all()->only($level->toArray())
+            ];
+
+            return ApiResponse::success($data, 200);
+        }
+
+        $data = [
+            'message' => 'You dont have any filter',
+            'data' => $scholar->all()
+        ];
+        return ApiResponse::success($data, 200);
+    }
+
+    public function searchByName(Request $request, Scholarship $scholarship)
+    {
+        $validate = Validator::make($request->all(), [
+            'name' => "string|required"
+        ]);
+
+        if ($validate->fails()) {
+            return ApiResponse::error($validate->errors(), 409);
+        }
+
+        $id = collect();
+
+        foreach ($scholarship->all() as $scho) {
+            $name = strtolower($scho->name);
+            $nameFromUser = strtolower($request->name);
+
+            if (str_contains($name, $nameFromUser)) {
+                $id->push($scho->id);
+            }
+        }
+
+        $data = [
+            'message' => "Search Successed",
+            'data' => $scholarship->all()->only($id->toArray())
+        ];
+
+        return ApiResponse::success($data, 200);
+    }
 
     public function seeTag(Scholarship $scholarship)
     {
@@ -160,5 +294,33 @@ class ScholarshipController extends Controller
         }
 
         return ApiResponse::success($data, 200);
+    }
+
+    private function tag_level($request, $scholar)
+    {
+        $response = $scholar->where('tag_level_id', $request->tag_level_id)->get('id');
+        return $response->pluck('id');
+    }
+
+    private function tag_cost($request, $scholar)
+    {
+        $response = $scholar->where('tag_cost_id', $request->tag_cost_id)->get('id');
+        return $response->pluck('id');
+    }
+
+    private function tag_country($request, $scholar)
+    {
+        $country = collect();
+        foreach ($scholar->all() as $pro) {
+
+            foreach ($pro->tagCountries as $tag) {
+
+                if ($tag->pivot->tag_country_id == $request->tag_country_id) {
+                    $country->push($tag->pivot->scholarship_id);
+                }
+            }
+        }
+
+        return $country;
     }
 }
