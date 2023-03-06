@@ -15,7 +15,7 @@ class ScholarshipController extends Controller
         try {
             $data = [
                 'message' => "Get all scholarship",
-                'data' => $scholarship->all()
+                'data' => $scholarship->paginate(9)
             ];
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);

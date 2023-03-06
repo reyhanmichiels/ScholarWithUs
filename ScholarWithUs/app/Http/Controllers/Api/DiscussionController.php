@@ -15,7 +15,7 @@ class DiscussionController extends Controller
         try {
             $data = [
                 'message' => "Get all discussion",
-                'data' => $discussion->all()
+                'data' => $discussion->paginate(9)
             ];
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);

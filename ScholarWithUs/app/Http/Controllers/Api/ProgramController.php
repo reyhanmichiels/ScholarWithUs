@@ -51,7 +51,7 @@ class ProgramController extends Controller
         try {
             $data = [
                 'message' => "Get all program",
-                'data' => $program->all()
+                'data' => $program->paginate(9)
             ];
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);

@@ -15,7 +15,7 @@ class CourseController extends Controller
         try {
             $data = [
                 'message' => "Get all course",
-                'data' => $course->all()
+                'data' => $course->paginate(9)
             ];
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);

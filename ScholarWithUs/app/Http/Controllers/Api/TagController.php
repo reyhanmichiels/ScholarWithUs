@@ -15,7 +15,7 @@ class TagController extends Controller
         try {
             $data = [
                 'message' => "Get all tag",
-                'data' => $tag->all()
+                'data' => $tag->paginate(9)
             ];
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);

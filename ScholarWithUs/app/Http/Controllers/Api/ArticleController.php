@@ -15,7 +15,7 @@ class ArticleController extends Controller
         try {
             $data = [
                 'message' => "Get all article",
-                'data' => $article->all()
+                'data' => $article->paginate(9)
             ];
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);

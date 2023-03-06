@@ -15,7 +15,7 @@ class UserController extends Controller
         try {
             $data = [
                 'message' => "Get all user",
-                'data' => $user->all()
+                'data' => $user->paginate(9)
             ];
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
