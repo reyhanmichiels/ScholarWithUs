@@ -15,4 +15,11 @@ class Article extends Model
     ];
 
     public $timestamps = false;
+
+    public function tagArticles()
+    {
+        return $this->hasMany(TagArticle::class, 'tag_article_id');
+    }
+
+
 }
