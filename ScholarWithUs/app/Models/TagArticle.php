@@ -14,9 +14,8 @@ class TagArticle extends Model
 
     public $timestamps = false;
 
-
     public function articles()
     {
-        return $this->hasMany(ArticleController::class, 'tag_article_id');
+        return $this->hasMany(Article::class);
     }
 }

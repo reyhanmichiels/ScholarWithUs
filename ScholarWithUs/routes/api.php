@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ScholarshipController;
 use App\Http\Controllers\Api\TagController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ArticleController;
+use App\Http\Controllers\Api\ArticleTagArticleController;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\DiscussionController;
 use App\Http\Controllers\Api\TagCostController;
@@ -76,6 +77,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/articles', [ArticleController::class, 'index']);
+Route::get('/articles/{article}/tag', [ArticleController::class, 'seeTag']);
 Route::get('/articles/{article}', [ArticleController::class, 'show']);
 
 Route::get('/discussions', [DiscussionController::class, 'index']);
@@ -110,3 +112,5 @@ Route::get('/tagCountries/{tagCountry}', [TagCountryController::class, 'show']);
 Route::get('/tagLevels/{tagLevel}', [TagLevelController::class, 'show']);
 
 Route::get('/tagCosts/{tagCost}', [TagCostController::class, 'show']);
+
+Route::get('tagArticles/{tagArticle}/articles', [ArticleTagArticleController::class, 'index']);
