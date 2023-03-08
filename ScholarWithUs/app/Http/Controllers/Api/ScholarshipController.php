@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ScholarshipResource;
 use App\Libraries\ApiResponse;
 use App\Models\Scholarship;
+use App\Models\TagCost;
+use App\Models\TagLevel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -15,10 +18,10 @@ class ScholarshipController extends Controller
         try {
             $data = [
                 'message' => "Get all scholarship",
-                'data' => $scholarship->paginate(9)
+                'data' => ScholarshipResource::collection($scholarship->all())
             ];
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         return ApiResponse::success($data, 200);
@@ -29,10 +32,10 @@ class ScholarshipController extends Controller
         try {
             $data = [
                 'message' => "Scholarship with id $scholarship->id",
-                'data' => $scholarship
+                'data' => new ScholarshipResource($scholarship)
             ];
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         return ApiResponse::success($data, 200);
@@ -52,6 +55,16 @@ class ScholarshipController extends Controller
         if ($validate->fails()) {
             return ApiResponse::error($validate->errors(), 409);
         }
+        
+        $tag_level = TagLevel::find($request->tag_level_id);
+        if (!$tag_level) {
+            return ApiResponse::error('tag level not found', 404);
+        }
+
+        $tag_cost = TagCost::find($request->tag_cost_id);
+        if (!$tag_cost) {
+            return ApiResponse::error('tag cost not found', 404);
+        }
 
         try {
             $scholarship = new Scholarship;
@@ -63,12 +76,12 @@ class ScholarshipController extends Controller
             $scholarship->close_registration = $request->close_registration;
             $scholarship->save();
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         $data = [
             'message' => 'Scholarship created',
-            'data' => $scholarship
+            'data' => new ScholarshipResource($scholarship) 
         ];
 
         return ApiResponse::success($data, 201);
@@ -89,6 +102,16 @@ class ScholarshipController extends Controller
             return ApiResponse::error($validate->errors(), 409);
         }
 
+        $tag_level = TagLevel::find($request->tag_level_id);
+        if (!$tag_level) {
+            return ApiResponse::error('tag level not found', 404);
+        }
+
+        $tag_cost = TagCost::find($request->tag_cost_id);
+        if (!$tag_cost) {
+            return ApiResponse::error('tag cost not found', 404);
+        }
+
         try {
             $scholarship->name = $request->name;
             $scholarship->tag_level_id = $request->tag_level_id;
@@ -98,12 +121,12 @@ class ScholarshipController extends Controller
             $scholarship->close_registration = $request->close_registration;
             $scholarship->save();
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         $data = [
             'message' => 'Scholarship updated',
-            'data' => $scholarship
+            'data' => new ScholarshipResource($scholarship)
         ];
 
         return ApiResponse::success($data, 200);
@@ -114,7 +137,7 @@ class ScholarshipController extends Controller
         try {
             $scholarship->delete();
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         $data['message'] = "scholarship Deleted";
@@ -129,10 +152,10 @@ class ScholarshipController extends Controller
 
             $data = [
                 'message' => "9 newest scholarship",
-                'data' => $response
+                'data' => ScholarshipResource::collection($response)
             ];
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         return ApiResponse::success($data, 200);
@@ -161,7 +184,7 @@ class ScholarshipController extends Controller
 
             $data = [
                 'message' => 'Scholarship after filter',
-                'data' => $scholar->all()->only($country->intersect($cost)->intersect($level)->toArray())
+                'data' => ScholarshipResource::collection($scholar->all()->only($country->intersect($cost)->intersect($level)->toArray()))
             ];
 
             return ApiResponse::success($data, 200);
@@ -173,7 +196,7 @@ class ScholarshipController extends Controller
 
             $data = [
                 'message' => 'Scholarship after filter',
-                'data' => $scholar->all()->only($country->intersect($cost)->toArray())
+                'data' => ScholarshipResource::collection($scholar->all()->only($country->intersect($cost)->toArray()))
             ];
 
             return ApiResponse::success($data, 200);
@@ -185,7 +208,7 @@ class ScholarshipController extends Controller
 
             $data = [
                 'message' => 'Scholarship after filter',
-                'data' => $scholar->all()->only($country->intersect($level)->toArray())
+                'data' => ScholarshipResource::collection($scholar->all()->only($country->intersect($level)->toArray()))
             ];
 
             return ApiResponse::success($data, 200);
@@ -197,7 +220,7 @@ class ScholarshipController extends Controller
 
             $data = [
                 'message' => 'Scholarship after filter',
-                'data' => $scholar->all()->only($cost->intersect($level)->toArray())
+                'data' => ScholarshipResource::collection($scholar->all()->only($cost->intersect($level)->toArray()))
             ];
 
             return ApiResponse::success($data, 200);
@@ -208,7 +231,7 @@ class ScholarshipController extends Controller
 
             $data = [
                 'message' => 'Scholarship after filter',
-                'data' => $scholar->all()->only($country->toArray())
+                'data' => ScholarshipResource::collection($scholar->all()->only($country->toArray()))
             ];
 
             return ApiResponse::success($data, 200);
@@ -219,7 +242,7 @@ class ScholarshipController extends Controller
 
             $data = [
                 'message' => 'Scholarship after filter',
-                'data' => $scholar->all()->only($cost->toArray())
+                'data' => ScholarshipResource::collection($scholar->all()->only($cost->toArray()))
             ];
 
             return ApiResponse::success($data, 200);
@@ -230,7 +253,7 @@ class ScholarshipController extends Controller
 
             $data = [
                 'message' => 'Scholarship after filter',
-                'data' => $scholar->all()->only($level->toArray())
+                'data' => ScholarshipResource::collection($scholar->all()->only($level->toArray()))
             ];
 
             return ApiResponse::success($data, 200);
@@ -238,7 +261,7 @@ class ScholarshipController extends Controller
 
         $data = [
             'message' => 'You dont have any filter',
-            'data' => $scholar->all()
+            'data' => ScholarshipResource::collection($scholar->all())
         ];
         return ApiResponse::success($data, 200);
     }
@@ -266,32 +289,8 @@ class ScholarshipController extends Controller
 
         $data = [
             'message' => "Search Successed",
-            'data' => $scholarship->all()->only($id->toArray())
+            'data' => ScholarshipResource::collection($scholarship->all()->only($id->toArray()))
         ];
-
-        return ApiResponse::success($data, 200);
-    }
-
-    public function seeTag(Scholarship $scholarship)
-    {
-        try {
-            $data = [
-                'message' => "Tag for scholarship with id $scholarship->id",
-                'data' => [
-                    'tag_level' => [
-                        'id' => $scholarship->tag_level_id,
-                        'name' => $scholarship->tagLevels->name,
-                    ],
-                    'tag_cost' => [
-                        'id' => $scholarship->tag_cost_id,
-                        'name' => $scholarship->tagCosts->name,
-                    ],
-                    'tag_country' => $scholarship->tagCountries
-                ]
-            ];
-        } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 500);
-        }
 
         return ApiResponse::success($data, 200);
     }

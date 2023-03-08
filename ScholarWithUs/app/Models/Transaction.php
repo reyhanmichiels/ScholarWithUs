@@ -12,12 +12,12 @@ class Transaction extends Model
 
     public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function programs()
     {
-        return $this->belongsTo(Program::class);
+        return $this->belongsTo(Program::class, 'program_id');
     }
 
     public $timestamps = false;

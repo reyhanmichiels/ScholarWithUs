@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ProgramResource;
 use App\Libraries\ApiResponse;
 use App\Models\Program;
+use App\Models\TagCost;
+use App\Models\TagLevel;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -51,10 +55,10 @@ class ProgramController extends Controller
         try {
             $data = [
                 'message' => "Get all program",
-                'data' => $program->paginate(9)
+                'data' => ProgramResource::collection($program->all())
             ];
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         return ApiResponse::success($data, 200);
@@ -65,10 +69,10 @@ class ProgramController extends Controller
         try {
             $data = [
                 'message' => "Program with id $program->id",
-                'data' => $program
+                'data' => new ProgramResource($program)
             ];
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         return ApiResponse::success($data, 200);
@@ -80,12 +84,23 @@ class ProgramController extends Controller
             'scholarship_id' => 'int|required',
             'name' => 'string|required|unique:programs',
             'description' => 'string|required',
-            'price' => 'int|required'
-
+            'price' => 'int|required',
+            'tag_level_id' => 'int|required',
+            'tag_cost_id' => 'int|required',
         ]);
 
         if ($validate->fails()) {
             return ApiResponse::error($validate->errors(), 409);
+        }
+
+        $tag_level = TagLevel::find($request->tag_level_id);
+        if (!$tag_level) {
+            return ApiResponse::error('tag level not found', 404);
+        }
+
+        $tag_cost = TagCost::find($request->tag_cost_id);
+        if (!$tag_cost) {
+            return ApiResponse::error('tag cost not found', 404);
         }
 
         try {
@@ -94,14 +109,16 @@ class ProgramController extends Controller
             $program->name = $request->name;
             $program->description = $request->description;
             $program->price = $request->price;
+            $program->tag_level_id = $request->tag_level_id;
+            $program->tag_cost_id = $request->tag_cost_id;
             $program->save();
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         $data = [
             'message' => 'Program created',
-            'data' => $program
+            'data' => new ProgramResource($program)
         ];
 
         return ApiResponse::success($data, 201);
@@ -110,29 +127,41 @@ class ProgramController extends Controller
     public function update(Request $request, Program $program)
     {
         $validate = Validator::make($request->all(), [
-            'scholarship_id' => 'int|required',
             'name' => 'string|required|unique:programs,name,' . $program->id,
             'description' => 'string|required',
-            'price' => 'int|required'
+            'price' => 'int|required',
+            'tag_level_id' => 'int|required',
+            'tag_cost_id' => 'int|required',
         ]);
 
         if ($validate->fails()) {
             return ApiResponse::error($validate->errors(), 409);
         }
 
+        $tag_level = TagLevel::find($request->tag_level_id);
+        if (!$tag_level) {
+            return ApiResponse::error('tag level not found', 404);
+        }
+
+        $tag_cost = TagCost::find($request->tag_cost_id);
+        if (!$tag_cost) {
+            return ApiResponse::error('tag cost not found', 404);
+        }
+
         try {
-            $program->scholarship_id = $request->scholarship_id;
             $program->name = $request->name;
             $program->description = $request->description;
             $program->price = $request->price;
+            $program->tag_level_id = $request->tag_level_id;
+            $program->tag_cost_id = $request->tag_cost_id;
             $program->save();
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         $data = [
             'message' => 'Program updated',
-            'data' => $program
+            'data' => new ProgramResource($program)
         ];
 
         return ApiResponse::success($data, 200);
@@ -143,7 +172,7 @@ class ProgramController extends Controller
         try {
             $program->delete();
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         $data['message'] = "Program Deleted";
@@ -158,10 +187,10 @@ class ProgramController extends Controller
 
             $data = [
                 'message' => "9 newest program",
-                'data' => $response
+                'data' => ProgramResource::collection($response)
             ];
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         return ApiResponse::success($data, 200);
@@ -220,7 +249,7 @@ class ProgramController extends Controller
             return ApiResponse::success($data, 201);
         } catch (\Exception $e) {
             DB::rollBack();
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), 500);
         }
     }
 
@@ -247,7 +276,7 @@ class ProgramController extends Controller
 
         $data = [
             'message' => "Search Successed",
-            'data' => $program->all()->only($id->toArray())
+            'data' => ProgramResource::collection($program->all()->only($id->toArray())) 
         ];
 
         return ApiResponse::success($data, 200);
@@ -276,7 +305,7 @@ class ProgramController extends Controller
 
             $data = [
                 'message' => 'Programs after filter',
-                'data' => $program->all()->only($country->intersect($cost)->intersect($level)->toArray())
+                'data' => ProgramResource::collection($program->all()->only($country->intersect($cost)->intersect($level)->toArray()))
             ];
 
             return ApiResponse::success($data, 200);
@@ -288,7 +317,7 @@ class ProgramController extends Controller
 
             $data = [
                 'message' => 'Programs after filter',
-                'data' => $program->all()->only($country->intersect($cost)->toArray())
+                'data' => ProgramResource::collection($program->all()->only($country->intersect($cost)->toArray()))
             ];
 
             return ApiResponse::success($data, 200);
@@ -300,7 +329,7 @@ class ProgramController extends Controller
 
             $data = [
                 'message' => 'Programs after filter',
-                'data' => $program->all()->only($country->intersect($level)->toArray())
+                'data' => ProgramResource::collection($program->all()->only($country->intersect($level)->toArray()))
             ];
 
             return ApiResponse::success($data, 200);
@@ -312,7 +341,7 @@ class ProgramController extends Controller
 
             $data = [
                 'message' => 'Programs after filter',
-                'data' => $program->all()->only($cost->intersect($level)->toArray())
+                'data' => ProgramResource::collection($program->all()->only($cost->intersect($level)->toArray()))
             ];
 
             return ApiResponse::success($data, 200);
@@ -323,7 +352,7 @@ class ProgramController extends Controller
 
             $data = [
                 'message' => 'Programs after filter',
-                'data' => $program->all()->only($country->toArray())
+                'data' => ProgramResource::collection($program->all()->only($country->toArray()))
             ];
 
             return ApiResponse::success($data, 200);
@@ -334,7 +363,7 @@ class ProgramController extends Controller
 
             $data = [
                 'message' => 'Programs after filter',
-                'data' => $program->all()->only($cost->toArray())
+                'data' => ProgramResource::collection($program->all()->only($cost->toArray()))
             ];
 
             return ApiResponse::success($data, 200);
@@ -345,7 +374,7 @@ class ProgramController extends Controller
 
             $data = [
                 'message' => 'Programs after filter',
-                'data' => $program->all()->only($level->toArray())
+                'data' => ProgramResource::collection($program->all()->only($level->toArray()))
             ];
 
             return ApiResponse::success($data, 200);
@@ -353,32 +382,8 @@ class ProgramController extends Controller
 
         $data = [
             'message' => 'You dont have any filter',
-            'data' => $program->all()
+            'data' => ProgramResource::collection($program->all())
         ];
-        return ApiResponse::success($data, 200);
-    }
-
-    public function seeTag(Program $program)
-    {
-        try {
-            $data = [
-                'message' => "Tag for program with id $program->id",
-                'data' => [
-                    'tag_level' => [
-                        'id' => $program->tag_level_id,
-                        'name' => $program->tagLevels->name,
-                    ],
-                    'tag_cost' => [
-                        'id' => $program->tag_cost_id,
-                        'name' => $program->tagCosts->name,
-                    ],
-                    'tag_country' => $program->tagCountries
-                ]
-            ];
-        } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 500);
-        }
-
         return ApiResponse::success($data, 200);
     }
 

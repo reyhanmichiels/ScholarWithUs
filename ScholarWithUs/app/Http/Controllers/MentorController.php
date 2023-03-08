@@ -4,34 +4,36 @@ namespace App\Http\Controllers;
 
 use App\Libraries\ApiResponse;
 use App\Models\Mentor;
+use App\Models\Program;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class MentorController extends Controller
 {
-    public function index(Mentor $mentor)
+    public function index(Program $program)
     {
         try {
             $data = [
-                'message' => "Get all mentor",
-                'data' => $mentor->all()
+                'message' => "Get all mentor from program with id $program->id",
+                'data' => $program->mentors
             ];
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         return ApiResponse::success($data, 200);
     }
 
-    public function show(Mentor $mentor)
-    {
+    public function show(Program $program, Mentor $mentor)
+    {   
+        
         try {
             $data = [
-                'message' => "Mentor with id $mentor->id",
-                'data' => $mentor
+                'message' => "Mentor with id $mentor->id from program with id $program->id",
+                'data' => $program->mentors->where('id', $mentor->id)
             ];
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         return ApiResponse::success($data, 200);
@@ -56,7 +58,7 @@ class MentorController extends Controller
             $mentor->scholar_history = $request->scholar_history;
             $mentor->save();
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         $data = [
@@ -85,7 +87,7 @@ class MentorController extends Controller
             $mentor->scholar_history = $request->scholar_history;
             $mentor->save();
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         $data = [
@@ -101,7 +103,7 @@ class MentorController extends Controller
         try {
             $mentor->delete();
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         $data['message'] = "Mentor Deleted";
@@ -119,8 +121,50 @@ class MentorController extends Controller
                 'data' => $response
             ];
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), 500);
         }
+
+        return ApiResponse::success($data, 200);
+    }
+
+    public function attach(Program $program, Mentor $mentor)
+    {
+        $test = $program->mentors->where('id', $mentor->id);
+
+        if (! empty($test->toArray())) {
+            return ApiResponse::error('Mentors already in that program', 409);
+        }
+
+        try {
+            $program->mentors()->attach($mentor->id);
+        } catch (\Exception $e) {
+            return ApiResponse::error($e->getMessage(), 500);  
+        }
+
+        $data = [
+            'message' => "attach mentor with id $mentor->id to program with id $program->id",
+        ];
+
+        return ApiResponse::success($data, 201);
+    }
+
+    public function detach(Program $program, Mentor $mentor)
+    {
+        $test = $program->mentors->where('id', $mentor->id);
+
+        if (empty($test->toArray())) {
+            return ApiResponse::error("mentor doesn't exist in that program", 409);
+        }
+
+        try {
+            $program->mentors()->detach($mentor->id);
+        } catch (\Exception $e) {
+            return ApiResponse::error($e->getMessage(), 500);  
+        }
+
+        $data = [
+            'message' => "detach mentor with id $mentor->id from program with id $program->id",
+        ];
 
         return ApiResponse::success($data, 200);
     }

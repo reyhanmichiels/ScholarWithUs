@@ -14,5 +14,16 @@ class Reply extends Model
         return $this->belongsTo(Discussion::class);
     }
 
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    protected $fillable = [
+        'user_id',
+        'discussion_id',
+        'comment'
+    ];
+
     public $timestamps = false;
 }

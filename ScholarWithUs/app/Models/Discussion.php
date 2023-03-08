@@ -11,12 +11,12 @@ class Discussion extends Model
 
     public function replies()
     {
-        return $this->hasMany(Reply::class);
+        return $this->hasMany(Reply::class, 'discussion_id');
     }
 
     public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public $timestamps = false;

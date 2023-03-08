@@ -19,7 +19,7 @@ class ArticleController extends Controller
                 'data' => $article->paginate(9)
             ];
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), $e->getCode() != "" ? $e->getCode() : 400);
         }
 
         return ApiResponse::success($data, 200);
@@ -33,7 +33,7 @@ class ArticleController extends Controller
                 'data' => $article
             ];
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), $e->getCode() != "" ? $e->getCode() : 400);
         }
 
         return ApiResponse::success($data, 200);
@@ -58,7 +58,7 @@ class ArticleController extends Controller
             $article->tag_article_id = $request->tag_article_id;
             $article->save();
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), $e->getCode() != "" ? $e->getCode() : 400);
         }
 
         $data = [

@@ -6,8 +6,10 @@ namespace Database\Seeders;
 
 use App\Models\Article;
 use App\Models\Course;
+use App\Models\Discussion;
 use App\Models\Mentor;
 use App\Models\Program;
+use App\Models\Reply;
 use App\Models\Scholarship;
 use App\Models\Tag;
 use App\Models\TagArticle;
@@ -322,6 +324,21 @@ class DatabaseSeeder extends Seeder
             'course_id' => '4',
         ]);
 
+        DB::table('mentor_program')->insert([
+            'mentor_id' => '1',
+            'program_id' => '1'
+        ]);
+
+        DB::table('mentor_program')->insert([
+            'mentor_id' => '2',
+            'program_id' => '2'
+        ]);
+
+        DB::table('mentor_program')->insert([
+            'mentor_id' => '3',
+            'program_id' => '3'
+        ]);
+
         Tag::create([
             'name' => 'Tag A',
         ]);
@@ -332,6 +349,42 @@ class DatabaseSeeder extends Seeder
 
         Tag::create([
             'name' => 'Tag C',
+        ]);
+
+        Discussion::create([
+            'user_id' => 1,
+            'title' => 'Discussion A',
+            'comment'=> 'lorem ipsum'
+        ]);
+
+        Discussion::create([
+            'user_id' => 2,
+            'title' => 'Discussion B',
+            'comment'=> 'lorem ipsum'
+        ]);
+
+        Discussion::create([
+            'user_id' => 3,
+            'title' => 'Discussion C',
+            'comment'=> 'lorem ipsum'
+        ]);
+
+        Reply::create([
+            'user_id' => 3,
+            'discussion_id' => 1,
+            'comment' => 'lorem'
+        ]);
+
+        Reply::create([
+            'user_id' => 1,
+            'discussion_id' => 2,
+            'comment' => 'lorem'
+        ]);
+
+        Reply::create([
+            'user_id' => 2,
+            'discussion_id' => 3,
+            'comment' => 'lorem'
         ]);
     }
 }

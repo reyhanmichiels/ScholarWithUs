@@ -18,21 +18,21 @@ class UserController extends Controller
                 'data' => $user->paginate(9)
             ];
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), $e->getCode() != 0 ? $e->getCode() : 400);
         }
 
         return ApiResponse::success($data, 200);
     }
 
     public function show(User $user)
-    {
+    {   
         try {
             $data = [
                 'message' => "user with id $user->id",
                 'data' => $user
             ];
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), $e->getCode() != 0 ? $e->getCode() : 500);
         }
 
         return ApiResponse::success($data, 200);
@@ -57,7 +57,7 @@ class UserController extends Controller
             $user->password = bcrypt($request->password);
             $user->save();
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), $e->getCode() != 0 ? $e->getCode() : 500);
         }
 
         $data = [
@@ -86,7 +86,7 @@ class UserController extends Controller
             $user->password = bcrypt($request->password);
             $user->save();
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), $e->getCode() != 0 ? $e->getCode() : 500);
         }
 
         $data = [
@@ -102,7 +102,7 @@ class UserController extends Controller
         try {
             $user->delete();
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), $e->getCode() != 0 ? $e->getCode() : 500);
         }
 
         $data['message'] = "User Deleted";
