@@ -16,6 +16,6 @@ class TagArticle extends Model
 
     public function articles()
     {
-        return $this->hasMany(Article::class);
+        return $this->hasMany(Article::class, 'tag_article_id');
     }
 }

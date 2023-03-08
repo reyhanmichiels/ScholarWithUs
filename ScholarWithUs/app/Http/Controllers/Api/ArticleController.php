@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ArticleResource;
 use App\Libraries\ApiResponse;
 use App\Models\Article;
 use App\Models\TagArticle;
@@ -16,10 +17,10 @@ class ArticleController extends Controller
         try {
             $data = [
                 'message' => "Get all article",
-                'data' => $article->paginate(9)
+            'data' => ArticleResource::collection($article->all())
             ];
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() != "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         return ApiResponse::success($data, 200);
@@ -30,10 +31,10 @@ class ArticleController extends Controller
         try {
             $data = [
                 'message' => "Article with id $article->id",
-                'data' => $article
+                'data' => new ArticleResource($article)
             ];
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() != "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         return ApiResponse::success($data, 200);
@@ -46,9 +47,15 @@ class ArticleController extends Controller
             'description' => 'string|required',
             'tag_article_id' => 'int|required'
         ]);
-
+        
         if ($validate->fails()) {
             return ApiResponse::error($validate->errors(), 409);
+        }
+        
+        $test = TagArticle::find($request->tag_article_id);
+
+        if (! $test) {
+            return ApiResponse::error('tag article not found', 404);
         }
 
         try {
@@ -58,12 +65,12 @@ class ArticleController extends Controller
             $article->tag_article_id = $request->tag_article_id;
             $article->save();
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() != "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         $data = [
             'message' => 'Article created',
-            'data' => $article
+            'data' => new ArticleResource($article)
         ];
 
         return ApiResponse::success($data, 201);
@@ -81,18 +88,24 @@ class ArticleController extends Controller
             return ApiResponse::error($validate->errors(), 409);
         }
 
+        $test = TagArticle::find($request->tag_article_id);
+
+        if (! $test) {
+            return ApiResponse::error('tag article not found', 404);
+        }
+
         try {
             $article->title = $request->title;
             $article->description = $request->description;
             $article->tag_article_id = $request->tag_article_id;
             $article->save();
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         $data = [
             'message' => 'Article updated',
-            'data' => $article
+            'data' => new ArticleResource($article)
         ];
 
         return ApiResponse::success($data, 200);
@@ -103,7 +116,7 @@ class ArticleController extends Controller
         try {
             $article->delete();
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         $data['message'] = "Article Deleted";
@@ -111,20 +124,16 @@ class ArticleController extends Controller
         return ApiResponse::success($data, 200);
     }
 
-    public function seeTag(Article $article)
+
+    public function filterByTag(TagArticle $tagArticle)
     {
         try {
             $data = [
-                'message' => "Tag for article with id $article->id",
-                'data' => [
-                    'tag_article' => [
-                        'id' => $article->tag_article_id,
-                        'name' => $article->tagArticles->name,
-                    ]
-                ]
+                'message' => "Get all article with tag $tagArticle->name",
+                'data' => ArticleResource::collection($tagArticle->articles)
             ];
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 500);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         return ApiResponse::success($data, 200);

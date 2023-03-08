@@ -199,7 +199,7 @@ class ProgramController extends Controller
     public function buy(Request $request, Program $program)
     {
         $validate = Validator::make($request->all(), [
-            'bank' => "string|required"
+            'payment_type' => "string|required"
         ]);
 
         if ($validate->fails()) {
@@ -209,40 +209,54 @@ class ProgramController extends Controller
         try {
             DB::beginTransaction();
 
-            $transaction = new Transaction();
+            $transaction = new Transaction;
             $transaction->user_id = Auth::id();
             $transaction->program_id = $program->id;
             $transaction->gross_amount = $program->price;
-            $transaction->bank = $request->bank;
+            $transaction->payment_type = $request->payment_type;
             $transaction->save();
-
+            
             $key = config('midtrans.server_key');
 
             $transaction_detail = [
-                "order_id" => $transaction->order_id,
+                "order_id" => $transaction->id,
                 "gross_amount" => $transaction->gross_amount
             ];
 
-            $response = Http::withBasicAuth($key, " ")->post("https://api.sandbox.midtrans.com/v2/charge", [
-                "payment_type" => "bank_transfer",
-                "transaction_details" => $transaction_detail,
-                "bank_transfer" => [
-                    "bank" => $request->bank
-                ]
-            ]);
+            if ($request->payment_type == 'qris') {
+                $response = Http::withBasicAuth($key, " ")->post("https://api.sandbox.midtrans.com/v2/charge", [
+                    "payment_type" => "qris",
+                    "transaction_details" => $transaction_detail,
+                ]);
+            } else {
+                $response = Http::withBasicAuth($key, " ")->post("https://api.sandbox.midtrans.com/v2/charge", [
+                    "payment_type" => "bank_transfer",
+                    "transaction_details" => $transaction_detail,
+                    "bank_transfer" => [
+                        "bank" => $request->payment_type
+                    ]
+                ]);
+            }
 
             if ($response->failed()) {
-                return ApiResponse::error("Transaction Failed", 400);
+                return ApiResponse::error("Transaction Failed", 500);
             }
 
             if ($response['status_code'] != 201) {
                 return ApiResponse::error("Transaction Failed", $response['status_code']);
             }
 
-            $data = [
-                'message' => "Transfer to VA Number",
-                'data' => $response['va_numbers']
-            ];
+            if ($request->payment_type == 'qris') {
+                $data = [
+                    'message' => "Scan QR code",
+                    'data' => $response['actions'][0]['url']
+                ];
+            } else {
+                $data = [
+                    'message' => "Transfer to VA Number",
+                    'data' => $response['va_numbers']
+                ];
+            }
 
             DB::commit();
 

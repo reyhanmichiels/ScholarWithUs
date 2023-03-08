@@ -59,7 +59,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/programs', [ProgramController::class, 'store']);
     Route::put('/programs/{program}', [ProgramController::class, 'update']);
     Route::delete('/programs/{program}', [ProgramController::class, 'destroy']);
-    Route::post('/programs/buy', [ProgramController::class, 'buy']);
+    Route::post('/programs/{program}/buy', [ProgramController::class, 'buy']);
 
     Route::get('/programs/{program}/courses', [CourseController::class, 'index']);
     Route::get('/programs/{program}/courses/{course}', [CourseController::class, 'show']);
@@ -100,8 +100,8 @@ Route::get('/tags', [TagController::class, 'index']);
 Route::get('/tags/{tag}', [TagController::class, 'show']);
 
 Route::get('/articles', [ArticleController::class, 'index']);
-Route::get('/articles/{article}/tag', [ArticleController::class, 'seeTag']);
 Route::get('/articles/{article}', [ArticleController::class, 'show']);
+Route::get('/articles/tagArticles/{tagArticle}', [ArticleController::class, 'filterByTag']);
 
 Route::get('programs/{program}/mentors', [MentorController::class, 'index']);
 Route::get('/mentors/new', [MentorController::class, 'showNew']);
@@ -112,6 +112,8 @@ Route::get('/programs/new', [ProgramController::class, 'showNew']);
 Route::get('/programs/search', [ProgramController::class, 'searchByName']);
 Route::get('/programs/filter', [ProgramController::class, 'filterByTag']);
 Route::get('/programs/{program}', [ProgramController::class, 'show']);
+Route::post('/midtrans/notif-hook', ProgramController::class);
+
 
 Route::get('/scholarships', [ScholarshipController::class, 'index']);
 Route::get('/scholarships/new', [ScholarshipController::class, 'showNew']);

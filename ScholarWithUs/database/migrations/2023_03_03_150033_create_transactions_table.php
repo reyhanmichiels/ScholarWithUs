@@ -15,8 +15,8 @@ return new class extends Migration
             $table->uuid("id")->primary();
             $table->foreignId("user_id");
             $table->foreignId("program_id");
-            $table->string("gross_amount")->default("BOOKED");
-            $table->string("bank")->default("BOOKED");
+            $table->string("gross_amount");
+            $table->string("payment_type");
             $table->string("status")->default("BOOKED");
         });
     }
