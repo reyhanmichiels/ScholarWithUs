@@ -112,6 +112,33 @@ class DatabaseSeeder extends Seeder
             'close_registration' => "2023-04-01"
         ]);
 
+        Scholarship::create([
+            'tag_level_id' => 1,
+            'tag_cost_id' => 3,
+            'name' => "scholarship C",
+            'scholarship_provider' => "Kemendikbud",
+            'open_registration' => "2023-03-01",
+            'close_registration' => "2023-04-01"
+        ]);
+
+        Scholarship::create([
+            'tag_level_id' => 3,
+            'tag_cost_id' => 1,
+            'name' => "scholarship C",
+            'scholarship_provider' => "Kemendikbud",
+            'open_registration' => "2023-03-01",
+            'close_registration' => "2023-04-01"
+        ]);
+
+        Scholarship::create([
+            'tag_level_id' => 2,
+            'tag_cost_id' => 2,
+            'name' => "scholarship C",
+            'scholarship_provider' => "Kemendikbud",
+            'open_registration' => "2023-03-01",
+            'close_registration' => "2023-04-01"
+        ]);
+
         Program::create([
             'tag_level_id' => 1,
             'tag_cost_id' => 1,
