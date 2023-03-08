@@ -114,7 +114,7 @@ class DatabaseSeeder extends Seeder
 
         Scholarship::create([
             'tag_level_id' => 1,
-            'tag_cost_id' => 3,
+            'tag_cost_id' => 2,
             'name' => "scholarship C",
             'scholarship_provider' => "Kemendikbud",
             'open_registration' => "2023-03-01",
