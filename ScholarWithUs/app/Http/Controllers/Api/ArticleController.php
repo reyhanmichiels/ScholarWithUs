@@ -44,6 +44,7 @@ class ArticleController extends Controller
     {
         $validate = Validator::make($request->all(), [
             'title' => 'string|required|unique:articles',
+            'brief_description' => 'string|required',
             'description' => 'string|required',
             'tag_article_id' => 'int|required'
         ]);
@@ -61,6 +62,7 @@ class ArticleController extends Controller
         try {
             $article = new Article;
             $article->title = $request->title;
+            $article->brief_description = $request->brief_description;
             $article->description = $request->description;
             $article->tag_article_id = $request->tag_article_id;
             $article->save();
@@ -80,6 +82,7 @@ class ArticleController extends Controller
     {
         $validate = Validator::make($request->all(), [
             'title' => 'string|required|unique:articles,title,' . $article->id,
+            'brief_description' => 'string|required',
             'description' => 'string|required',
             'tag_article_id' => 'int|required'
         ]);
@@ -96,6 +99,7 @@ class ArticleController extends Controller
 
         try {
             $article->title = $request->title;
+            $article->brief_description = $request->brief_description;
             $article->description = $request->description;
             $article->tag_article_id = $request->tag_article_id;
             $article->save();

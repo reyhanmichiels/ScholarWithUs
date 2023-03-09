@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('tag_article_id');
             $table->string('title');
+            $table->string('brief_description');
             $table->mediumText('description');
         });
     }

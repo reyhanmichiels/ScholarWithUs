@@ -18,6 +18,7 @@ class ArticleResource extends JsonResource
             'id' => $this->id,
             'tag_article_id' => $this->tag_article_id,
             'title' => $this->title,
+            'brief_description' => $this->brief_description,
             'description' => $this->description,
             'tag_article' => $this->tagArticles
         ];
