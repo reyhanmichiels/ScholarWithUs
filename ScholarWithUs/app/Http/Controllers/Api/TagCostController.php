@@ -9,12 +9,12 @@ use Illuminate\Http\Request;
 
 class TagCostController extends Controller
 {
-    public function show(TagCost $tagCost)
+    public function index(TagCost $tagCost)
     {
         try {
             $data = [
-                'message' => "Tag Cost with id $tagCost->id",
-                'data' => $tagCost
+                'message' => "All Tag Cost",
+                'data' => $tagCost->all()
             ];
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 500);

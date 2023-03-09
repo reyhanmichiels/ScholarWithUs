@@ -9,15 +9,15 @@ use Illuminate\Http\Request;
 
 class TagLevelController extends Controller
 {
-    public function show(TagLevel $tagLevel)
+    public function index(TagLevel $tagLevel)
     {
         try {
             $data = [
-                'message' => "Tag Level with id $tagLevel->id",
-                'data' => $tagLevel
+                'message' => "All Tag Level",
+                'data' => $tagLevel->all()
             ];
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 500);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         return ApiResponse::success($data, 200);

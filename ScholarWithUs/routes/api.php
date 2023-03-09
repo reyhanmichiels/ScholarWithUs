@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/articles/{article}', [ArticleController::class, 'update']);
     Route::delete('/articles/{article}', [ArticleController::class, 'destroy']);
 
-Route::post('/discussions', [DiscussionController::class, 'store']);
+    Route::post('/discussions', [DiscussionController::class, 'store']);
     Route::delete('/discussions/{discussion}', [DiscussionController::class, 'destroy']);
 
     Route::post('/programs', [ProgramController::class, 'store']);
@@ -75,13 +75,17 @@ Route::post('/discussions', [DiscussionController::class, 'store']);
     Route::post('/users', [UserController::class, 'store']);
     Route::put('/users/{user}', [UserController::class, 'update']);
     Route::delete('/users/{user}', [UserController::class, 'destroy']);
+
+    Route::post('/tagCountries', [TagCountryController::class, 'store']);
+    Route::put('/tagCountries/{tagCountry}', [TagCountryController::class, 'update']);
+    Route::delete('/tagCountries/{tagCountry}', [TagCountryController::class, 'destroy']);
 });
 
-Route::get('/tagCountries/{tagCountry}', [TagCountryController::class, 'show']);
+Route::get('/tagCountries', [TagCountryController::class, 'index']);
 
-Route::get('/tagLevels/{tagLevel}', [TagLevelController::class, 'show']);
+Route::get('/tagLevels', [TagLevelController::class, 'index']);
 
-Route::get('/tagCosts/{tagCost}', [TagCostController::class, 'show']);
+Route::get('/tagCosts', [TagCostController::class, 'index']);
 
 Route::get('tagArticles/{tagArticle}/articles', [ArticleTagArticleController::class, 'index']);
 
@@ -118,5 +122,3 @@ Route::get('/scholarships/new', [ScholarshipController::class, 'showNew']);
 Route::get('/scholarships/filter', [ScholarshipController::class, 'filterByTag']);
 Route::get('/scholarships/search', [ScholarshipController::class, 'searchByName']);
 Route::get('/scholarships/{scholarship}', [ScholarshipController::class, 'show']);
-
-
