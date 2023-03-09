@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\FileController;
 use App\Libraries\ApiResponse;
 use App\Models\User;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Enum;
 
@@ -37,17 +40,28 @@ class UserController extends Controller
             'phone_number' => 'string|required',
             'age' => 'int|required',
             'gender' => 'required|in:male,female',
+            'profile_picture' => 'sometimes|file'
         ]);
 
         if ($validate->fails()) {
             return ApiResponse::error($validate->errors(), 409);
         }
 
+        $image = $request->file('profile_picture');
+        $data = [
+            'file' => $image,
+            'file_name' =>  $request->name . "_" . "$user->id." . $image->extension(),
+            'file_path' => '/profile_picture_user'
+        ];
+
+        $url = FileController::manage($data);
+
         try {
             $user->name = $request->name;
             $user->phone_number = $request->phone_number;
             $user->age = $request->age;
             $user->gender = $request->gender;
+            $user->image = $url;
             $user->save();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);

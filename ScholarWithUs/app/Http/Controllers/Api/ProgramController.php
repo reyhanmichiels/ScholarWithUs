@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\FileController;
 use App\Http\Resources\ProgramResource;
 use App\Libraries\ApiResponse;
 use App\Models\Program;
@@ -87,7 +88,8 @@ class ProgramController extends Controller
             'price' => 'int|required',
             'tag_level_id' => 'int|required',
             'tag_cost_id' => 'int|required',
-            'mentor_id' => 'int|required'
+            'mentor_id' => 'int|required',
+            'program_image' => 'sometimes|file'
         ]);
 
         if ($validate->fails()) {
@@ -114,6 +116,18 @@ class ProgramController extends Controller
             $program->tag_cost_id = $request->tag_cost_id;
             $program->mentor_id = $request->mentor_id;
             $program->save();
+
+            $image = $request->file('program_picture');
+            $data = [
+                'file' => $image,
+                'file_name' =>  $request->name . "_" . "$program->id." . $image->extension(),
+                'file_path' => '/program_picture'
+            ];
+
+            $url = FileController::manage($data);
+
+            $program->image = $url;
+            $program->save();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
         }
@@ -135,12 +149,26 @@ class ProgramController extends Controller
             'tag_level_id' => 'int|required',
             'tag_cost_id' => 'int|required',
             'mentor_id' => 'int|required',
+            'program_picture' => 'sometimes|required'
 
         ]);
 
         if ($validate->fails()) {
             return ApiResponse::error($validate->errors(), 409);
         }
+
+        $delete = substr($program->image, 9);
+
+        $image = $request->file('program_picture');
+        
+        $data = [
+            'file' => $image,
+            'file_name' =>  $request->name . "_" . $program->id . "." . $image->extension(),
+            'file_path' => '/program_picture',
+            'delete_file' => $delete
+        ];
+
+        $url = FileController::manage($data);
 
         $tag_level = TagLevel::find($request->tag_level_id);
         if (!$tag_level) {
@@ -159,6 +187,7 @@ class ProgramController extends Controller
             $program->tag_level_id = $request->tag_level_id;
             $program->tag_cost_id = $request->tag_cost_id;
             $program->mentor_id = $request->mentor_id;
+            $program->image = $url;
             $program->save();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);

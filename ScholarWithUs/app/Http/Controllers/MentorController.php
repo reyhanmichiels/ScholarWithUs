@@ -25,8 +25,8 @@ class MentorController extends Controller
     }
 
     public function show(Mentor $mentor)
-    {   
-        
+    {
+
         try {
             $data = [
                 'message' => "Mentor with id $mentor->id",
@@ -44,7 +44,8 @@ class MentorController extends Controller
         $validate = Validator::make($request->all(), [
             'name' => 'string|required',
             'study_track' => 'string|required',
-            'scholar_history' => 'string|required'
+            'scholar_history' => 'string|required',
+            'profile_picture' => 'sometimes|file'
         ]);
 
         if ($validate->fails()) {
@@ -56,6 +57,18 @@ class MentorController extends Controller
             $mentor->name = $request->name;
             $mentor->study_track = $request->study_track;
             $mentor->scholar_history = $request->scholar_history;
+            $mentor->save();
+
+            $image = $request->file('profile_picture');
+            $data = [
+                'file' => $image,
+                'file_name' =>  $request->name . "_" . "$mentor->id." . $image->extension(),
+                'file_path' => '/profile_picture_mentor'
+            ];
+
+            $url = FileController::manage($data);
+
+            $mentor->image = $url;
             $mentor->save();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
@@ -74,17 +87,32 @@ class MentorController extends Controller
         $validate = Validator::make($request->all(), [
             'name' => 'string|required',
             'study_track' => 'string|required',
-            'scholar_history' => 'string|required'
+            'scholar_history' => 'string|required',
+            'profile_picture' => 'sometimes|file'
         ]);
 
         if ($validate->fails()) {
             return ApiResponse::error($validate->errors(), 409);
         }
 
+        $delete = substr($mentor->image, 9);
+
+        $image = $request->file('profile_picture');
+        
+        $data = [
+            'file' => $image,
+            'file_name' =>  $request->name . "_" . $mentor->id . "." . $image->extension(),
+            'file_path' => '/profile_picture_mentor',
+            'delete_file' => $delete
+        ];
+
+        $url = FileController::manage($data);
+
         try {
             $mentor->name = $request->name;
             $mentor->study_track = $request->study_track;
             $mentor->scholar_history = $request->scholar_history;
+            $mentor->image = $url;
             $mentor->save();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
@@ -115,7 +143,7 @@ class MentorController extends Controller
     {
         try {
             $response = $mentor->all()->sortByDesc('created_at')->take(9);
-            
+
             $data = [
                 'message' => "9 newest mentor",
                 'data' => $response

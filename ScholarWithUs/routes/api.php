@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/tags/{tag}', [TagController::class, 'destroy']);
 
     Route::post('/mentors', [MentorController::class, 'store']);
-    Route::put('/mentors/{mentor}', [MentorController::class, 'update']);
+    Route::post('/mentors/{mentor}', [MentorController::class, 'update']);
     Route::delete('/mentors/{mentor}', [MentorController::class, 'destroy']);
 
     Route::post('/scholarships', [ScholarshipController::class, 'store']);
@@ -56,7 +56,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/discussions/{discussion}', [DiscussionController::class, 'destroy']);
 
     Route::post('/programs', [ProgramController::class, 'store']);
-    Route::put('/programs/{program}', [ProgramController::class, 'update']);
+    Route::post('/programs/{program}', [ProgramController::class, 'update']);
     Route::delete('/programs/{program}', [ProgramController::class, 'destroy']);
     Route::post('/programs/{program}/buy', [ProgramController::class, 'buy']);
 
@@ -72,7 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/users/transactions/{transaction}', [TransactionController::class, 'show']);
 
     Route::get('/users', [UserController::class, 'show']);
-    Route::put('/users', [UserController::class, 'update']);
+    Route::post('/users', [UserController::class, 'update']);
     Route::delete('/users', [UserController::class, 'destroy']);
 
     Route::get('/users/programs', [UserProgramController::class, 'index']);

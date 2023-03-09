@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('name');
             $table->mediumText('description');
             $table->integer('price');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

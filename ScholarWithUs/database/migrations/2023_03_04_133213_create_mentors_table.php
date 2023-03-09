@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');  
             $table->string('study_track');  
             $table->string('scholar_history');  
+            $table->string('image')->nullable();  
             $table->timestamps();
         });
         

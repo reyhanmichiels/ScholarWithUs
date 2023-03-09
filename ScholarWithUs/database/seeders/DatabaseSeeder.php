@@ -30,19 +30,22 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => "reyhan",
             'email' => 'reyhan@gmail.com',
-            'password' => bcrypt('rahasia')
+            'password' => bcrypt('rahasia'),
+            'image' => '/storage//profile_picture/example.svg'
         ]);
        
         User::create([
             'name' => "budi",
             'email' => 'budi@gmail.com',
-            'password' => bcrypt('rahasia')
+            'password' => bcrypt('rahasia'),
+            'image' => '/storage//profile_picture/example.svg'
         ]);
        
         User::create([
             'name' => "james",
             'email' => 'james@gmail.com',
-            'password' => bcrypt('rahasia')
+            'password' => bcrypt('rahasia'),
+            'image' => '/storage//profile_picture/example.svg'
         ]);
 
         TagCost::create([
@@ -142,19 +145,22 @@ class DatabaseSeeder extends Seeder
         Mentor::create([
             'name' => 'Mentor A',
             'study_track' => 'Computer Science, Harvard',
-            'scholar_history' => 'Sholarship A'
+            'scholar_history' => 'Sholarship A',
+            'image' => '/storage//profile_picture_mentor/example.svg'
         ]);
 
         Mentor::create([
             'name' => 'Mentor B',
             'study_track' => 'Computer Science, Cambridge',
-            'scholar_history' => 'Sholarship B'
+            'scholar_history' => 'Sholarship B',
+            'image' => '/storage//profile_picture_mentor/example.svg'
         ]);
 
         Mentor::create([
             'name' => 'Mentor C',
             'study_track' => 'Computer Science, Stanford',
-            'scholar_history' => 'Sholarship A'
+            'scholar_history' => 'Sholarship A',
+            'image' => '/storage//profile_picture_mentor/example.svg'
         ]);
 
         Program::create([
@@ -164,7 +170,8 @@ class DatabaseSeeder extends Seeder
             'name' => "program A",
             'scholarship_id' => 1,
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?",
-            'price' => 1000000
+            'price' => 1000000,
+            'image' =>"/storage//program_picture/example.svg"
         ]);
 
         Program::create([
@@ -174,7 +181,9 @@ class DatabaseSeeder extends Seeder
             'name' => "program B",
             'scholarship_id' => 2,
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?",
-            'price' => 2000000
+            'price' => 2000000,
+            'image' =>"/storage//program_picture/example.svg"
+
         
         ]);
 
@@ -185,7 +194,8 @@ class DatabaseSeeder extends Seeder
             'name' => "program C",
             'scholarship_id' => 3,
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?",
-            'price' => 3000000
+            'price' => 3000000,
+            'image' =>"/storage//program_picture/example.svg"
         ]);
 
         DB::table('program_tag_country')->insert([

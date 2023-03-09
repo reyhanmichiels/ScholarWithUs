@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('phone_number')->nullable();
             $table->enum('gender', ['male', 'female'])->nullable();
             $table->integer('age')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
