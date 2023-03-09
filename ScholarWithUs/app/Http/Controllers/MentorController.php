@@ -10,12 +10,12 @@ use Illuminate\Support\Facades\Validator;
 
 class MentorController extends Controller
 {
-    public function index(Program $program)
+    public function index(Mentor $mentor)
     {
         try {
             $data = [
-                'message' => "Get all mentor from program with id $program->id",
-                'data' => $program->mentors
+                'message' => "Get all mentor",
+                'data' => $mentor->all()
             ];
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
@@ -24,13 +24,13 @@ class MentorController extends Controller
         return ApiResponse::success($data, 200);
     }
 
-    public function show(Program $program, Mentor $mentor)
+    public function show(Mentor $mentor)
     {   
         
         try {
             $data = [
-                'message' => "Mentor with id $mentor->id from program with id $program->id",
-                'data' => $program->mentors->where('id', $mentor->id)
+                'message' => "Mentor with id $mentor->id",
+                'data' => $mentor
             ];
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
@@ -123,48 +123,6 @@ class MentorController extends Controller
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
         }
-
-        return ApiResponse::success($data, 200);
-    }
-
-    public function attach(Program $program, Mentor $mentor)
-    {
-        $test = $program->mentors->where('id', $mentor->id);
-
-        if (! empty($test->toArray())) {
-            return ApiResponse::error('Mentors already in that program', 409);
-        }
-
-        try {
-            $program->mentors()->attach($mentor->id);
-        } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), 500);  
-        }
-
-        $data = [
-            'message' => "attach mentor with id $mentor->id to program with id $program->id",
-        ];
-
-        return ApiResponse::success($data, 201);
-    }
-
-    public function detach(Program $program, Mentor $mentor)
-    {
-        $test = $program->mentors->where('id', $mentor->id);
-
-        if (empty($test->toArray())) {
-            return ApiResponse::error("mentor doesn't exist in that program", 409);
-        }
-
-        try {
-            $program->mentors()->detach($mentor->id);
-        } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), 500);  
-        }
-
-        $data = [
-            'message' => "detach mentor with id $mentor->id from program with id $program->id",
-        ];
 
         return ApiResponse::success($data, 200);
     }

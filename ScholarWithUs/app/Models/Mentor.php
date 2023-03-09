@@ -11,7 +11,7 @@ class Mentor extends Model
 
     public function programs()
     {
-        return $this->belongsToMany(Program::class);
+        return $this->hasMany(Program::class);
     }
 
     public function courses()

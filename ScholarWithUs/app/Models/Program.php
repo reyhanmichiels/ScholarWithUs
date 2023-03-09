@@ -33,7 +33,7 @@ class Program extends Model
 
     public function mentors()
     {
-        return $this->belongsToMany(Mentor::class);
+        return $this->belongsTo(Mentor::class, 'mentor_id');
     }
 
     public function transactions()

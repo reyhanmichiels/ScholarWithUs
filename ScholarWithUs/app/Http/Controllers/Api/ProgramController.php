@@ -87,6 +87,7 @@ class ProgramController extends Controller
             'price' => 'int|required',
             'tag_level_id' => 'int|required',
             'tag_cost_id' => 'int|required',
+            'mentor_id' => 'int|required'
         ]);
 
         if ($validate->fails()) {
@@ -111,6 +112,7 @@ class ProgramController extends Controller
             $program->price = $request->price;
             $program->tag_level_id = $request->tag_level_id;
             $program->tag_cost_id = $request->tag_cost_id;
+            $program->mentor_id = $request->mentor_id;
             $program->save();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
@@ -132,6 +134,8 @@ class ProgramController extends Controller
             'price' => 'int|required',
             'tag_level_id' => 'int|required',
             'tag_cost_id' => 'int|required',
+            'mentor_id' => 'int|required',
+
         ]);
 
         if ($validate->fails()) {
@@ -154,6 +158,7 @@ class ProgramController extends Controller
             $program->price = $request->price;
             $program->tag_level_id = $request->tag_level_id;
             $program->tag_cost_id = $request->tag_cost_id;
+            $program->mentor_id = $request->mentor_id;
             $program->save();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);

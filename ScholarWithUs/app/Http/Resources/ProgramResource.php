@@ -27,6 +27,7 @@ class ProgramResource extends JsonResource
             'tag_level' => $this->tagLevels,
             'tag_cost' => $this->tagCosts,
             'tag_countries' => $this->tagCountries,
+            'mentor' => $this->mentors
         ];
     }
 }

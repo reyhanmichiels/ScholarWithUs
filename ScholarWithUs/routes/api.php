@@ -39,8 +39,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/mentors', [MentorController::class, 'store']);
     Route::put('/mentors/{mentor}', [MentorController::class, 'update']);
     Route::delete('/mentors/{mentor}', [MentorController::class, 'destroy']);
-    Route::post('/programs/{program}/mentors/{mentor}', [MentorController::class, 'attach']);
-    Route::delete('/programs/{program}/mentors/{mentor}', [MentorController::class, 'detach']);
 
     Route::post('/scholarships', [ScholarshipController::class, 'store']);
     Route::put('/scholarships/{scholarship}', [ScholarshipController::class, 'update']);
@@ -53,7 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/articles/{article}', [ArticleController::class, 'update']);
     Route::delete('/articles/{article}', [ArticleController::class, 'destroy']);
 
-    Route::post('/discussions', [DiscussionController::class, 'store']);
+Route::post('/discussions', [DiscussionController::class, 'store']);
     Route::delete('/discussions/{discussion}', [DiscussionController::class, 'destroy']);
 
     Route::post('/programs', [ProgramController::class, 'store']);
@@ -103,9 +101,9 @@ Route::get('/articles', [ArticleController::class, 'index']);
 Route::get('/articles/{article}', [ArticleController::class, 'show']);
 Route::get('/articles/tagArticles/{tagArticle}', [ArticleController::class, 'filterByTag']);
 
-Route::get('programs/{program}/mentors', [MentorController::class, 'index']);
+Route::get('/mentors', [MentorController::class, 'index']);
 Route::get('/mentors/new', [MentorController::class, 'showNew']);
-Route::get('programs/{program}/mentors/{mentor}', [MentorController::class, 'show']);
+Route::get('/mentors/{mentor}', [MentorController::class, 'show']);
 
 Route::get('/programs', [ProgramController::class, 'index']);
 Route::get('/programs/new', [ProgramController::class, 'showNew']);

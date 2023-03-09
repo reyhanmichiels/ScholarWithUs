@@ -139,9 +139,28 @@ class DatabaseSeeder extends Seeder
             'close_registration' => "2023-04-01"
         ]);
 
+        Mentor::create([
+            'name' => 'Mentor A',
+            'study_track' => 'Computer Science, Harvard',
+            'scholar_history' => 'Sholarship A'
+        ]);
+
+        Mentor::create([
+            'name' => 'Mentor B',
+            'study_track' => 'Computer Science, Cambridge',
+            'scholar_history' => 'Sholarship B'
+        ]);
+
+        Mentor::create([
+            'name' => 'Mentor C',
+            'study_track' => 'Computer Science, Stanford',
+            'scholar_history' => 'Sholarship A'
+        ]);
+
         Program::create([
             'tag_level_id' => 1,
             'tag_cost_id' => 1,
+            'mentor_id' => 1,
             'name' => "program A",
             'scholarship_id' => 1,
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?",
@@ -151,6 +170,7 @@ class DatabaseSeeder extends Seeder
         Program::create([
             'tag_level_id' => 2,
             'tag_cost_id' => 2,
+            'mentor_id' => 2,
             'name' => "program B",
             'scholarship_id' => 2,
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?",
@@ -161,6 +181,7 @@ class DatabaseSeeder extends Seeder
         Program::create([
             'tag_level_id' => 3,
             'tag_cost_id' => 2,
+            'mentor_id' => 3,
             'name' => "program C",
             'scholarship_id' => 3,
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?",
@@ -217,29 +238,6 @@ class DatabaseSeeder extends Seeder
             'tag_country_id' => '5',
         ]);
 
-        Mentor::create([
-            'name' => 'Mentor A',
-            'study_track' => 'Computer Science, Harvard',
-            'scholar_history' => 'Sholarship A'
-        ]);
-
-        Mentor::create([
-            'name' => 'Mentor B',
-            'study_track' => 'Computer Science, Cambridge',
-            'scholar_history' => 'Sholarship B'
-        ]);
-
-        Mentor::create([
-            'name' => 'Mentor C',
-            'study_track' => 'Computer Science, Stanford',
-            'scholar_history' => 'Sholarship A'
-        ]);
-
-        Mentor::create([
-            'name' => 'Mentor D',
-            'study_track' => 'Computer Science, Waseda',
-            'scholar_history' => 'Sholarship A'
-        ]);
 
         Course::create([
             'mentor_id' => 1,
@@ -349,21 +347,6 @@ class DatabaseSeeder extends Seeder
         DB::table('course_program')->insert([
             'program_id' => '3',
             'course_id' => '4',
-        ]);
-
-        DB::table('mentor_program')->insert([
-            'mentor_id' => '1',
-            'program_id' => '1'
-        ]);
-
-        DB::table('mentor_program')->insert([
-            'mentor_id' => '2',
-            'program_id' => '2'
-        ]);
-
-        DB::table('mentor_program')->insert([
-            'mentor_id' => '3',
-            'program_id' => '3'
         ]);
 
         Tag::create([
