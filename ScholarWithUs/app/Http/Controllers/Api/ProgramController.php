@@ -202,7 +202,11 @@ class ProgramController extends Controller
     }
 
     public function buy(Request $request, Program $program)
-    {
+    {   
+        if ($program->users->count() == 20) {
+            return ApiResponse::error("capacity full", 503);
+        }
+        
         $validate = Validator::make($request->all(), [
             'payment_type' => "string|required"
         ]);

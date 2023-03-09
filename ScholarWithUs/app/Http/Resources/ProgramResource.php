@@ -22,6 +22,7 @@ class ProgramResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'price' => $this->price,
+            'participant' => $this->users->count() . "/20",
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'tag_level' => $this->tagLevels,

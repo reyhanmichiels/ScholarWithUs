@@ -349,6 +349,21 @@ class DatabaseSeeder extends Seeder
             'course_id' => '4',
         ]);
 
+        DB::table('program_user')->insert([
+            'program_id' => 1,
+            'user_id' => 1
+        ]);
+
+        DB::table('program_user')->insert([
+            'program_id' => 2,
+            'user_id' => 2
+        ]);
+
+        DB::table('program_user')->insert([
+            'program_id' => 3,
+            'user_id' => 3
+        ]);
+
         Tag::create([
             'name' => 'Tag A',
         ]);
