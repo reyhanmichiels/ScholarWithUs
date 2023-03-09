@@ -62,7 +62,7 @@ class MentorController extends Controller
             $image = $request->file('profile_picture');
             $data = [
                 'file' => $image,
-                'file_name' =>  $request->name . "_" . "$mentor->id." . $image->extension(),
+                'file_name' => "$mentor->id." . $image->extension(),
                 'file_path' => '/profile_picture_mentor'
             ];
 
@@ -101,7 +101,7 @@ class MentorController extends Controller
         
         $data = [
             'file' => $image,
-            'file_name' =>  $request->name . "_" . $mentor->id . "." . $image->extension(),
+            'file_name' => $mentor->id . "." . $image->extension(),
             'file_path' => '/profile_picture_mentor',
             'delete_file' => $delete
         ];

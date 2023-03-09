@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('brief_description');
             $table->mediumText('description');
-            $table->string('image');
+            $table->string('image')->nullable();
         });
     }
 

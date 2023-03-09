@@ -72,7 +72,7 @@ class ArticleController extends Controller
             $image = $request->file('article_picture');
             $data = [
                 'file' => $image,
-                'file_name' =>  $request->title . "_" . "$article->id." . $image->extension(),
+                'file_name' =>  "$article->id." . $image->extension(),
                 'file_path' => '/article_picture'
             ];
 
@@ -112,7 +112,7 @@ class ArticleController extends Controller
         
         $data = [
             'file' => $image,
-            'file_name' =>  $request->title . "_" . $article->id . "." . $image->extension(),
+            'file_name' =>  $article->id . "." . $image->extension(),
             'file_path' => '/article_picture',
             'delete_file' => $delete
         ];

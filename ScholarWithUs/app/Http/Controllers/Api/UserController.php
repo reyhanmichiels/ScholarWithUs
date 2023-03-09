@@ -50,7 +50,7 @@ class UserController extends Controller
         $image = $request->file('profile_picture');
         $data = [
             'file' => $image,
-            'file_name' =>  $request->name . "_" . "$user->id." . $image->extension(),
+            'file_name' => "$user->id." . $image->extension(),
             'file_path' => '/profile_picture_user'
         ];
 

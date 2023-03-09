@@ -120,7 +120,7 @@ class ProgramController extends Controller
             $image = $request->file('program_picture');
             $data = [
                 'file' => $image,
-                'file_name' =>  $request->name . "_" . "$program->id." . $image->extension(),
+                'file_name' =>  "$program->id." . $image->extension(),
                 'file_path' => '/program_picture'
             ];
 
@@ -163,7 +163,7 @@ class ProgramController extends Controller
         
         $data = [
             'file' => $image,
-            'file_name' =>  $request->name . "_" . $program->id . "." . $image->extension(),
+            'file_name' =>  $program->id . "." . $image->extension(),
             'file_path' => '/program_picture',
             'delete_file' => $delete
         ];
