@@ -6,74 +6,37 @@ use App\Http\Controllers\Controller;
 use App\Libraries\ApiResponse;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Enum;
 
 class UserController extends Controller
 {
-    public function index(User $user)
-    {
-        try {
-            $data = [
-                'message' => "Get all user",
-                'data' => $user->paginate(9)
-            ];
-        } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() != 0 ? $e->getCode() : 400);
-        }
-
-        return ApiResponse::success($data, 200);
-    }
-
-    public function show(User $user)
+    public function show()
     {   
         try {
+            $user = User::find(Auth::user()->id);
+
             $data = [
                 'message' => "user with id $user->id",
                 'data' => $user
             ];
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() != 0 ? $e->getCode() : 500);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         return ApiResponse::success($data, 200);
     }
 
-    public function store(Request $request)
+    public function update(Request $request)
     {
+        $user = User::find(Auth::user()->id);
+
         $validate = Validator::make($request->all(), [
             'name' => 'string|required',
-            'email' => 'email|unique:users|required',
-            'password' => 'string|required'
-        ]);
-
-        if ($validate->fails()) {
-            return ApiResponse::error($validate->errors(), 409);
-        }
-
-        try {
-            $user = new User;
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->password = bcrypt($request->password);
-            $user->save();
-        } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() != 0 ? $e->getCode() : 500);
-        }
-
-        $data = [
-            'message' => 'User created',
-            'data' => $user
-        ];
-
-        return ApiResponse::success($data, 201);
-    }
-
-    public function update(Request $request, User $user)
-    {
-        $validate = Validator::make($request->all(), [
-            'name' => 'string|required',
-            'email' => 'email|required|unique:users,email,' . $user->id,
-            'password' => 'string|required'
+            'phone_number' => 'string|required',
+            'age' => 'int|required',
+            'gender' => 'required|in:male,female',
         ]);
 
         if ($validate->fails()) {
@@ -82,11 +45,12 @@ class UserController extends Controller
 
         try {
             $user->name = $request->name;
-            $user->email = $request->email;
-            $user->password = bcrypt($request->password);
+            $user->phone_number = $request->phone_number;
+            $user->age = $request->age;
+            $user->gender = $request->gender;
             $user->save();
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() != 0 ? $e->getCode() : 500);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         $data = [
@@ -102,7 +66,7 @@ class UserController extends Controller
         try {
             $user->delete();
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() != 0 ? $e->getCode() : 500);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         $data['message'] = "User Deleted";

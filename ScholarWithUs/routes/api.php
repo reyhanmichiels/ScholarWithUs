@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\DiscussionController;
 use App\Http\Controllers\Api\TagCostController;
 use App\Http\Controllers\Api\TagCountryController;
 use App\Http\Controllers\Api\TagLevelController;
+use App\Http\Controllers\Api\UserProgramController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Http\Request;
@@ -70,11 +71,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/users/transactions', [TransactionController::class, 'index']);
     Route::get('/users/transactions/{transaction}', [TransactionController::class, 'show']);
 
-    Route::get('/users', [UserController::class, 'index']);
-    Route::get('/users/{user}', [UserController::class, 'show']);
-    Route::post('/users', [UserController::class, 'store']);
-    Route::put('/users/{user}', [UserController::class, 'update']);
-    Route::delete('/users/{user}', [UserController::class, 'destroy']);
+    Route::get('/users', [UserController::class, 'show']);
+    Route::put('/users', [UserController::class, 'update']);
+    Route::delete('/users', [UserController::class, 'destroy']);
+
+    Route::get('/users/programs', [UserProgramController::class, 'index']);
+    Route::get('/users/programs/{program}', [UserProgramController::class, 'show']);
+    Route::post('/users/programs/{program}', [UserProgramController::class, 'attach']);
+    Route::delete('/users/programs/{program}', [UserProgramController::class, 'detach']);
 
     Route::post('/tagCountries', [TagCountryController::class, 'store']);
     Route::put('/tagCountries/{tagCountry}', [TagCountryController::class, 'update']);
