@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\FileController;
 use App\Http\Resources\ArticleResource;
 use App\Libraries\ApiResponse;
 use App\Models\Article;
@@ -46,7 +47,8 @@ class ArticleController extends Controller
             'title' => 'string|required|unique:articles',
             'brief_description' => 'string|required',
             'description' => 'string|required',
-            'tag_article_id' => 'int|required'
+            'tag_article_id' => 'int|required',
+            'article_picture' => 'file|sometimes',
         ]);
         
         if ($validate->fails()) {
@@ -66,6 +68,18 @@ class ArticleController extends Controller
             $article->description = $request->description;
             $article->tag_article_id = $request->tag_article_id;
             $article->save();
+
+            $image = $request->file('article_picture');
+            $data = [
+                'file' => $image,
+                'file_name' =>  $request->title . "_" . "$article->id." . $image->extension(),
+                'file_path' => '/article_picture'
+            ];
+
+            $url = FileController::manage($data);
+
+            $article->image = $url;
+            $article->save();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
         }
@@ -84,12 +98,26 @@ class ArticleController extends Controller
             'title' => 'string|required|unique:articles,title,' . $article->id,
             'brief_description' => 'string|required',
             'description' => 'string|required',
-            'tag_article_id' => 'int|required'
+            'tag_article_id' => 'int|required',
+            'article_picture' => 'file|sometimes',
         ]);
 
         if ($validate->fails()) {
             return ApiResponse::error($validate->errors(), 409);
         }
+
+        $delete = substr($article->image, 9);
+
+        $image = $request->file('article_picture');
+        
+        $data = [
+            'file' => $image,
+            'file_name' =>  $request->title . "_" . $article->id . "." . $image->extension(),
+            'file_path' => '/article_picture',
+            'delete_file' => $delete
+        ];
+
+        $url = FileController::manage($data);
 
         $test = TagArticle::find($request->tag_article_id);
 
@@ -102,6 +130,7 @@ class ArticleController extends Controller
             $article->brief_description = $request->brief_description;
             $article->description = $request->description;
             $article->tag_article_id = $request->tag_article_id;
+            $article->image = $url;
             $article->save();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);

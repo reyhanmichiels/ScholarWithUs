@@ -49,7 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/discussions/{discussion}/replies/{reply}', [ReplyController::class, 'destroy']);
 
     Route::post('/articles', [ArticleController::class, 'store']);
-    Route::put('/articles/{article}', [ArticleController::class, 'update']);
+    Route::post('/articles/{article}', [ArticleController::class, 'update']);
     Route::delete('/articles/{article}', [ArticleController::class, 'destroy']);
 
     Route::post('/discussions', [DiscussionController::class, 'store']);
