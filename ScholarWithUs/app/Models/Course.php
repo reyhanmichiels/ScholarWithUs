@@ -16,6 +16,11 @@ class Course extends Model
         return $this->belongsToMany(Program::class);
     }
 
+    public function materials()
+    {
+        return $this->hasMany(Material::class);
+    }
+
     public function mentor()
     {
         return $this->belongsTo(Mentor::class);

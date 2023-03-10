@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Article;
 use App\Models\Course;
 use App\Models\Discussion;
+use App\Models\Material;
 use App\Models\Mentor;
 use App\Models\Program;
 use App\Models\Reply;
@@ -26,21 +27,21 @@ class DatabaseSeeder extends Seeder
      * Seed the application's database.
      */
     public function run(): void
-    {   
+    {
         User::create([
             'name' => "reyhan",
             'email' => 'reyhan@gmail.com',
             'password' => bcrypt('rahasia'),
             'image' => '/storage//profile_picture/example.svg'
         ]);
-       
+
         User::create([
             'name' => "budi",
             'email' => 'budi@gmail.com',
             'password' => bcrypt('rahasia'),
             'image' => '/storage//profile_picture/example.svg'
         ]);
-       
+
         User::create([
             'name' => "james",
             'email' => 'james@gmail.com',
@@ -51,7 +52,7 @@ class DatabaseSeeder extends Seeder
         TagCost::create([
             'name' => 'Fully Funded'
         ]);
-       
+
         TagCost::create([
             'name' => 'Half Funded'
         ]);
@@ -59,19 +60,19 @@ class DatabaseSeeder extends Seeder
         TagLevel::create([
             'name' => 'S1'
         ]);
-       
+
         TagLevel::create([
             'name' => 'S2'
         ]);
-       
+
         TagLevel::create([
             'name' => 'S3'
         ]);
-       
+
         TagCountry::create([
             'name' => "Germany"
         ]);
-        
+
         TagCountry::create([
             'name' => "Korean"
         ]);
@@ -171,7 +172,7 @@ class DatabaseSeeder extends Seeder
             'scholarship_id' => 1,
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?",
             'price' => 1000000,
-            'image' =>"/storage//program_picture/example.svg"
+            'image' => "/storage//program_picture/example.svg"
         ]);
 
         Program::create([
@@ -182,9 +183,9 @@ class DatabaseSeeder extends Seeder
             'scholarship_id' => 2,
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?",
             'price' => 2000000,
-            'image' =>"/storage//program_picture/example.svg"
+            'image' => "/storage//program_picture/example.svg"
 
-        
+
         ]);
 
         Program::create([
@@ -195,7 +196,7 @@ class DatabaseSeeder extends Seeder
             'scholarship_id' => 3,
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?",
             'price' => 3000000,
-            'image' =>"/storage//program_picture/example.svg"
+            'image' => "/storage//program_picture/example.svg"
         ]);
 
         DB::table('program_tag_country')->insert([
@@ -267,6 +268,62 @@ class DatabaseSeeder extends Seeder
         Course::create([
             'mentor_id' => 4,
             'name' => 'course D'
+        ]);
+
+        Material::create([
+            'course_id' => 1,
+            'name' => 'material A',
+            'modul' => '/storage//material_modul/modul_dummy.pdf',
+            'video' => 'https://drive.google.com/file/d/1ZLUzjSkwtxXhjRctYAcsrAxhfMOV8mJC/preview ',
+        ]);
+
+        Material::create([
+            'course_id' => 1,
+            'name' => 'material B',
+            'modul' => '/storage//material_modul/modul_dummy.pdf',
+            'video' => 'https://drive.google.com/file/d/1ZLUzjSkwtxXhjRctYAcsrAxhfMOV8mJC/preview ',
+        ]);
+
+        Material::create([
+            'course_id' => 2,
+            'name' => 'material C',
+            'modul' => '/storage//material_modul/modul_dummy.pdf',
+            'video' => 'https://drive.google.com/file/d/1ZLUzjSkwtxXhjRctYAcsrAxhfMOV8mJC/preview '
+        ]);
+
+        Material::create([
+            'course_id' => 2,
+            'name' => 'material D',
+            'modul' => '/storage//material_modul/modul_dummy.pdf',
+            'video' => 'https://drive.google.com/file/d/1ZLUzjSkwtxXhjRctYAcsrAxhfMOV8mJC/preview '
+        ]);
+
+        Material::create([
+            'course_id' => 3,
+            'name' => 'material E',
+            'modul' => '/storage//material_modul/modul_dummy.pdf',
+            'video' => 'https://drive.google.com/file/d/1ZLUzjSkwtxXhjRctYAcsrAxhfMOV8mJC/preview '
+        ]);
+
+        Material::create([
+            'course_id' => 3,
+            'name' => 'material F',
+            'modul' => '/storage//material_modul/modul_dummy.pdf',
+            'video' => 'https://drive.google.com/file/d/1ZLUzjSkwtxXhjRctYAcsrAxhfMOV8mJC/preview '
+        ]);
+
+        Material::create([
+            'course_id' => 4,
+            'name' => 'material G',
+            'modul' => '/storage//material_modul/modul_dummy.pdf',
+            'video' => 'https://drive.google.com/file/d/1ZLUzjSkwtxXhjRctYAcsrAxhfMOV8mJC/preview '
+        ]);
+
+        Material::create([
+            'course_id' => 4,
+            'name' => 'material H',
+            'modul' => '/storage//material_modul/modul_dummy.pdf',
+            'video' => 'https://drive.google.com/file/d/1ZLUzjSkwtxXhjRctYAcsrAxhfMOV8mJC/preview '
         ]);
 
         TagArticle::create([
@@ -342,8 +399,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('course_program')->insert([
-            'course_id' => '1',
             'program_id' => '1',
+            'course_id' => '1',
         ]);
 
         DB::table('course_program')->insert([
@@ -355,7 +412,7 @@ class DatabaseSeeder extends Seeder
             'program_id' => '2',
             'course_id' => '1',
         ]);
-        
+
         DB::table('course_program')->insert([
             'program_id' => '2',
             'course_id' => '3',
@@ -365,7 +422,7 @@ class DatabaseSeeder extends Seeder
             'program_id' => '3',
             'course_id' => '1',
         ]);
-        
+
         DB::table('course_program')->insert([
             'program_id' => '3',
             'course_id' => '4',
@@ -401,19 +458,19 @@ class DatabaseSeeder extends Seeder
         Discussion::create([
             'user_id' => 1,
             'title' => 'Discussion A',
-            'comment'=> 'lorem ipsum'
+            'comment' => 'lorem ipsum'
         ]);
 
         Discussion::create([
             'user_id' => 2,
             'title' => 'Discussion B',
-            'comment'=> 'lorem ipsum'
+            'comment' => 'lorem ipsum'
         ]);
 
         Discussion::create([
             'user_id' => 3,
             'title' => 'Discussion C',
-            'comment'=> 'lorem ipsum'
+            'comment' => 'lorem ipsum'
         ]);
 
         Reply::create([

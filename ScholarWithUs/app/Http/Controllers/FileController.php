@@ -9,7 +9,6 @@ class FileController extends Controller
 {
     public static function manage($data)
     {
-        // Storage::delete($data['file_path'] . '/' . $data['file_name']);
         if (! empty($data['delete_file'])) {
             Storage::delete($data['delete_file']);
         }

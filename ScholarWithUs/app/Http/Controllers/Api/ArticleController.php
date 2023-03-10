@@ -48,7 +48,7 @@ class ArticleController extends Controller
             'brief_description' => 'string|required',
             'description' => 'string|required',
             'tag_article_id' => 'int|required',
-            'article_picture' => 'file|sometimes',
+            'article_picture' => 'file|required',
         ]);
         
         if ($validate->fails()) {

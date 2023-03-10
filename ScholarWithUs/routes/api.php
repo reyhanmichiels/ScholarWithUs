@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\TagCostController;
 use App\Http\Controllers\Api\TagCountryController;
 use App\Http\Controllers\Api\TagLevelController;
 use App\Http\Controllers\Api\UserProgramController;
+use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Http\Request;
@@ -32,6 +33,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    Route::get('/courses/{course}/materials', [MaterialController::class, 'index']);
+    Route::get('/courses/{course}/materials/{material}', [MaterialController::class, 'show']);
+    Route::post('/courses/{course}/materials', [MaterialController::class, 'store']);
+    Route::post('/courses/{course}/materials/{material}', [MaterialController::class, 'update']);
+    Route::delete('/courses/{course}/materials/{material}', [MaterialController::class, 'destroy']);
 
     Route::post('/tags', [TagController::class, 'store']);
     Route::put('/tags/{tag}', [TagController::class, 'update']);
