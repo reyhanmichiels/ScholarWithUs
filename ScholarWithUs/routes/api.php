@@ -114,6 +114,7 @@ Route::get('/tags/{tag}', [TagController::class, 'show']);
 
 Route::get('/articles', [ArticleController::class, 'index']);
 Route::get('/articles/{article}', [ArticleController::class, 'show']);
+Route::get('/articles/{article}/recomend', [ArticleController::class, 'recomend']);
 Route::get('/articles/tagArticles/{tagArticle}', [ArticleController::class, 'filterByTag']);
 
 Route::get('/mentors', [MentorController::class, 'index']);

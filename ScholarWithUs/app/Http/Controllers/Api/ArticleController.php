@@ -15,28 +15,20 @@ class ArticleController extends Controller
 {
     public function index(Article $article)
     {
-        try {
-            $data = [
-                'message' => "Get all article",
+        $data = [
+            'message' => "Show all article",
             'data' => ArticleResource::collection($article->all())
-            ];
-        } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), 500);
-        }
+        ];
 
         return ApiResponse::success($data, 200);
     }
 
     public function show(Article $article)
     {
-        try {
-            $data = [
-                'message' => "Article with id $article->id",
-                'data' => new ArticleResource($article)
-            ];
-        } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), 500);
-        }
+        $data = [
+            'message' => "Show article with id $article->id",
+            'data' => new ArticleResource($article)
+        ];
 
         return ApiResponse::success($data, 200);
     }
@@ -44,20 +36,18 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $validate = Validator::make($request->all(), [
-            'title' => 'string|required|unique:articles',
+            'title' => 'string|required|unique:articles|max:20',
             'brief_description' => 'string|required',
             'description' => 'string|required',
             'tag_article_id' => 'int|required',
             'article_picture' => 'file|required',
         ]);
-        
+
         if ($validate->fails()) {
             return ApiResponse::error($validate->errors(), 409);
         }
-        
-        $test = TagArticle::find($request->tag_article_id);
 
-        if (! $test) {
+        if (!TagArticle::find($request->tag_article_id)) {
             return ApiResponse::error('tag article not found', 404);
         }
 
@@ -67,16 +57,16 @@ class ArticleController extends Controller
             $article->brief_description = $request->brief_description;
             $article->description = $request->description;
             $article->tag_article_id = $request->tag_article_id;
+            $article->image = "temp";
             $article->save();
 
-            $image = $request->file('article_picture');
-            $data = [
-                'file' => $image,
-                'file_name' =>  "$article->id." . $image->extension(),
+            $image = [
+                'file' => $request->file('article_picture'),
+                'file_name' =>  "$article->id." . $request->file('article_picture')->extension(),
                 'file_path' => '/article_picture'
             ];
 
-            $url = FileController::manage($data);
+            $url = FileController::manage($image);
 
             $article->image = $url;
             $article->save();
@@ -85,7 +75,7 @@ class ArticleController extends Controller
         }
 
         $data = [
-            'message' => 'Article created',
+            'message' => 'Successfully created article',
             'data' => new ArticleResource($article)
         ];
 
@@ -95,7 +85,7 @@ class ArticleController extends Controller
     public function update(Request $request, Article $article)
     {
         $validate = Validator::make($request->all(), [
-            'title' => 'string|required|unique:articles,title,' . $article->id,
+            'title' => 'string|required|max:20|unique:articles,title,' . $article->id,
             'brief_description' => 'string|required',
             'description' => 'string|required',
             'tag_article_id' => 'int|required',
@@ -106,23 +96,19 @@ class ArticleController extends Controller
             return ApiResponse::error($validate->errors(), 409);
         }
 
-        $delete = substr($article->image, 9);
-
-        $image = $request->file('article_picture');
-        
-        $data = [
-            'file' => $image,
-            'file_name' =>  $article->id . "." . $image->extension(),
-            'file_path' => '/article_picture',
-            'delete_file' => $delete
-        ];
-
-        $url = FileController::manage($data);
-
-        $test = TagArticle::find($request->tag_article_id);
-
-        if (! $test) {
+        if (!TagArticle::find($request->tag_article_id)) {
             return ApiResponse::error('tag article not found', 404);
+        }
+
+        if (!empty($request->article_picture)) {
+            $data = [
+                'file' => $request->file('article_picture'),
+                'file_name' =>  $article->id . "." . $request->file('article_picture')->extension(),
+                'file_path' => '/article_picture',
+                'delete_file' => substr($article->image, 9)
+            ];
+
+            $url = FileController::manage($data);
         }
 
         try {
@@ -130,14 +116,14 @@ class ArticleController extends Controller
             $article->brief_description = $request->brief_description;
             $article->description = $request->description;
             $article->tag_article_id = $request->tag_article_id;
-            $article->image = $url;
+            $article->image = $url ?? $article->image;
             $article->save();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
         }
 
         $data = [
-            'message' => 'Article updated',
+            'message' => 'Successfully updated article',
             'data' => new ArticleResource($article)
         ];
 
@@ -152,7 +138,7 @@ class ArticleController extends Controller
             return ApiResponse::error($e->getMessage(), 500);
         }
 
-        $data['message'] = "Article Deleted";
+        $data['message'] = "Successfully deleted article";
 
         return ApiResponse::success($data, 200);
     }
@@ -160,14 +146,22 @@ class ArticleController extends Controller
 
     public function filterByTag(TagArticle $tagArticle)
     {
-        try {
-            $data = [
-                'message' => "Get all article with tag $tagArticle->name",
-                'data' => ArticleResource::collection($tagArticle->articles)
-            ];
-        } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), 500);
-        }
+        $data = [
+            'message' => "Show all article with tag $tagArticle->name",
+            'data' => ArticleResource::collection($tagArticle->articles)
+        ];
+
+        return ApiResponse::success($data, 200);
+    }
+
+    public function recomend(Article $article)
+    {   
+        $tag = TagArticle::find($article->tagArticles->id);
+
+        $data = [
+            'message' => "Show recomend article for article with id $article->id",
+            'data' => ArticleResource::collection($tag->articles()->where('id', '!=', $article->id)->get())
+        ];
 
         return ApiResponse::success($data, 200);
     }
