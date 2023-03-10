@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\FileController;
+use App\Http\Controllers\Api\FileController;
 use App\Http\Resources\ArticleResource;
 use App\Libraries\ApiResponse;
 use App\Models\Article;

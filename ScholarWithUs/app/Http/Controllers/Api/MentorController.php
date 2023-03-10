@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Api\FileController;
+use App\Http\Controllers\Controller;
 use App\Libraries\ApiResponse;
 use App\Models\Mentor;
 use App\Models\Program;

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\FileController;
+use App\Http\Controllers\Api\FileController;
 use App\Libraries\ApiResponse;
 use App\Models\User;
 use Illuminate\Contracts\Cache\Store;
@@ -48,20 +48,24 @@ class UserController extends Controller
         }
 
         $image = $request->file('profile_picture');
-        $data = [
-            'file' => $image,
-            'file_name' => "$user->id." . $image->extension(),
-            'file_path' => '/profile_picture_user'
-        ];
 
-        $url = FileController::manage($data);
+        if (! empty($image)) {
+            $data = [
+                'file' => $image,
+                'file_name' => "$user->id." . $image->extension(),
+                'file_path' => '/profile_picture_user'
+            ];
+    
+            $url = FileController::manage($data);
+    
+            $user->image = $url;
+        }
 
         try {
             $user->name = $request->name;
             $user->phone_number = $request->phone_number;
             $user->age = $request->age;
             $user->gender = $request->gender;
-            $user->image = $url;
             $user->save();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
