@@ -9,6 +9,7 @@ use App\Libraries\ApiResponse;
 use App\Models\Article;
 use App\Models\TagArticle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ArticleController extends Controller
@@ -133,7 +134,8 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         try {
-            $article->delete();
+            Storage::delete('article_picture/7.svg');
+            // $article->delete();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
         }
