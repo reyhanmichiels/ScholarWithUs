@@ -16,7 +16,7 @@ class AuthController extends Controller
         $validate = Validator::make($request->all(), [
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
-            'password' => 'required|string',
+            'password' => 'required|string|confirmed',
         ]);
 
         if ($validate->fails()) {
@@ -30,7 +30,7 @@ class AuthController extends Controller
             $user->password = bcrypt($request->password);
             $user->save();
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         $data = [
