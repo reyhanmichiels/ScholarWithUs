@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -34,5 +35,15 @@ class Scholarship extends Model
     public function tagCountries()
     {
         return $this->belongsToMany(TagCountry::class);
+    }
+
+    public function getOpenRegistrationAttribute($value)
+    {
+        return Carbon::parse($value)->format('d m Y');
+    }
+
+    public function getCloseRegistrationAttribute($value)
+    {
+        return Carbon::parse($value)->format('d m Y');
     }
 }

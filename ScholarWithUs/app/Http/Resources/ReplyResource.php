@@ -19,7 +19,10 @@ class ReplyResource extends JsonResource
             'user_id' => $this->user_id,
             'discussion_id' => $this->discussion_id,
             'comment' => $this->comment,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
             'user' => $this->users,
+            'discussion' => $this->discussions
         ];
     }
 }

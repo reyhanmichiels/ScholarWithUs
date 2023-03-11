@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +12,7 @@ class Reply extends Model
 
     public function discussions()
     {
-        return $this->belongsTo(Discussion::class);
+        return $this->belongsTo(Discussion::class, 'discussion_id');
     }
 
     public function users()
@@ -25,5 +26,13 @@ class Reply extends Model
         'comment'
     ];
 
-    public $timestamps = false;
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('d m Y H:i');
+    }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->diffForHumans();
+    }
 }
