@@ -106,7 +106,8 @@ class DatabaseSeeder extends Seeder
             'other_language_test' => 'lorem ipsum',
             'standarized_test' => 'lorem ipsum',
             'documents' => 'lorem ipsum',
-            'detail_information' => 'lorem ipsum'
+            'detail_information' => 'lorem ipsum',
+            'image' => '/storage/scholarship_picture/example.svg'
         ]);
 
         Scholarship::create([
@@ -126,7 +127,8 @@ class DatabaseSeeder extends Seeder
             'other_language_test' => 'lorem ipsum',
             'standarized_test' => 'lorem ipsum',
             'documents' => 'lorem ipsum',
-            'detail_information' => 'lorem ipsum'
+            'detail_information' => 'lorem ipsum',
+            'image' => '/storage/scholarship_picture/example.svg'
         ]);
 
         Scholarship::create([
@@ -146,7 +148,8 @@ class DatabaseSeeder extends Seeder
             'other_language_test' => 'lorem ipsum',
             'standarized_test' => 'lorem ipsum',
             'documents' => 'lorem ipsum',
-            'detail_information' => 'lorem ipsum'
+            'detail_information' => 'lorem ipsum',
+            'image' => '/storage/scholarship_picture/example.svg'
         ]);
 
         Scholarship::create([
@@ -166,7 +169,8 @@ class DatabaseSeeder extends Seeder
             'other_language_test' => 'lorem ipsum',
             'standarized_test' => 'lorem ipsum',
             'documents' => 'lorem ipsum',
-            'detail_information' => 'lorem ipsum'
+            'detail_information' => 'lorem ipsum',
+            'image' => '/storage/scholarship_picture/example.svg'
         ]);
 
         Scholarship::create([
@@ -186,7 +190,8 @@ class DatabaseSeeder extends Seeder
             'other_language_test' => 'lorem ipsum',
             'standarized_test' => 'lorem ipsum',
             'documents' => 'lorem ipsum',
-            'detail_information' => 'lorem ipsum'
+            'detail_information' => 'lorem ipsum',
+            'image' => '/storage/scholarship_picture/example.svg'
         ]);
 
         Scholarship::create([
@@ -206,7 +211,8 @@ class DatabaseSeeder extends Seeder
             'other_language_test' => 'lorem ipsum',
             'standarized_test' => 'lorem ipsum',
             'documents' => 'lorem ipsum',
-            'detail_information' => 'lorem ipsum'
+            'detail_information' => 'lorem ipsum',
+            'image' => '/storage/scholarship_picture/example.svg'
         ]);
 
         Mentor::create([

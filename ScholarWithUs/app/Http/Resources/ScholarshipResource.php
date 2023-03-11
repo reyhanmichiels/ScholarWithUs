@@ -34,6 +34,7 @@ class ScholarshipResource extends JsonResource
             'detail_information' => $this->scholarship_provider,
             'open_registration' => $this->open_registration,
             'close_registration' => $this->close_registration,
+            'image' => $this->image,
             'tag_level' => $this->tagLevels,
             'tag_cost' => $this->tagCosts,
             'tag_countries' => $this->tagCountries,

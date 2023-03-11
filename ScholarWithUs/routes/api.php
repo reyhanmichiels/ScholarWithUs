@@ -49,7 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/mentors/{mentor}', [MentorController::class, 'destroy']);
 
     Route::post('/scholarships', [ScholarshipController::class, 'store']);
-    Route::put('/scholarships/{scholarship}', [ScholarshipController::class, 'update']);
+    Route::post('/scholarships/{scholarship}', [ScholarshipController::class, 'update']);
     Route::delete('/scholarships/{scholarship}', [ScholarshipController::class, 'destroy']);
 
     Route::post('/discussions/{discussion}/replies    ', [ReplyController::class, 'store']);

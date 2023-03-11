@@ -9,6 +9,7 @@ use App\Models\Scholarship;
 use App\Models\TagCost;
 use App\Models\TagLevel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ScholarshipController extends Controller
@@ -60,6 +61,7 @@ class ScholarshipController extends Controller
             'other'                 => 'string|sometimes',
             'detail_information'    => 'string|required',
             'scholarship_provider'  => "string|required",
+            'image'                 => 'required|file',
             'open_registration'     => 'date|required',
             'close_registration'    => 'date|required',
         ]);
@@ -98,6 +100,18 @@ class ScholarshipController extends Controller
             $scholarship->detail_information = $request->scholarship_provider;
             $scholarship->open_registration = $request->open_registration;
             $scholarship->close_registration = $request->close_registration;
+            $scholarship->image = "temp";
+            $scholarship->save();
+
+            $image = [
+                'file' => $request->file('image'),
+                'file_name' => $scholarship->id . "." . $request->file('image')->extension(),
+                'file_path' => 'scholarship_picture'
+            ];
+
+            $url = FileController::manage($image);
+
+            $scholarship->image = $url;
             $scholarship->save();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
@@ -132,6 +146,7 @@ class ScholarshipController extends Controller
             'scholarship_provider'  => "string|required",
             'open_registration'     => 'date|required',
             'close_registration'    => 'date|required',
+            'image'                 => 'sometimes|file'
         ]);
 
         if ($validate->fails()) {
@@ -146,6 +161,17 @@ class ScholarshipController extends Controller
         $tag_cost = TagCost::find($request->tag_cost_id);
         if (!$tag_cost) {
             return ApiResponse::error('tag cost not found', 404);
+        }
+
+        if (!empty($request->image)) {
+            $image = [
+                'file' => $request->file('image'),
+                'file_name' => $scholarship->id . "." . $request->file('image')->extension(),
+                'file_path' => 'scholarship_picture',
+                'delete' => substr($scholarship->image, 8)
+            ];
+
+            $url = FileController::manage($image);
         }
 
         try {
@@ -167,6 +193,7 @@ class ScholarshipController extends Controller
             $scholarship->detail_information = $request->scholarship_provider;
             $scholarship->open_registration = $request->open_registration;
             $scholarship->close_registration = $request->close_registration;
+            $scholarship->image = $url ?? $scholarship->image;
             $scholarship->save();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
@@ -183,6 +210,7 @@ class ScholarshipController extends Controller
     public function destroy(Scholarship $scholarship)
     {
         try {
+            Storage::delete(substr($scholarship->image, 8));
             $scholarship->delete();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);

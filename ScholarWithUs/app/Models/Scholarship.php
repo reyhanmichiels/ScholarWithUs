@@ -27,7 +27,8 @@ class Scholarship extends Model
         'other',
         'detail_information',
         'open_registration',
-        'close_registration'
+        'close_registration',
+        'image'
     ];
 
     public $timestamps = false;

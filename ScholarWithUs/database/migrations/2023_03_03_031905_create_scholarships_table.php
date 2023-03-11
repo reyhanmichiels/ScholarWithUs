@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('documents');
             $table->string('other')->nullable();
             $table->string('detail_information');
+            $table->string('image');
             $table->date('open_registration');
             $table->date('close_registration');
         });
