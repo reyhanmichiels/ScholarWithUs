@@ -44,18 +44,30 @@ class ScholarshipController extends Controller
     public function store(Request $request)
     {
         $validate = Validator::make($request->all(), [
-            'name' => 'string|required|unique:scholarships',
-            'tag_level_id' => 'int|required',
-            'tag_cost_id' => 'int|required',
-            'scholarship_provider' => "string|required",
-            'open_registration' => 'date|required',
-            'close_registration' => 'date|required',
+            'name'                  => 'string|required|unique:scholarships',
+            'tag_level_id'          => 'int|required',
+            'tag_cost_id'           => 'int|required',
+            'description'           => 'string|required',
+            'university'            => 'string|required',
+            'study_program'         => 'string|required',
+            'benefit'               => 'string|required',
+            'age'                   => 'integer|required',
+            'gpa'                   => 'decimal:2|required',
+            'english_test'          => 'string|required',
+            'other_language_test'   => 'string|required',
+            'standarized_test'      => 'string|required',
+            'documents'             => 'string|required',
+            'other'                 => 'string|sometimes',
+            'detail_information'    => 'string|required',
+            'scholarship_provider'  => "string|required",
+            'open_registration'     => 'date|required',
+            'close_registration'    => 'date|required',
         ]);
 
         if ($validate->fails()) {
             return ApiResponse::error($validate->errors(), 409);
         }
-        
+
         $tag_level = TagLevel::find($request->tag_level_id);
         if (!$tag_level) {
             return ApiResponse::error('tag level not found', 404);
@@ -72,6 +84,18 @@ class ScholarshipController extends Controller
             $scholarship->tag_level_id = $request->tag_level_id;
             $scholarship->tag_cost_id = $request->tag_cost_id;
             $scholarship->scholarship_provider = $request->scholarship_provider;
+            $scholarship->description = $request->description;
+            $scholarship->university = $request->university;
+            $scholarship->study_program = $request->study_program;
+            $scholarship->benefit = $request->benefit;
+            $scholarship->age = $request->age;
+            $scholarship->gpa = $request->gpa;
+            $scholarship->english_test = $request->english_test;
+            $scholarship->other_language_test = $request->other_language_test;
+            $scholarship->standarized_test = $request->standarized_test;
+            $scholarship->documents = $request->documents ?? null;
+            $scholarship->other = $request->other;
+            $scholarship->detail_information = $request->scholarship_provider;
             $scholarship->open_registration = $request->open_registration;
             $scholarship->close_registration = $request->close_registration;
             $scholarship->save();
@@ -81,7 +105,7 @@ class ScholarshipController extends Controller
 
         $data = [
             'message' => 'Scholarship created',
-            'data' => new ScholarshipResource($scholarship) 
+            'data' => new ScholarshipResource($scholarship)
         ];
 
         return ApiResponse::success($data, 201);
@@ -90,12 +114,24 @@ class ScholarshipController extends Controller
     public function update(Request $request, Scholarship $scholarship)
     {
         $validate = Validator::make($request->all(), [
-            'name' => 'string|required|unique:scholarships,name,' . $scholarship->id,
-            'tag_level_id' => 'int|required',
-            'tag_cost_id' => 'int|required',
-            'scholarship_provider' => "string|required",
-            'open_registration' => 'date|required',
-            'close_registration' => 'date|required',
+            'name'                  => 'string|required|unique:scholarships,name,' . $scholarship->id,
+            'tag_level_id'          => 'int|required',
+            'tag_cost_id'           => 'int|required',
+            'description'           => 'string|required',
+            'university'            => 'string|required',
+            'study_program'         => 'string|required',
+            'benefit'               => 'string|required',
+            'age'                   => 'integer|required',
+            'gpa'                   => 'decimal:2|required',
+            'english_test'          => 'string|required',
+            'other_language_test'   => 'string|required',
+            'standarized_test'      => 'string|required',
+            'documents'             => 'string|required',
+            'other'                 => 'string|sometimes',
+            'detail_information'    => 'string|required',
+            'scholarship_provider'  => "string|required",
+            'open_registration'     => 'date|required',
+            'close_registration'    => 'date|required',
         ]);
 
         if ($validate->fails()) {
@@ -117,6 +153,18 @@ class ScholarshipController extends Controller
             $scholarship->tag_level_id = $request->tag_level_id;
             $scholarship->tag_cost_id = $request->tag_cost_id;
             $scholarship->scholarship_provider = $request->scholarship_provider;
+            $scholarship->description = $request->description;
+            $scholarship->university = $request->university;
+            $scholarship->study_program = $request->study_program;
+            $scholarship->benefit = $request->benefit;
+            $scholarship->age = $request->age;
+            $scholarship->gpa = $request->gpa;
+            $scholarship->english_test = $request->english_test;
+            $scholarship->other_language_test = $request->other_language_test;
+            $scholarship->standarized_test = $request->standarized_test;
+            $scholarship->documents = $request->documents ?? null;
+            $scholarship->other = $request->other;
+            $scholarship->detail_information = $request->scholarship_provider;
             $scholarship->open_registration = $request->open_registration;
             $scholarship->close_registration = $request->close_registration;
             $scholarship->save();
@@ -160,7 +208,7 @@ class ScholarshipController extends Controller
 
         return ApiResponse::success($data, 200);
     }
-    
+
     public function filterByTag(Request $request, Scholarship $scholar)
     {
         $validate = Validator::make($request->all(), [

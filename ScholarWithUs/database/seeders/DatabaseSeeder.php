@@ -95,7 +95,18 @@ class DatabaseSeeder extends Seeder
             'name' => "scholarship A",
             'scholarship_provider' => "Kemendikbud",
             'open_registration' => "2023-03-05",
-            'close_registration' => "2023-04-05"
+            'close_registration' => "2023-04-05",
+            'description' => 'lorem ipsum',
+            'university' => 'lorem ipsum',
+            'study_program' => 'lorem ipsum',
+            'benefit' => 'lorem ipsum',
+            'age' => 20,
+            'gpa' => 3.40,
+            'english_test' => 'lorem ipsum',
+            'other_language_test' => 'lorem ipsum',
+            'standarized_test' => 'lorem ipsum',
+            'documents' => 'lorem ipsum',
+            'detail_information' => 'lorem ipsum'
         ]);
 
         Scholarship::create([
@@ -104,7 +115,18 @@ class DatabaseSeeder extends Seeder
             'name' => "scholarship B",
             'scholarship_provider' => "Kemendikbud",
             'open_registration' => "2023-03-10",
-            'close_registration' => "2023-04-10"
+            'close_registration' => "2023-04-10",
+            'description' => 'lorem ipsum',
+            'university' => 'lorem ipsum',
+            'study_program' => 'lorem ipsum',
+            'benefit' => 'lorem ipsum',
+            'age' => 20,
+            'gpa' => 3.40,
+            'english_test' => 'lorem ipsum',
+            'other_language_test' => 'lorem ipsum',
+            'standarized_test' => 'lorem ipsum',
+            'documents' => 'lorem ipsum',
+            'detail_information' => 'lorem ipsum'
         ]);
 
         Scholarship::create([
@@ -113,7 +135,18 @@ class DatabaseSeeder extends Seeder
             'name' => "scholarship C",
             'scholarship_provider' => "Kemendikbud",
             'open_registration' => "2023-03-01",
-            'close_registration' => "2023-04-01"
+            'close_registration' => "2023-04-01",
+            'description' => 'lorem ipsum',
+            'university' => 'lorem ipsum',
+            'study_program' => 'lorem ipsum',
+            'benefit' => 'lorem ipsum',
+            'age' => 20,
+            'gpa' => 3.40,
+            'english_test' => 'lorem ipsum',
+            'other_language_test' => 'lorem ipsum',
+            'standarized_test' => 'lorem ipsum',
+            'documents' => 'lorem ipsum',
+            'detail_information' => 'lorem ipsum'
         ]);
 
         Scholarship::create([
@@ -122,7 +155,18 @@ class DatabaseSeeder extends Seeder
             'name' => "scholarship C",
             'scholarship_provider' => "Kemendikbud",
             'open_registration' => "2023-03-01",
-            'close_registration' => "2023-04-01"
+            'close_registration' => "2023-04-01",
+            'description' => 'lorem ipsum',
+            'university' => 'lorem ipsum',
+            'study_program' => 'lorem ipsum',
+            'benefit' => 'lorem ipsum',
+            'age' => 20,
+            'gpa' => 3.40,
+            'english_test' => 'lorem ipsum',
+            'other_language_test' => 'lorem ipsum',
+            'standarized_test' => 'lorem ipsum',
+            'documents' => 'lorem ipsum',
+            'detail_information' => 'lorem ipsum'
         ]);
 
         Scholarship::create([
@@ -131,7 +175,18 @@ class DatabaseSeeder extends Seeder
             'name' => "scholarship C",
             'scholarship_provider' => "Kemendikbud",
             'open_registration' => "2023-03-01",
-            'close_registration' => "2023-04-01"
+            'close_registration' => "2023-04-01",
+            'description' => 'lorem ipsum',
+            'university' => 'lorem ipsum',
+            'study_program' => 'lorem ipsum',
+            'benefit' => 'lorem ipsum',
+            'age' => 20,
+            'gpa' => 3.40,
+            'english_test' => 'lorem ipsum',
+            'other_language_test' => 'lorem ipsum',
+            'standarized_test' => 'lorem ipsum',
+            'documents' => 'lorem ipsum',
+            'detail_information' => 'lorem ipsum'
         ]);
 
         Scholarship::create([
@@ -140,7 +195,18 @@ class DatabaseSeeder extends Seeder
             'name' => "scholarship C",
             'scholarship_provider' => "Kemendikbud",
             'open_registration' => "2023-03-01",
-            'close_registration' => "2023-04-01"
+            'close_registration' => "2023-04-01",
+            'description' => 'lorem ipsum',
+            'university' => 'lorem ipsum',
+            'study_program' => 'lorem ipsum',
+            'benefit' => 'lorem ipsum',
+            'age' => 20,
+            'gpa' => 3.40,
+            'english_test' => 'lorem ipsum',
+            'other_language_test' => 'lorem ipsum',
+            'standarized_test' => 'lorem ipsum',
+            'documents' => 'lorem ipsum',
+            'detail_information' => 'lorem ipsum'
         ]);
 
         Mentor::create([

@@ -160,7 +160,7 @@ class ArticleController extends Controller
 
         $data = [
             'message' => "Show recomend article for article with id $article->id",
-            'data' => ArticleResource::collection($tag->articles()->where('id', '!=', $article->id)->get())
+            'data' => ArticleResource::collection($tag->articles()->where('id', '!=', $article->id)->take(4))
         ];
 
         return ApiResponse::success($data, 200);

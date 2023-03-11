@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\FileController;
+use App\Http\Controllers\Api\FileController;
 use App\Http\Resources\ProgramResource;
 use App\Libraries\ApiResponse;
 use App\Models\Program;
@@ -160,7 +160,7 @@ class ProgramController extends Controller
         $delete = substr($program->image, 9);
 
         $image = $request->file('program_picture');
-        
+
         $data = [
             'file' => $image,
             'file_name' =>  $program->id . "." . $image->extension(),
@@ -231,11 +231,11 @@ class ProgramController extends Controller
     }
 
     public function buy(Request $request, Program $program)
-    {   
+    {
         if ($program->users->count() == 20) {
             return ApiResponse::error("capacity full", 503);
         }
-        
+
         $validate = Validator::make($request->all(), [
             'payment_type' => "string|required"
         ]);
@@ -253,7 +253,7 @@ class ProgramController extends Controller
             $transaction->gross_amount = $program->price;
             $transaction->payment_type = $request->payment_type;
             $transaction->save();
-            
+
             $key = config('midtrans.server_key');
 
             $transaction_detail = [
@@ -287,12 +287,18 @@ class ProgramController extends Controller
             if ($request->payment_type == 'qris') {
                 $data = [
                     'message' => "Scan QR code",
-                    'data' => $response['actions'][0]['url']
+                    'data' => [
+                        'qris' => $response['actions'][0]['url'],
+                        'transaction' => $transaction
+                    ]
                 ];
             } else {
                 $data = [
                     'message' => "Transfer to VA Number",
-                    'data' => $response['va_numbers']
+                    'data' => [
+                        'Virtual Account Number' => $response['va_numbers'],
+                        'transaction' => $response
+                    ]
                 ];
             }
 
@@ -328,7 +334,7 @@ class ProgramController extends Controller
 
         $data = [
             'message' => "Search Successed",
-            'data' => ProgramResource::collection($program->all()->only($id->toArray())) 
+            'data' => ProgramResource::collection($program->all()->only($id->toArray()))
         ];
 
         return ApiResponse::success($data, 200);

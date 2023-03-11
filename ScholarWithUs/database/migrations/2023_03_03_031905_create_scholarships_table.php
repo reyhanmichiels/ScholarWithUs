@@ -17,6 +17,18 @@ return new class extends Migration
             $table->foreignId('tag_cost_id');
             $table->string('name');
             $table->string('scholarship_provider');
+            $table->string('description');
+            $table->string('university');
+            $table->string('study_program');
+            $table->string('benefit');
+            $table->integer('age');
+            $table->float('gpa', 3,2);
+            $table->string('english_test');
+            $table->string('other_language_test');
+            $table->string('standarized_test');
+            $table->string('documents');
+            $table->string('other')->nullable();
+            $table->string('detail_information');
             $table->date('open_registration');
             $table->date('close_registration');
         });

@@ -12,7 +12,22 @@ class Scholarship extends Model
 
     protected $fillable = [
         'name',
-        'description'
+        'description',
+        'scholarship_provider',
+        'description',
+        'university',
+        'study_program',
+        'benefit',
+        'age',
+        'gpa',
+        'english_test',
+        'other_language_test',
+        'standarized_test',
+        'documents',
+        'other',
+        'detail_information',
+        'open_registration',
+        'close_registration'
     ];
 
     public $timestamps = false;
@@ -21,7 +36,7 @@ class Scholarship extends Model
     {
         return $this->hasOne(Program::class);
     }
-    
+
     public function tagCosts()
     {
         return $this->belongsTo(TagCost::class, 'tag_cost_id');
@@ -31,7 +46,7 @@ class Scholarship extends Model
     {
         return $this->belongsTo(TagLevel::class, 'tag_level_id');
     }
-    
+
     public function tagCountries()
     {
         return $this->belongsToMany(TagCountry::class);
