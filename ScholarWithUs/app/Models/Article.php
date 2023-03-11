@@ -22,7 +22,7 @@ class Article extends Model
 
     public function getUpdatedAtAttribute($value)
     {
-        return Carbon::parse($value)->diffForHumans();
+        return Carbon::parse($value)->format('d m Y H:i');
     }
 
     public function tagArticles()

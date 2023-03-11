@@ -13,7 +13,7 @@ class ArticleTagArticleController extends Controller
     {
         try {
             $data = [
-                'message' => "Get all article with tag $tagArticle->name",
+                'message' => "Show all article with tag $tagArticle->name",
                 'data' => $tagArticle->articles
             ];
         } catch (\Exception $e) {
