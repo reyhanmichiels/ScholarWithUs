@@ -2,8 +2,12 @@
 
 namespace App\Exceptions;
 
+use App\Libraries\ApiResponse;
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -42,9 +46,18 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->renderable(function (Exception $e) {
-            // $code = $e->getCode();
-            // $code =  isset($code) ? $code : 400;
+        $this->renderable(function (Exception $e, $request) {
+
+            if ($e instanceof NotFoundHttpException && str_contains($e->getMessage(), 'model')) {
+                $model = explode("/", $request->path());
+                $model = $model[1];
+                return ApiResponse::error("$model id not found", 409);
+            } 
+
+            if ($e instanceof NotFoundHttpException) {
+                return ApiResponse::error("Route not found", 404);
+            } 
+
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
