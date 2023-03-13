@@ -104,6 +104,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/discussions', [DiscussionController::class, 'index']);
+Route::get('/discussions/search', [DiscussionController::class, 'search']);
 Route::get('/discussions/{discussion}', [DiscussionController::class, 'show']);
 
 Route::get('/discussions/{discussion}/replies', [ReplyController::class, 'index']);

@@ -19,9 +19,11 @@ class DiscussionResource extends JsonResource
             'user_id' => $this->user_id,
             'title' => $this->title,
             'comment' => $this->comment,
+            'reply_count' => $this->replies()->count(),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'user' => $this->users
+            'user' => $this->users,
+            'tag_discussion' => $this->tagDiscussions
         ];
     }
 }

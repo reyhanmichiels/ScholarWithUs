@@ -16,6 +16,7 @@ use App\Models\Tag;
 use App\Models\TagArticle;
 use App\Models\TagCost;
 use App\Models\TagCountry;
+use App\Models\TagDiscussion;
 use App\Models\TagLevel;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -545,6 +546,17 @@ class DatabaseSeeder extends Seeder
             'comment' => 'lorem ipsum'
         ]);
 
+        TagDiscussion::create([
+            'name' => 'php'
+        ]);
+
+        TagDiscussion::create([
+            'name' => 'java script'
+        ]);
+        TagDiscussion::create([
+            'name' => 'java'
+        ]);
+
         Reply::create([
             'user_id' => 3,
             'discussion_id' => 1,
@@ -561,6 +573,31 @@ class DatabaseSeeder extends Seeder
             'user_id' => 2,
             'discussion_id' => 3,
             'comment' => 'lorem'
+        ]);
+
+        DB::table('discussion_tag_discussion')->insert([
+            'discussion_id' => '1',
+            'tag_discussion_id' => '2',
+        ]);
+
+        DB::table('discussion_tag_discussion')->insert([
+            'discussion_id' => '2',
+            'tag_discussion_id' => '1',
+        ]);
+
+        DB::table('discussion_tag_discussion')->insert([
+            'discussion_id' => '2',
+            'tag_discussion_id' => '3',
+        ]);
+
+        DB::table('discussion_tag_discussion')->insert([
+            'discussion_id' => '3',
+            'tag_discussion_id' => '2',
+        ]);
+
+        DB::table('discussion_tag_discussion')->insert([
+            'discussion_id' => '3',
+            'tag_discussion_id' => '3',
         ]);
     }
 }

@@ -30,6 +30,11 @@ return new class extends Migration
             $table->foreignId('tag_country_id');
             $table->foreignId('scholarship_id');
         });
+
+        Schema::create('discussion_tag_discussion', function (Blueprint $table) {
+            $table->foreignId('tag_discussion_id');
+            $table->foreignId('discussion_id');
+        });
     }
 
     /**

@@ -20,6 +20,11 @@ class Discussion extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function tagDiscussions()
+    {
+        return $this->belongsToMany(TagDiscussion::class);
+    }
+
     public function getCreatedAtAttribute($value)
     {
         return Carbon::parse($value)->format('d m Y H:i');
