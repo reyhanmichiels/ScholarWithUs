@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('tag_cost_id');
             $table->foreignId('mentor_id');
             $table->string('name');
+            $table->string('content');
             $table->mediumText('description');
             $table->integer('price');
             $table->string('image')->nullable();

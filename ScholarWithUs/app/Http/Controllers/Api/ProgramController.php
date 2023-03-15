@@ -85,6 +85,7 @@ class ProgramController extends Controller
             'scholarship_id' => 'int|required',
             'name' => 'string|required|unique:programs',
             'description' => 'string|required',
+            'content' => 'string|required',
             'price' => 'int|required',
             'tag_level_id' => 'int|required',
             'tag_cost_id' => 'int|required',
@@ -111,6 +112,7 @@ class ProgramController extends Controller
             $program->scholarship_id = $request->scholarship_id;
             $program->name = $request->name;
             $program->description = $request->description;
+            $program->content = $request->content;
             $program->price = $request->price;
             $program->tag_level_id = $request->tag_level_id;
             $program->tag_cost_id = $request->tag_cost_id;
@@ -145,6 +147,7 @@ class ProgramController extends Controller
         $validate = Validator::make($request->all(), [
             'name' => 'string|required|unique:programs,name,' . $program->id,
             'description' => 'string|required',
+            'content' => 'string|required',
             'price' => 'int|required',
             'tag_level_id' => 'int|required',
             'tag_cost_id' => 'int|required',
@@ -183,6 +186,7 @@ class ProgramController extends Controller
         try {
             $program->name = $request->name;
             $program->description = $request->description;
+            $program->content = $request->content;
             $program->price = $request->price;
             $program->tag_level_id = $request->tag_level_id;
             $program->tag_cost_id = $request->tag_cost_id;

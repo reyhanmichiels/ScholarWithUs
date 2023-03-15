@@ -21,6 +21,7 @@ class ProgramResource extends JsonResource
             'tag_cost_id' => $this->tag_cost_id,
             'name' => $this->name,
             'description' => $this->description,
+            'content' => $this->content,
             'price' => $this->price,
             'participant' => $this->users->count() . "/20",
             'image' => $this->image,
