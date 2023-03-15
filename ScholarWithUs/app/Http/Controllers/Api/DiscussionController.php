@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\TagDiscussionController;
+use App\Http\Controllers\Api\TagDiscussionController;
 use App\Http\Resources\ArticleResource;
 use App\Http\Resources\DiscussionCollection;
 use App\Http\Resources\DiscussionResource;

@@ -20,6 +20,11 @@ class Program extends Model
     {
         return $this->belongsTo(Scholarship::class);
     }
+    
+    public function userProgresses()
+    {
+        return $this->hasMany(UserProgress::class);
+    }
 
     public function courses()
     {

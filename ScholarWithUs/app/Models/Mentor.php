@@ -19,6 +19,11 @@ class Mentor extends Model
         return $this->hasOne(Course::class);
     }
 
+    public function userProgresses()
+    {
+        return $this->hasMany(UserProgress::class);
+    }
+
     protected $fillable = [
         'name',
         'study_track',

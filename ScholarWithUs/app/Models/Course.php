@@ -26,6 +26,11 @@ class Course extends Model
         return $this->belongsTo(Mentor::class);
     }
 
+    public function userProgresses()
+    {
+        return $this->hasMany(UserProgress::class);
+    }
+
     public $timestamps = false;
 
 }

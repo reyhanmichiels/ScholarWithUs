@@ -46,11 +46,13 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->renderable(function (Exception $e, $request) {
+        $this->renderable(function (Exception $e) {
 
             if ($e instanceof NotFoundHttpException && str_contains($e->getMessage(), 'model')) {
-                $model = explode("/", $request->path());
-                $model = $model[1];
+                $firstIndex = strpos($e->getMessage(), "Models\\") + 7;
+                $lastIndex = strpos($e->getMessage(), "]");
+                $model = substr($e->getMessage(), $firstIndex, $lastIndex - $firstIndex);
+                
                 return ApiResponse::error("$model id not found", 409);
             } 
 

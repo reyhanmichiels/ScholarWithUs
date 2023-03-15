@@ -16,7 +16,8 @@ use App\Http\Controllers\Api\TagLevelController;
 use App\Http\Controllers\Api\UserProgramController;
 use App\Http\Controllers\Api\MaterialController;
 use App\Http\Controllers\Api\MentorController;
-use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\Api\TransactionController;
+use App\Http\Controllers\Api\UserProgressController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,62 +35,88 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
-    Route::get('/courses/{course}/materials', [MaterialController::class, 'index']);
-    Route::get('/courses/{course}/materials/{material}', [MaterialController::class, 'show']);
-    Route::post('/courses/{course}/materials', [MaterialController::class, 'store']);
-    Route::post('/courses/{course}/materials/{material}', [MaterialController::class, 'update']);
-    Route::delete('/courses/{course}/materials/{material}', [MaterialController::class, 'destroy']);
+    Route::controller(ReplyController::class)->group(function () {
+        Route::post('/discussions/{discussion}/replies    ', 'store');
+        Route::delete('/discussions/{discussion}/replies/{reply}', 'destroy');
+    });
 
-    Route::post('/tags', [TagController::class, 'store']);
-    Route::put('/tags/{tag}', [TagController::class, 'update']);
-    Route::delete('/tags/{tag}', [TagController::class, 'destroy']);
+    Route::controller(UserProgressController::class)->group(function () {
+        Route::get('/userProgresses/programs/{program}', 'show');
+        Route::post('/userProgresses/programs/{program}/courses/{course}/materials/{material}', 'store');
+        Route::get('/userProgresses/programs/{program}/courses/{course}/materials/{material}', 'check');
+    });
 
-    Route::post('/mentors', [MentorController::class, 'store']);
-    Route::post('/mentors/{mentor}', [MentorController::class, 'update']);
-    Route::delete('/mentors/{mentor}', [MentorController::class, 'destroy']);
+    Route::controller(MentorController::class)->group(function () {
+        Route::post('/mentors', 'store');
+        Route::post('/mentors/{mentor}', 'update');
+        Route::delete('/mentors/{mentor}', 'destroy');
+    });
 
-    Route::post('/scholarships', [ScholarshipController::class, 'store']);
-    Route::post('/scholarships/{scholarship}', [ScholarshipController::class, 'update']);
-    Route::delete('/scholarships/{scholarship}', [ScholarshipController::class, 'destroy']);
+    Route::controller(ScholarshipController::class)->group(function () {
+        Route::post('/scholarships', 'store');
+        Route::post('/scholarships/{scholarship}', 'update');
+        Route::delete('/scholarships/{scholarship}', 'destroy');
+    });
 
-    Route::post('/discussions/{discussion}/replies    ', [ReplyController::class, 'store']);
-    Route::delete('/discussions/{discussion}/replies/{reply}', [ReplyController::class, 'destroy']);
+    Route::controller(ArticleController::class)->group(function () {
+        Route::post('/articles', 'store');
+        Route::post('/articles/{article}', 'update');
+        Route::delete('/articles/{article}', 'destroy');
+    });
 
-    Route::post('/articles', [ArticleController::class, 'store']);
-    Route::post('/articles/{article}', [ArticleController::class, 'update']);
-    Route::delete('/articles/{article}', [ArticleController::class, 'destroy']);
+    Route::controller(DiscussionController::class)->group(function () {
+        Route::post('/discussions', 'store');
+        Route::delete('/discussions/{discussion}', 'destroy');
+    });
 
-    Route::post('/discussions', [DiscussionController::class, 'store']);
-    Route::delete('/discussions/{discussion}', [DiscussionController::class, 'destroy']);
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/users', 'show');
+        Route::post('/users', 'update');
+        Route::delete('/users', 'destroy');
+    });
 
-    Route::post('/programs', [ProgramController::class, 'store']);
-    Route::post('/programs/{program}', [ProgramController::class, 'update']);
-    Route::delete('/programs/{program}', [ProgramController::class, 'destroy']);
-    Route::post('/programs/{program}/buy', [ProgramController::class, 'buy']);
+    Route::controller(TagCountryController::class)->group(function () {
+        Route::post('/tagCountries', 'store');
+        Route::put('/tagCountries/{tagCountry}', 'update');
+        Route::delete('/tagCountries/{tagCountry}', 'destroy');
+    });
 
-    Route::get('/programs/{program}/courses', [CourseController::class, 'index']);
-    Route::get('/programs/{program}/courses/{course}', [CourseController::class, 'show']);
-    Route::post('/programs/{program}/courses/{course}', [CourseController::class, 'attach']);
-    Route::delete('/programs/{program}/courses/{course}', [CourseController::class, 'detach']);
-    Route::post('/courses', [CourseController::class, 'store']);
-    Route::put('/courses/{course}', [CourseController::class, 'update']);
-    Route::delete('/courses/{course}', [CourseController::class, 'destroy']);
+    Route::controller(ProgramController::class)->group(function () {
+        Route::post('/programs', 'store');
+        Route::post('/programs/{program}', 'update');
+        Route::delete('/programs/{program}', 'destroy');
+        Route::post('/programs/{program}/buy', 'buy');
+    });
 
-    Route::get('/users/transactions', [TransactionController::class, 'index']);
-    Route::get('/users/transactions/{transaction}', [TransactionController::class, 'show']);
+    Route::controller(MaterialController::class)->group(function () {
+        Route::get('/courses/{course}/materials', 'index');
+        Route::get('/courses/{course}/materials/{material}', 'show');
+        Route::post('/courses/{course}/materials', 'store');
+        Route::post('/courses/{course}/materials/{material}', 'update');
+        Route::delete('/courses/{course}/materials/{material}', 'destroy');
+    });
 
-    Route::get('/users', [UserController::class, 'show']);
-    Route::post('/users', [UserController::class, 'update']);
-    Route::delete('/users', [UserController::class, 'destroy']);
+    Route::controller(CourseController::class)->group(function () {
+        Route::get('/programs/{program}/courses', 'index');
+        Route::get('/programs/{program}/courses/{course}', 'show');
+        Route::post('/programs/{program}/courses/{course}', 'attach');
+        Route::delete('/programs/{program}/courses/{course}', 'detach');
+        Route::post('/courses', 'store');
+        Route::put('/courses/{course}', 'update');
+        Route::delete('/courses/{course}', 'destroy');
+    });
 
-    Route::get('/users/programs', [UserProgramController::class, 'index']);
-    Route::get('/users/programs/{program}', [UserProgramController::class, 'show']);
-    Route::post('/users/programs/{program}', [UserProgramController::class, 'attach']);
-    Route::delete('/users/programs/{program}', [UserProgramController::class, 'detach']);
+    Route::controller(TransactionController::class)->group(function () {
+        Route::get('/users/transactions', 'index');
+        Route::get('/users/transactions/{transaction}', 'show');
+    });
 
-    Route::post('/tagCountries', [TagCountryController::class, 'store']);
-    Route::put('/tagCountries/{tagCountry}', [TagCountryController::class, 'update']);
-    Route::delete('/tagCountries/{tagCountry}', [TagCountryController::class, 'destroy']);
+    Route::controller(UserProgramController::class)->group(function () {
+        Route::get('/users/programs', 'index');
+        Route::get('/users/programs/{program}', 'show');
+        Route::post('/users/programs/{program}', 'attach');
+        Route::delete('/users/programs/{program}', 'detach');
+    });
 });
 
 Route::get('/tagCountries', [TagCountryController::class, 'index']);
@@ -100,38 +127,48 @@ Route::get('/tagCosts', [TagCostController::class, 'index']);
 
 Route::get('tagArticles/{tagArticle}/articles', [ArticleTagArticleController::class, 'index']);
 
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
+Route::controller(AuthController::class)->group(function () {
+    Route::post('/register', 'register');
+    Route::post('/login', 'login');
+});
 
-Route::get('/discussions', [DiscussionController::class, 'index']);
-Route::get('/discussions/search', [DiscussionController::class, 'search']);
-Route::get('/discussions/{discussion}', [DiscussionController::class, 'show']);
+Route::controller(DiscussionController::class)->group(function () {
+    Route::get('/discussions', 'index');
+    Route::get('/discussions/search', 'search');
+    Route::get('/discussions/{discussion}', 'show');
+});
 
-Route::get('/discussions/{discussion}/replies', [ReplyController::class, 'index']);
-Route::get('/discussions/{discussion}/replies/{reply}', [ReplyController::class, 'show']);
+Route::controller(ReplyController::class)->group(function () {
+    Route::get('/discussions/{discussion}/replies', 'index');
+    Route::get('/discussions/{discussion}/replies/{reply}', 'show');
+});
 
-Route::get('/tags', [TagController::class, 'index']);
-Route::get('/tags/{tag}', [TagController::class, 'show']);
+Route::controller(ArticleController::class)->group(function () {
+    Route::get('/articles', 'index');
+    Route::get('/articles/{article}', 'show');
+    Route::get('/articles/{article}/recomend', 'recomend');
+    Route::get('/articles/tagArticles/{tagArticle}', 'filterByTag');
+});
 
-Route::get('/articles', [ArticleController::class, 'index']);
-Route::get('/articles/{article}', [ArticleController::class, 'show']);
-Route::get('/articles/{article}/recomend', [ArticleController::class, 'recomend']);
-Route::get('/articles/tagArticles/{tagArticle}', [ArticleController::class, 'filterByTag']);
+Route::controller(MentorController::class)->group(function () {
+    Route::get('/mentors', 'index');
+    Route::get('/mentors/new', 'showNew');
+    Route::get('/mentors/{mentor}', 'show');
+});
 
-Route::get('/mentors', [MentorController::class, 'index']);
-Route::get('/mentors/new', [MentorController::class, 'showNew']);
-Route::get('/mentors/{mentor}', [MentorController::class, 'show']);
+Route::controller(ProgramController::class)->group(function () {
+    Route::get('/programs', 'index');
+    Route::get('/programs/new', 'showNew');
+    Route::get('/programs/search', 'searchByName');
+    Route::get('/programs/filter', 'filterByTag');
+    Route::get('/programs/{program}', 'show');
+    Route::post('/midtrans/notif-hook');
+});
 
-Route::get('/programs', [ProgramController::class, 'index']);
-Route::get('/programs/new', [ProgramController::class, 'showNew']);
-Route::get('/programs/search', [ProgramController::class, 'searchByName']);
-Route::get('/programs/filter', [ProgramController::class, 'filterByTag']);
-Route::get('/programs/{program}', [ProgramController::class, 'show']);
-Route::post('/midtrans/notif-hook', ProgramController::class);
-
-
-Route::get('/scholarships', [ScholarshipController::class, 'index']);
-Route::get('/scholarships/new', [ScholarshipController::class, 'showNew']);
-Route::get('/scholarships/filter', [ScholarshipController::class, 'filterByTag']);
-Route::get('/scholarships/search', [ScholarshipController::class, 'searchByName']);
-Route::get('/scholarships/{scholarship}', [ScholarshipController::class, 'show']);
+Route::controller(ScholarshipController::class)->group(function () {
+    Route::get('/scholarships', 'index');
+    Route::get('/scholarships/new', 'showNew');
+    Route::get('/scholarships/filter', 'filterByTag');
+    Route::get('/scholarships/search', 'searchByName');
+    Route::get('/scholarships/{scholarship}', 'show');
+});
