@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('program_id');
             $table->foreignId('user_id');
-            $table->enum('type', ['asking_mentor', 'review_document']);
+            $table->string('type');
             $table->date('date');
             $table->time('start');
             $table->time('finish');

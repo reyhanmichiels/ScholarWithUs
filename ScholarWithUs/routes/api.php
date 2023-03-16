@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\MaterialController;
 use App\Http\Controllers\Api\MentorController;
 use App\Http\Controllers\Api\TransactionController;
 use App\Http\Controllers\Api\UserProgressController;
+use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\InteractiveController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -122,6 +123,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/users/programs/{program}', 'show');
         Route::post('/users/programs/{program}', 'attach');
         Route::delete('/users/programs/{program}', 'detach');
+    });
+
+    Route::controller(ConsultationController::class)->group(function() {
+        Route::get('/consultations/available', 'available');
+        Route::post('/consultations', 'store');
     });
 });
 

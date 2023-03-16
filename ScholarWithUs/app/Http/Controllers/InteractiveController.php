@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\InteractiveResource;
 use App\Libraries\ApiResponse;
 use App\Models\Interactive;
 use App\Models\Program;
@@ -31,7 +32,7 @@ class InteractiveController extends Controller
 
         $data = [
             'message' => "Show user next interactive class schedule",
-            'data' => $interactive->where('date', '>=', $todayDate)->take(1)
+            'data' => $interactive->where('date', '>=', $todayDate)->take(1) 
         ];
 
         return ApiResponse::success($data, 200);
@@ -64,7 +65,7 @@ class InteractiveController extends Controller
 
         $data = [
             'message' => "Succesfuly created interactive schedule",
-            'data' => $interactive
+            'data' => new InteractiveResource($interactive) 
         ];
 
         return ApiResponse::success($data, 201);
