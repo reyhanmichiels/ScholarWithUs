@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Api\FileController;
 use App\Http\Resources\ProgramResource;
+use App\Http\Resources\TransactionResource;
 use App\Libraries\ApiResponse;
 use App\Models\Program;
 use App\Models\TagCost;
@@ -293,15 +294,15 @@ class ProgramController extends Controller
                     'message' => "Scan QR code",
                     'data' => [
                         'qris' => $response['actions'][0]['url'],
-                        'transaction' => $transaction
+                        'transaction' => new TransactionResource($transaction)
                     ]
                 ];
             } else {
                 $data = [
                     'message' => "Transfer to VA Number",
                     'data' => [
-                        'Virtual Account Number' => $response['va_numbers'],
-                        'transaction' => $response
+                        'Virtual_Account_Number' => $response['va_numbers'],
+                        'transaction' => new TransactionResource($transaction)
                     ]
                 ];
             }
