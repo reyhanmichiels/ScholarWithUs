@@ -26,6 +26,11 @@ class Program extends Model
         return $this->hasMany(UserProgress::class);
     }
 
+    public function interactives()
+    {
+        return $this->hasMany(Interactive::class);
+    }
+
     public function courses()
     {
         return $this->belongsToMany(Course::class);

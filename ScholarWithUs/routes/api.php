@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\MaterialController;
 use App\Http\Controllers\Api\MentorController;
 use App\Http\Controllers\Api\TransactionController;
 use App\Http\Controllers\Api\UserProgressController;
+use App\Http\Controllers\InteractiveController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,8 +37,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::controller(ReplyController::class)->group(function () {
-        Route::post('/discussions/{discussion}/replies    ', 'store');
+        Route::post('/discussions/{discussion}/replies', 'store');
         Route::delete('/discussions/{discussion}/replies/{reply}', 'destroy');
+    });
+
+    Route::controller(InteractiveController::class)->group(function () {
+        Route::get('/interactives/{program}', 'show');
+        Route::post('/interactives/{program}', 'store');
     });
 
     Route::controller(UserProgressController::class)->group(function () {

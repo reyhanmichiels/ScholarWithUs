@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Article;
 use App\Models\Course;
 use App\Models\Discussion;
+use App\Models\Interactive;
 use App\Models\Material;
 use App\Models\Mentor;
 use App\Models\Program;
@@ -276,6 +277,30 @@ class DatabaseSeeder extends Seeder
             'image' => "/storage//program_picture/example.svg"
         ]);
 
+        Interactive::create([
+            'program_id' => 1,
+            'date' => '2023-04-18',
+            'start' => '09:00',
+            'finish' => '10:00',
+            'zoom' => 'this is link zoom'
+        ]);
+
+        Interactive::create([
+            'program_id' => 1,
+            'date' => '2023-04-25',
+            'start' => '09:00',
+            'finish' => '10:00',
+            'zoom' => 'this is link zoom'
+        ]);
+
+        Interactive::create([
+            'program_id' => 1,
+            'date' => '2023-05-01',
+            'start' => '09:00',
+            'finish' => '10:00',
+            'zoom' => 'this is link zoom'
+        ]);
+        
         DB::table('program_tag_country')->insert([
             'program_id' => '1',
             'tag_country_id' => '1',

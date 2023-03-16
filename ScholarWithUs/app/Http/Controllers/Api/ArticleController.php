@@ -135,7 +135,7 @@ class ArticleController extends Controller
     {
         try {
             Storage::delete('/article_picture/7.svg');
-            // $article->delete();
+            $article->delete();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
         }
