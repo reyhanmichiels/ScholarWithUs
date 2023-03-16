@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Article;
+use App\Models\Consultation;
 use App\Models\Course;
 use App\Models\Discussion;
 use App\Models\Interactive;
@@ -299,6 +300,25 @@ class DatabaseSeeder extends Seeder
             'start' => '09:00',
             'finish' => '10:00',
             'zoom' => 'this is link zoom'
+        ]);
+
+        Consultation::create([
+            'program_id' => 1,
+            'user_id' => 1,
+            'type' => 'asking_mentor',
+            'date' => '2023-03-19',
+            'start' => '09:00',
+            'finish' => '10:00',
+        ]);
+
+        Consultation::create([
+            'program_id' => 1,
+            'user_id' => 1,
+            'type' => 'asking_mentor',
+            'date' => '2023-03-20',
+            'start' => '09:00',
+            'finish' => '10:00',
+            'document' => 'this is link document'
         ]);
         
         DB::table('program_tag_country')->insert([

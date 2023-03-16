@@ -16,11 +16,16 @@ class Program extends Model
         'price'
     ];
 
+    public function consultations()
+    {
+        return $this->hasMany(Consultation::class);
+    }
+
     public function scholarships()
     {
         return $this->belongsTo(Scholarship::class);
     }
-    
+
     public function userProgresses()
     {
         return $this->hasMany(UserProgress::class);
@@ -60,7 +65,7 @@ class Program extends Model
     {
         return $this->belongsTo(TagLevel::class, 'tag_level_id');
     }
-    
+
     public function tagCountries()
     {
         return $this->belongsToMany(TagCountry::class);
