@@ -17,7 +17,7 @@ class CourseController extends Controller
         if (!Gate::allows('user-program', $program)) {
             return ApiResponse::error("Unauthorized", 403);
         }
-        
+
         $data = [
             'message' => "Show all course with program id $program->id",
             'data' => $program->courses
@@ -33,7 +33,7 @@ class CourseController extends Controller
 
         $response = $program->courses->find($course->id);
 
-        if (! $response) {
+        if (!$response) {
             return ApiResponse::error('not found', 404);
         }
 
@@ -46,8 +46,8 @@ class CourseController extends Controller
     }
 
     public function store(Request $request)
-    {   
-        if (! Gate::allows('only-admin')) {
+    {
+        if (!Gate::allows('only-admin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 
@@ -76,8 +76,8 @@ class CourseController extends Controller
     }
 
     public function update(Request $request, Course $course)
-    {   
-        if (! Gate::allows('only-admin')) {
+    {
+        if (!Gate::allows('only-admin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 
@@ -105,8 +105,8 @@ class CourseController extends Controller
     }
 
     public function destroy(Course $course)
-    {   
-        if (! Gate::allows('only-admin')) {
+    {
+        if (!Gate::allows('only-admin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 
@@ -122,8 +122,8 @@ class CourseController extends Controller
     }
 
     public function attach(Program $program, Course $course)
-    {   
-        if (! Gate::allows('only-admin')) {
+    {
+        if (!Gate::allows('only-admin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 
@@ -147,11 +147,11 @@ class CourseController extends Controller
     }
 
     public function detach(Program $program, Course $course)
-    {   
-        if (! Gate::allows('only-admin')) {
+    {
+        if (!Gate::allows('only-admin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
-        
+
         $test = $program->courses->where('id', $course->id);
 
         if (empty($test->toArray())) {

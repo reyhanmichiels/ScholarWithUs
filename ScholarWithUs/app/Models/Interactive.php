@@ -24,11 +24,11 @@ class Interactive extends Model
 
     public function getStartAttribute($value)
     {
-        return Carbon::parse($value)->format('h:m');
+        return Carbon::parse($value)->format('h:s');
     }
 
     public function getFinishAttribute($value)
     {
-        return Carbon::parse($value)->format('h:m');
+        return Carbon::parse($value)->format('h:s');
     }
 }

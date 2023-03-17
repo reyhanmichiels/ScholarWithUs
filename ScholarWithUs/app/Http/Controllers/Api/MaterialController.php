@@ -7,46 +7,43 @@ use App\Libraries\ApiResponse;
 use App\Models\Course;
 use App\Models\Material;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class MaterialController extends Controller
 {
     public function index(Course $course)
     {
-        try {
-            $data = [
-                'message' => "All material from course with course id $course->id",
-                'data' => $course->materials
-            ];
-        } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), 500);
-        }
+        $data = [
+            'message' => "Show all material from course id $course->id",
+            'data' => $course->materials
+        ];
 
         return ApiResponse::success($data, 200);
     }
 
     public function show(Course $course, Material $material)
     {
-        try {
-            $response = $course->materials->where('id', $material->id);
+        $response = $course->materials->find($material->id);
 
-            if (empty($response->toArray())) {
-                return ApiResponse::error("Material doesn't exist", 404);
-            }
-
-            $data = [
-                'message' => "Material with id $material->id from course with course id $course->id",
-                'data' => $response
-            ];
-        } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), 500);
+        if (!$response) {
+            return ApiResponse::error("Material not found", 404);
         }
 
+        $data = [
+            'message' => "Show material id $material->id from course id $course->id",
+            'data' => $response
+        ];
         return ApiResponse::success($data, 200);
     }
 
     public function store(Request $request, Course $course)
     {
+        if (!Gate::allows('only-admin')) {
+            return ApiResponse::error("Unauthorized", 403);
+        };
+
         $validate = Validator::make($request->all(), [
             'name' => 'required|string',
             'video' => 'required|string',
@@ -83,7 +80,7 @@ class MaterialController extends Controller
         }
 
         $data = [
-            'message' => "Material succesfully created",
+            'message' => "Succesfully created material",
             'data' => $material
         ];
 
@@ -92,6 +89,10 @@ class MaterialController extends Controller
 
     public function update(Request $request, Course $course, Material $material)
     {
+        if (!Gate::allows('only-admin')) {
+            return ApiResponse::error("Unauthorized", 403);
+        };
+
         $validate = Validator::make($request->all(), [
             'name' => 'required|string',
             'video' => 'required|string',
@@ -121,7 +122,7 @@ class MaterialController extends Controller
             $material->name = $request->name;
             $material->video = str_replace('/view', '/preview', $request->video);
             $material->modul = $url;
-            $material->save();            
+            $material->save();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
         }
@@ -136,13 +137,18 @@ class MaterialController extends Controller
 
     public function destroy(Course $course, Material $material)
     {
-        $response = $course->materials->where('id', $material->id);
+        if (!Gate::allows('only-admin')) {
+            return ApiResponse::error("Unauthorized", 403);
+        };
 
-        if (empty($response->toArray())) {
-            return ApiResponse::error("Material doesn't exist", 404);
+        $response = $course->materials->find($material->id);
+
+        if (!$response) {
+            return ApiResponse::error("Material not found", 404);
         }
 
         try {
+            Storage::delete(substr($material->modul, 8));
             $material->delete();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);

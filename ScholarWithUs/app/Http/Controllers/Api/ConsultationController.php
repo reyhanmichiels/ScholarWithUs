@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Libraries\ApiResponse;
 use App\Models\Consultation;
 use App\Models\Program;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -119,5 +120,30 @@ class ConsultationController extends Controller
         ];
 
         return ApiResponse::success($data, 200);
+    }
+
+    public function show()
+    {
+        $user = User::find(Auth::user()->id);
+
+        if (empty($user->programs->toArray())) {
+            return ApiResponse::error("User don't have program", 404);
+        }
+
+        $todayDate = Carbon::parse(Carbon::now())->format('Y-m-d');
+
+        $consultation = Consultation::orderBy('date')->where('date', '>=', $todayDate)->take(1)->get();
+
+        if (empty($consultation->toArray())) {
+            return ApiResponse::error("User don't have schedule", 404);
+        }
+
+        $data = [
+            'message' => "Show user next consultation schedule",
+            'data' => $consultation
+        ];
+
+        return ApiResponse::success($data, 200);
+        
     }
 }

@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Validator;
 class DiscussionController extends Controller
 {
     public function index(Discussion $discussion)
-    {      
+    {
         if (Cache::has('discussion')) {
             $response = Cache::get('discussion');
         } else {
@@ -62,14 +62,6 @@ class DiscussionController extends Controller
 
             $tag = explode(", ", $request->tag);
             foreach ($tag as $tag) {
-                // $tagDiscussion = TagDiscussion::all()->where('name', strtolower($tag))->toArray();
-
-                // if (empty($tagDiscussion)) {
-                //     $newTagDiscussion = new TagDiscussion;
-                //     $newTagDiscussion->name = strtolower($request->tag);
-                //     $newTagDiscussion->save();
-                //     $tagDiscussion = $newTagDiscussion;
-                // }
                 $id = TagDiscussionController::store($tag);
                 $discussion->tagDiscussions()->attach($id);
             }

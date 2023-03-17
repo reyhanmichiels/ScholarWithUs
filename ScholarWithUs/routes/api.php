@@ -18,7 +18,7 @@ use App\Http\Controllers\Api\MaterialController;
 use App\Http\Controllers\Api\MentorController;
 use App\Http\Controllers\Api\TransactionController;
 use App\Http\Controllers\Api\UserProgressController;
-use App\Http\Controllers\InteractiveController;
+use App\Http\Controllers\Api\InteractiveController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,7 +42,8 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(InteractiveController::class)->group(function () {
         Route::get('/interactives/{program}', 'show');
-        Route::post('/interactives/{program}', 'store');
+        Route::post('/interactives', 'store');
+        Route::delete('/interactives/{interactive}', 'destroy');
     });
 
     Route::controller(UserProgressController::class)->group(function () {
@@ -126,6 +127,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(ConsultationController::class)->group(function() {
         Route::get('/consultations/available', 'available');
         Route::post('/consultations', 'store');
+        Route::get('/consultations', 'show');
     });
 });
 
