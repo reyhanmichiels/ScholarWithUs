@@ -36,21 +36,21 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => bcrypt('rahasia'),
             'role' => 'admin',
-            'image' => '/storage//profile_picture/example.svg'
+            'image' => '/storage/profile_picture/example.svg'
         ]);
 
         User::create([
             'name' => "reyhan",
             'email' => 'reyhan@gmail.com',
             'password' => bcrypt('rahasia'),
-            'image' => '/storage//profile_picture/example.svg'
+            'image' => '/storage/profile_picture/example.svg'
         ]);
 
         User::create([
             'name' => "budi",
             'email' => 'budi@gmail.com',
             'password' => bcrypt('rahasia'),
-            'image' => '/storage//profile_picture/example.svg'
+            'image' => '/storage/profile_picture/example.svg'
         ]);
 
         TagCost::create([
@@ -126,7 +126,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Budi Waseso',
             'study_track' => 'Life Sciences and Technology, Australian National University',
             'scholar_history' => 'Australian National University',
-            'image' => '/storage//profile_picture_mentor/example.svg'
+            'image' => '/storage/profile_picture_mentor/example.svg'
         ]);
 
         Program::create([
@@ -138,7 +138,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'Beasiswa Australian Government Research Training Program (AGRTP) International Fee Offset Scholarship - Australian National University untuk jenjang S2/S3 dengan tipe Fully Funded di Australia',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
             'price' => 2500,
-            'image' => "/storage//program_picture/example.svg"
+            'image' => "/storage/program_picture/example.svg"
         ]);
 
         DB::table('program_user')->insert([
@@ -177,42 +177,42 @@ class DatabaseSeeder extends Seeder
         Material::create([
             'course_id' => 1,
             'name' => 'material 1',
-            'modul' => '/storage//material_modul/modul_dummy.pdf',
+            'modul' => '/storage/material_modul/modul_dummy.pdf',
             'video' => 'https://drive.google.com/file/d/1ZLUzjSkwtxXhjRctYAcsrAxhfMOV8mJC/preview ',
         ]);
 
         Material::create([
             'course_id' => 1,
             'name' => 'material 2',
-            'modul' => '/storage//material_modul/modul_dummy.pdf',
+            'modul' => '/storage/material_modul/modul_dummy.pdf',
             'video' => 'https://drive.google.com/file/d/1ZLUzjSkwtxXhjRctYAcsrAxhfMOV8mJC/preview ',
         ]);
 
         Material::create([
             'course_id' => 1,
             'name' => 'material 3',
-            'modul' => '/storage//material_modul/modul_dummy.pdf',
+            'modul' => '/storage/material_modul/modul_dummy.pdf',
             'video' => 'https://drive.google.com/file/d/1ZLUzjSkwtxXhjRctYAcsrAxhfMOV8mJC/preview ',
         ]);
 
         Material::create([
             'course_id' => 2,
             'name' => 'material 1',
-            'modul' => '/storage//material_modul/modul_dummy.pdf',
+            'modul' => '/storage/material_modul/modul_dummy.pdf',
             'video' => 'https://drive.google.com/file/d/1ZLUzjSkwtxXhjRctYAcsrAxhfMOV8mJC/preview ',
         ]);
 
         Material::create([
             'course_id' => 2,
             'name' => 'material 2',
-            'modul' => '/storage//material_modul/modul_dummy.pdf',
+            'modul' => '/storage/material_modul/modul_dummy.pdf',
             'video' => 'https://drive.google.com/file/d/1ZLUzjSkwtxXhjRctYAcsrAxhfMOV8mJC/preview ',
         ]);
 
         Material::create([
             'course_id' => 2,
             'name' => 'material 3',
-            'modul' => '/storage//material_modul/modul_dummy.pdf',
+            'modul' => '/storage/material_modul/modul_dummy.pdf',
             'video' => 'https://drive.google.com/file/d/1ZLUzjSkwtxXhjRctYAcsrAxhfMOV8mJC/preview ',
         ]);
 
@@ -288,7 +288,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Jerome Sinaga',
             'study_track' => 'Humanities and Social Sciences, Nagoya University',
             'scholar_history' => 'Mombukagakusho',
-            'image' => '/storage//profile_picture_mentor/example.svg'
+            'image' => '/storage/profile_picture_mentor/example.svg'
         ]);
 
         Program::create([
@@ -300,7 +300,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'Beasiswa Monbukagakusho (MEXT) Graduate School of International Development (GSID) - Nagoya University untuk jenjang S3 dengan tipe Fully Funded di Jepang',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
             'price' => 1000,
-            'image' => "/storage//program_picture/example.svg"
+            'image' => "/storage/program_picture/example.svg"
         ]);
 
         DB::table('program_user')->insert([
@@ -340,42 +340,42 @@ class DatabaseSeeder extends Seeder
         Material::create([
             'course_id' => 3,
             'name' => 'material 1',
-            'modul' => '/storage//material_modul/modul_dummy.pdf',
+            'modul' => '/storage/material_modul/modul_dummy.pdf',
             'video' => 'https://drive.google.com/file/d/1ZLUzjSkwtxXhjRctYAcsrAxhfMOV8mJC/preview ',
         ]);
 
         Material::create([
             'course_id' => 3,
             'name' => 'material 2',
-            'modul' => '/storage//material_modul/modul_dummy.pdf',
+            'modul' => '/storage/material_modul/modul_dummy.pdf',
             'video' => 'https://drive.google.com/file/d/1ZLUzjSkwtxXhjRctYAcsrAxhfMOV8mJC/preview ',
         ]);
 
         Material::create([
             'course_id' => 3,
             'name' => 'material 3',
-            'modul' => '/storage//material_modul/modul_dummy.pdf',
+            'modul' => '/storage/material_modul/modul_dummy.pdf',
             'video' => 'https://drive.google.com/file/d/1ZLUzjSkwtxXhjRctYAcsrAxhfMOV8mJC/preview ',
         ]);
 
         Material::create([
             'course_id' => 4,
             'name' => 'material 1',
-            'modul' => '/storage//material_modul/modul_dummy.pdf',
+            'modul' => '/storage/material_modul/modul_dummy.pdf',
             'video' => 'https://drive.google.com/file/d/1ZLUzjSkwtxXhjRctYAcsrAxhfMOV8mJC/preview ',
         ]);
 
         Material::create([
             'course_id' => 4,
             'name' => 'material 2',
-            'modul' => '/storage//material_modul/modul_dummy.pdf',
+            'modul' => '/storage/material_modul/modul_dummy.pdf',
             'video' => 'https://drive.google.com/file/d/1ZLUzjSkwtxXhjRctYAcsrAxhfMOV8mJC/preview ',
         ]);
 
         Material::create([
             'course_id' => 4,
             'name' => 'material 3',
-            'modul' => '/storage//material_modul/modul_dummy.pdf',
+            'modul' => '/storage/material_modul/modul_dummy.pdf',
             'video' => 'https://drive.google.com/file/d/1ZLUzjSkwtxXhjRctYAcsrAxhfMOV8mJC/preview ',
         ]);
 
@@ -455,7 +455,7 @@ class DatabaseSeeder extends Seeder
             'title' => 'article A',
             'tag_article_id' => 1,
             'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
-            'image' => "/storage//article_picture/example.svg",
+            'image' => "/storage/article_picture/example.svg",
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
         ]);
 
@@ -463,7 +463,7 @@ class DatabaseSeeder extends Seeder
             'title' => 'article B',
             'tag_article_id' => 2,
             'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
-            'image' => "/storage//article_picture/example.svg",
+            'image' => "/storage/article_picture/example.svg",
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
         ]);
 
@@ -471,7 +471,7 @@ class DatabaseSeeder extends Seeder
             'title' => 'article C',
             'tag_article_id' => 3,
             'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
-            'image' => "/storage//article_picture/example.svg",
+            'image' => "/storage/article_picture/example.svg",
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
         ]);
 
@@ -479,7 +479,7 @@ class DatabaseSeeder extends Seeder
             'title' => 'article D',
             'tag_article_id' => 4,
             'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
-            'image' => "/storage//article_picture/example.svg",
+            'image' => "/storage/article_picture/example.svg",
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
         ]);
 
@@ -487,7 +487,7 @@ class DatabaseSeeder extends Seeder
             'title' => 'article E',
             'tag_article_id' => 5,
             'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
-            'image' => "/storage//article_picture/example.svg",
+            'image' => "/storage/article_picture/example.svg",
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
         ]);
 
@@ -495,14 +495,14 @@ class DatabaseSeeder extends Seeder
             'title' => 'article F',
             'tag_article_id' => 6,
             'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
-            'image' => "/storage//article_picture/example.svg",
+            'image' => "/storage/article_picture/example.svg",
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
         ]);
         Article::create([
             'title' => 'article G',
             'tag_article_id' => 1,
             'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
-            'image' => "/storage//article_picture/example.svg",
+            'image' => "/storage/article_picture/example.svg",
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
         ]);
 
@@ -510,7 +510,7 @@ class DatabaseSeeder extends Seeder
             'title' => 'article H',
             'tag_article_id' => 2,
             'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
-            'image' => "/storage//article_picture/example.svg",
+            'image' => "/storage/article_picture/example.svg",
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
         ]);
 
@@ -518,7 +518,7 @@ class DatabaseSeeder extends Seeder
             'title' => 'article I',
             'tag_article_id' => 3,
             'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
-            'image' => "/storage//article_picture/example.svg",
+            'image' => "/storage/article_picture/example.svg",
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
         ]);
 
@@ -526,7 +526,7 @@ class DatabaseSeeder extends Seeder
             'title' => 'article J',
             'tag_article_id' => 4,
             'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
-            'image' => "/storage//article_picture/example.svg",
+            'image' => "/storage/article_picture/example.svg",
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
         ]);
 
@@ -534,7 +534,7 @@ class DatabaseSeeder extends Seeder
             'title' => 'article K',
             'tag_article_id' => 5,
             'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
-            'image' => "/storage//article_picture/example.svg",
+            'image' => "/storage/article_picture/example.svg",
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
         ]);
 
@@ -542,14 +542,14 @@ class DatabaseSeeder extends Seeder
             'title' => 'article L',
             'tag_article_id' => 6,
             'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
-            'image' => "/storage//article_picture/example.svg",
+            'image' => "/storage/article_picture/example.svg",
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
         ]);
         Article::create([
             'title' => 'article M',
             'tag_article_id' => 1,
             'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
-            'image' => "/storage//article_picture/example.svg",
+            'image' => "/storage/article_picture/example.svg",
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
         ]);
 
@@ -557,7 +557,7 @@ class DatabaseSeeder extends Seeder
             'title' => 'article N',
             'tag_article_id' => 2,
             'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
-            'image' => "/storage//article_picture/example.svg",
+            'image' => "/storage/article_picture/example.svg",
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
         ]);
 
@@ -565,7 +565,7 @@ class DatabaseSeeder extends Seeder
             'title' => 'article O',
             'tag_article_id' => 3,
             'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
-            'image' => "/storage//article_picture/example.svg",
+            'image' => "/storage/article_picture/example.svg",
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
         ]);
 
@@ -573,7 +573,7 @@ class DatabaseSeeder extends Seeder
             'title' => 'article P',
             'tag_article_id' => 4,
             'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
-            'image' => "/storage//article_picture/example.svg",
+            'image' => "/storage/article_picture/example.svg",
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
         ]);
 
@@ -581,7 +581,7 @@ class DatabaseSeeder extends Seeder
             'title' => 'article Q',
             'tag_article_id' => 5,
             'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
-            'image' => "/storage//article_picture/example.svg",
+            'image' => "/storage/article_picture/example.svg",
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
         ]);
 
@@ -589,7 +589,7 @@ class DatabaseSeeder extends Seeder
             'title' => 'article R',
             'tag_article_id' => 6,
             'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
-            'image' => "/storage//article_picture/example.svg",
+            'image' => "/storage/article_picture/example.svg",
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
         ]);
 
@@ -1045,7 +1045,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
             'price' => 1000,
-            'image' => "/storage//program_picture/example.svg"
+            'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
             'tag_level_id' => 3,
@@ -1056,7 +1056,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
             'price' => 1000,
-            'image' => "/storage//program_picture/example.svg"
+            'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
             'tag_level_id' => 3,
@@ -1067,7 +1067,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
             'price' => 1000,
-            'image' => "/storage//program_picture/example.svg"
+            'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
             'tag_level_id' => 3,
@@ -1078,7 +1078,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
             'price' => 1000,
-            'image' => "/storage//program_picture/example.svg"
+            'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
             'tag_level_id' => 3,
@@ -1089,7 +1089,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
             'price' => 1000,
-            'image' => "/storage//program_picture/example.svg"
+            'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
             'tag_level_id' => 3,
@@ -1100,7 +1100,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
             'price' => 1000,
-            'image' => "/storage//program_picture/example.svg"
+            'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
             'tag_level_id' => 3,
@@ -1111,7 +1111,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
             'price' => 1000,
-            'image' => "/storage//program_picture/example.svg"
+            'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
             'tag_level_id' => 3,
@@ -1122,7 +1122,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
             'price' => 1000,
-            'image' => "/storage//program_picture/example.svg"
+            'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
             'tag_level_id' => 3,
@@ -1133,7 +1133,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
             'price' => 1000,
-            'image' => "/storage//program_picture/example.svg"
+            'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
             'tag_level_id' => 3,
@@ -1144,7 +1144,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
             'price' => 1000,
-            'image' => "/storage//program_picture/example.svg"
+            'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
             'tag_level_id' => 3,
@@ -1155,7 +1155,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
             'price' => 1000,
-            'image' => "/storage//program_picture/example.svg"
+            'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
             'tag_level_id' => 3,
@@ -1166,7 +1166,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
             'price' => 1000,
-            'image' => "/storage//program_picture/example.svg"
+            'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
             'tag_level_id' => 3,
@@ -1177,7 +1177,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
             'price' => 1000,
-            'image' => "/storage//program_picture/example.svg"
+            'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
             'tag_level_id' => 3,
@@ -1188,7 +1188,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
             'price' => 1000,
-            'image' => "/storage//program_picture/example.svg"
+            'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
             'tag_level_id' => 3,
@@ -1199,7 +1199,7 @@ class DatabaseSeeder extends Seeder
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
             'price' => 1000,
-            'image' => "/storage//program_picture/example.svg"
+            'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
             'tag_level_id' => 3,
@@ -1210,44 +1210,44 @@ class DatabaseSeeder extends Seeder
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
             'price' => 1000,
-            'image' => "/storage//program_picture/example.svg"
+            'image' => "/storage/program_picture/example.svg"
         ]);
 
         Mentor::create([
             'name' => 'Mentor C',
             'study_track' => 'lorem',
             'scholar_history' => 'lorem',
-            'image' => '/storage//profile_picture_mentor/example.svg'
+            'image' => '/storage/profile_picture_mentor/example.svg'
         ]);
         Mentor::create([
             'name' => 'Mentor D',
             'study_track' => 'lorem',
             'scholar_history' => 'lorem',
-            'image' => '/storage//profile_picture_mentor/example.svg'
+            'image' => '/storage/profile_picture_mentor/example.svg'
         ]);
         Mentor::create([
             'name' => 'Mentor E',
             'study_track' => 'lorem',
             'scholar_history' => 'lorem',
-            'image' => '/storage//profile_picture_mentor/example.svg'
+            'image' => '/storage/profile_picture_mentor/example.svg'
         ]);
         Mentor::create([
             'name' => 'Mentor F',
             'study_track' => 'lorem',
             'scholar_history' => 'lorem',
-            'image' => '/storage//profile_picture_mentor/example.svg'
+            'image' => '/storage/profile_picture_mentor/example.svg'
         ]);
         Mentor::create([
             'name' => 'Mentor G',
             'study_track' => 'lorem',
             'scholar_history' => 'lorem',
-            'image' => '/storage//profile_picture_mentor/example.svg'
+            'image' => '/storage/profile_picture_mentor/example.svg'
         ]);
         Mentor::create([
             'name' => 'Mentor H',
             'study_track' => 'lorem',
             'scholar_history' => 'lorem',
-            'image' => '/storage//profile_picture_mentor/example.svg'
+            'image' => '/storage/profile_picture_mentor/example.svg'
         ]);
 
         // Scholarship::create([

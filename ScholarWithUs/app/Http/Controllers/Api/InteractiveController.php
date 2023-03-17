@@ -79,9 +79,9 @@ class InteractiveController extends Controller
 
     public function destroy(Interactive $interactive)
     {
-        // if (! Gate::allows('only-admin')) {
-        //     return ApiResponse::error("Unauthorized", 403);
-        // };
+        if (! Gate::allows('only-admin')) {
+            return ApiResponse::error("Unauthorized", 403);
+        };
 
         try {
             $interactive->delete();

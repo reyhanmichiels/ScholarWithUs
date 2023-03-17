@@ -7,15 +7,21 @@ use App\Http\Controllers\Api\FileController;
 use App\Http\Resources\ProgramResource;
 use App\Http\Resources\TransactionResource;
 use App\Libraries\ApiResponse;
+use App\Models\Mentor;
 use App\Models\Program;
+use App\Models\Scholarship;
 use App\Models\TagCost;
 use App\Models\TagLevel;
 use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ProgramController extends Controller
@@ -40,6 +46,7 @@ class ProgramController extends Controller
         if ($response['transaction_status'] == "settlement") {
             $transaction->status = "PAID";
             $transaction->save();
+            User::find($transaction->user_id)->programs()->attach($transaction->program_id);
         } else if ($response['transaction_status'] == "expire") {
             $transaction->status = "CANCELED";
             $transaction->save();
@@ -54,48 +61,61 @@ class ProgramController extends Controller
 
     public function index(Program $program)
     {
-        try {
-            $data = [
-                'message' => "Get all program",
-                'data' => ProgramResource::collection($program->all())
-            ];
-        } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), 500);
+        if (Cache::has('program')) {
+            $response = Cache::get('program');
+        } else {
+            $response = $program->all();
+            Cache::put('program', $response, 3600);
         }
+
+        $data = [
+            'message' => "Show all program",
+            'data' => ProgramResource::collection($response)
+        ];
 
         return ApiResponse::success($data, 200);
     }
 
     public function show(Program $program)
     {
-        try {
-            $data = [
-                'message' => "Program with id $program->id",
-                'data' => new ProgramResource($program)
-            ];
-        } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), 500);
-        }
+        $data = [
+            'message' => "Show Program id $program->id",
+            'data' => new ProgramResource($program)
+        ];
 
         return ApiResponse::success($data, 200);
     }
 
     public function store(Request $request)
     {
+        if (!Gate::allows('only-admin')) {
+            return ApiResponse::error("Unauthorized", 403);
+        };
+
         $validate = Validator::make($request->all(), [
-            'scholarship_id' => 'int|required',
+            'scholarship_id' => 'numeric|required',
             'name' => 'string|required|unique:programs',
             'description' => 'string|required',
             'content' => 'string|required',
-            'price' => 'int|required',
-            'tag_level_id' => 'int|required',
-            'tag_cost_id' => 'int|required',
-            'mentor_id' => 'int|required',
-            'program_image' => 'sometimes|file'
+            'price' => 'numeric|required',
+            'tag_level_id' => 'numeric|required',
+            'tag_cost_id' => 'numeric|required',
+            'mentor_id' => 'numeric|required',
+            'program_picture' => 'required|file'
         ]);
 
         if ($validate->fails()) {
             return ApiResponse::error($validate->errors(), 409);
+        }
+
+        $mentor = Mentor::find($request->mentor_id);
+        if (!$mentor) {
+            return ApiResponse::error('Mentor not found', 404);
+        }
+
+        $scholar = Scholarship::find($request->scholarship_id);
+        if (!$scholar) {
+            return ApiResponse::error('Scholar not found', 404);
         }
 
         $tag_level = TagLevel::find($request->tag_level_id);
@@ -124,19 +144,20 @@ class ProgramController extends Controller
             $data = [
                 'file' => $image,
                 'file_name' =>  "$program->id." . $image->extension(),
-                'file_path' => '/program_picture'
+                'file_path' => 'program_picture'
             ];
 
             $url = FileController::manage($data);
 
             $program->image = $url;
             $program->save();
+            Cache::forget('program');
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
         }
 
         $data = [
-            'message' => 'Program created',
+            'message' => 'Successfully created program',
             'data' => new ProgramResource($program)
         ];
 
@@ -145,14 +166,18 @@ class ProgramController extends Controller
 
     public function update(Request $request, Program $program)
     {
+        if (!Gate::allows('only-admin')) {
+            return ApiResponse::error("Unauthorized", 403);
+        };
+
         $validate = Validator::make($request->all(), [
             'name' => 'string|required|unique:programs,name,' . $program->id,
             'description' => 'string|required',
             'content' => 'string|required',
-            'price' => 'int|required',
-            'tag_level_id' => 'int|required',
-            'tag_cost_id' => 'int|required',
-            'mentor_id' => 'int|required',
+            'price' => 'numeric|required',
+            'tag_level_id' => 'numeric|required',
+            'tag_cost_id' => 'numeric|required',
+            'mentor_id' => 'numeric|required',
             'program_picture' => 'sometimes|required'
 
         ]);
@@ -161,18 +186,10 @@ class ProgramController extends Controller
             return ApiResponse::error($validate->errors(), 409);
         }
 
-        $delete = substr($program->image, 9);
-
-        $image = $request->file('program_picture');
-
-        $data = [
-            'file' => $image,
-            'file_name' =>  $program->id . "." . $image->extension(),
-            'file_path' => '/program_picture',
-            'delete_file' => $delete
-        ];
-
-        $url = FileController::manage($data);
+        $mentor = Mentor::find($request->mentor_id);
+        if (!$mentor) {
+            return ApiResponse::error('Mentor not found', 404);
+        }
 
         $tag_level = TagLevel::find($request->tag_level_id);
         if (!$tag_level) {
@@ -184,6 +201,18 @@ class ProgramController extends Controller
             return ApiResponse::error('tag cost not found', 404);
         }
 
+        if (!empty($request->program_picture)) {
+            $image = $request->file('program_picture');
+            $data = [
+                'file' => $image,
+                'file_name' =>  $program->id . "." . $image->extension(),
+                'file_path' => '/program_picture',
+                'delete_file' => substr($program->image, 8)
+            ];
+
+            $url = FileController::manage($data);
+        }
+
         try {
             $program->name = $request->name;
             $program->description = $request->description;
@@ -192,14 +221,15 @@ class ProgramController extends Controller
             $program->tag_level_id = $request->tag_level_id;
             $program->tag_cost_id = $request->tag_cost_id;
             $program->mentor_id = $request->mentor_id;
-            $program->image = $url;
+            $program->image = $url ?? $program->image;
             $program->save();
+            Cache::forget('program');
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
         }
 
         $data = [
-            'message' => 'Program updated',
+            'message' => 'Successfully updated program',
             'data' => new ProgramResource($program)
         ];
 
@@ -208,13 +238,18 @@ class ProgramController extends Controller
 
     public function destroy(Program $program)
     {
+        if (!Gate::allows('only-admin')) {
+            return ApiResponse::error("Unauthorized", 403);
+        };
         try {
+            Storage::delete(substr($program->image, 8));
             $program->delete();
+            Cache::forget('program');
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
         }
 
-        $data['message'] = "Program Deleted";
+        $data['message'] = "Sucessfully deleted program";
 
         return ApiResponse::success($data, 200);
     }
@@ -222,7 +257,7 @@ class ProgramController extends Controller
     public function showNew(Program $program)
     {
         try {
-            $response = $program->all()->sortByDesc('created_at')->take(9);
+            $response = $program->orderByDesc('created_at')->take(9)->get();
 
             $data = [
                 'message' => "9 newest program",
@@ -237,12 +272,16 @@ class ProgramController extends Controller
 
     public function buy(Request $request, Program $program)
     {
+        if (User::find(Auth::user()->id)->programs->find($program->id)) {
+            return ApiResponse::error("User already have that program", 409);
+        }
+
         if ($program->users->count() == 20) {
             return ApiResponse::error("capacity full", 503);
         }
 
         $validate = Validator::make($request->all(), [
-            'payment_type' => "string|required"
+            'payment_type' => "string|required|in:bca,bni,permata,bri,qris"
         ]);
 
         if ($validate->fails()) {
@@ -272,9 +311,14 @@ class ProgramController extends Controller
                     "transaction_details" => $transaction_detail,
                 ]);
             } else if ($request->payment_type == 'permata') {
-                $response = Http::withBasicAuth($key, " ")->post("https://api.sandbox.midtrans.com/v2/charge", [
-                    "payment_type" => "permata",
-                    "transaction_details" => $transaction_detail,
+                $response = Http::withBasicAuth($key, "")->post("https://api.sandbox.midtrans.com/v2/charge", [
+                    "payment_type" => "bank_transfer",
+                    "bank_transfer" => [
+                        "bank" => "permata",
+                        "recipient_name" => 'BCCFinalProject'
+                    ],
+                    "transaction_details" => $transaction_detail
+
                 ]);
             } else {
                 $response = Http::withBasicAuth($key, " ")->post("https://api.sandbox.midtrans.com/v2/charge", [

@@ -158,6 +158,7 @@ class ArticleController extends Controller
         try {
             Storage::delete(substr($article->image, 8));
             $article->delete();
+            Cache::forget('article');
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
         }
