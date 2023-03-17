@@ -498,9 +498,103 @@ class DatabaseSeeder extends Seeder
             'image' => "/storage//article_picture/example.svg",
             'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
         ]);
+        Article::create([
+            'title' => 'article G',
+            'tag_article_id' => 1,
+            'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
+            'image' => "/storage//article_picture/example.svg",
+            'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
+        ]);
+
+        Article::create([
+            'title' => 'article H',
+            'tag_article_id' => 2,
+            'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
+            'image' => "/storage//article_picture/example.svg",
+            'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
+        ]);
+
+        Article::create([
+            'title' => 'article I',
+            'tag_article_id' => 3,
+            'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
+            'image' => "/storage//article_picture/example.svg",
+            'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
+        ]);
+
+        Article::create([
+            'title' => 'article J',
+            'tag_article_id' => 4,
+            'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
+            'image' => "/storage//article_picture/example.svg",
+            'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
+        ]);
+
+        Article::create([
+            'title' => 'article K',
+            'tag_article_id' => 5,
+            'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
+            'image' => "/storage//article_picture/example.svg",
+            'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
+        ]);
+
+        Article::create([
+            'title' => 'article L',
+            'tag_article_id' => 6,
+            'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
+            'image' => "/storage//article_picture/example.svg",
+            'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
+        ]);
+        Article::create([
+            'title' => 'article M',
+            'tag_article_id' => 1,
+            'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
+            'image' => "/storage//article_picture/example.svg",
+            'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
+        ]);
+
+        Article::create([
+            'title' => 'article N',
+            'tag_article_id' => 2,
+            'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
+            'image' => "/storage//article_picture/example.svg",
+            'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
+        ]);
+
+        Article::create([
+            'title' => 'article O',
+            'tag_article_id' => 3,
+            'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
+            'image' => "/storage//article_picture/example.svg",
+            'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
+        ]);
+
+        Article::create([
+            'title' => 'article P',
+            'tag_article_id' => 4,
+            'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
+            'image' => "/storage//article_picture/example.svg",
+            'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
+        ]);
+
+        Article::create([
+            'title' => 'article Q',
+            'tag_article_id' => 5,
+            'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
+            'image' => "/storage//article_picture/example.svg",
+            'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
+        ]);
+
+        Article::create([
+            'title' => 'article R',
+            'tag_article_id' => 6,
+            'brief_description' => 'Lorem ipsum dolor sit amet consectetur',
+            'image' => "/storage//article_picture/example.svg",
+            'description' => "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi cumque excepturi, officia repellat quas, qui obcaecati, molestias iure ipsum sunt natus fugiat eligendi. Quisquam cupiditate dicta aliquam tenetur excepturi itaque ut amet illo accusamus cumque aut soluta inventore architecto hic assumenda harum, debitis molestiae similique quaerat adipisci ipsa saepe id, ab ratione? Debitis, corrupti minima. Dolor fugiat explicabo expedita repudiandae asperiores harum assumenda impedit amet esse ex, nihil accusantium, molestias aspernatur nisi dolorum! Alias, explicabo incidunt! Ullam deserunt quisquam quibusdam quam iure illum beatae delectus doloribus animi, eos laborum omnis accusamus odit, quos fuga. Ut debitis odio nulla fuga qui?"
+        ]);
 
         Discussion::create([
-            'user_id' => 1,
+            'user_id' => 2,
             'title' => 'Discussion A',
             'comment' => 'lorem ipsum'
         ]);
@@ -516,6 +610,35 @@ class DatabaseSeeder extends Seeder
             'title' => 'Discussion C',
             'comment' => 'lorem ipsum'
         ]);
+        Discussion::create([
+            'user_id' => 2,
+            'title' => 'Discussion D',
+            'comment' => 'lorem ipsum'
+        ]);
+
+        Discussion::create([
+            'user_id' => 2,
+            'title' => 'Discussion E',
+            'comment' => 'lorem ipsum'
+        ]);
+
+        Discussion::create([
+            'user_id' => 3,
+            'title' => 'Discussion F',
+            'comment' => 'lorem ipsum'
+        ]);
+        Discussion::create([
+            'user_id' => 2,
+            'title' => 'Discussion G',
+            'comment' => 'lorem ipsum'
+        ]);
+
+        Discussion::create([
+            'user_id' => 2,
+            'title' => 'Discussion H',
+            'comment' => 'lorem ipsum'
+        ]);
+
 
         TagDiscussion::create([
             'name' => 'php'
@@ -562,7 +685,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('discussion_tag_discussion')->insert([
-            'discussion_id' => '3',
+            'discussion_id' => '4',
             'tag_discussion_id' => '2',
         ]);
 
@@ -570,8 +693,207 @@ class DatabaseSeeder extends Seeder
             'discussion_id' => '3',
             'tag_discussion_id' => '3',
         ]);
+        DB::table('discussion_tag_discussion')->insert([
+            'discussion_id' => '5',
+            'tag_discussion_id' => '1',
+        ]);
+
+        DB::table('discussion_tag_discussion')->insert([
+            'discussion_id' => '6',
+            'tag_discussion_id' => '3',
+        ]);
+
+        DB::table('discussion_tag_discussion')->insert([
+            'discussion_id' => '7',
+            'tag_discussion_id' => '2',
+        ]);
+
+        DB::table('discussion_tag_discussion')->insert([
+            'discussion_id' => '8',
+            'tag_discussion_id' => '3',
+        ]);
 
 
+        Scholarship::create([
+            'tag_level_id' => 1,
+            'tag_cost_id' => 2,
+            'name' => "Scholarship A",
+            'scholarship_provider' => "lorem",
+            'open_registration' => "2023-03-10",
+            'close_registration' => "2023-04-15",
+            'description' => 'Lorem Ipsum',
+            'university' => 'Lorem Ipsum',
+            'study_program' => 'Lorem Ipsum',
+            'benefit' => 'lorem ipsum',
+            'age' => 20,
+            'gpa' => 3.50,
+            'english_test' => 'Lorem Ipsum',
+            // 'other_language_test' => 'lorem ipsum',
+            // 'standarized_test' => 'lorem ipsum',
+            'documents' => 'Lorem Ipsum',
+            'detail_information' => 'this is link',
+            'image' => '/storage/scholarship_picture/example.svg'
+        ]);
+        Scholarship::create([
+            'tag_level_id' => 1,
+            'tag_cost_id' => 2,
+            'name' => "Scholarship A",
+            'scholarship_provider' => "lorem",
+            'open_registration' => "2023-03-10",
+            'close_registration' => "2023-04-15",
+            'description' => 'Lorem Ipsum',
+            'university' => 'Lorem Ipsum',
+            'study_program' => 'Lorem Ipsum',
+            'benefit' => 'lorem ipsum',
+            'age' => 20,
+            'gpa' => 3.50,
+            'english_test' => 'Lorem Ipsum',
+            // 'other_language_test' => 'lorem ipsum',
+            // 'standarized_test' => 'lorem ipsum',
+            'documents' => 'Lorem Ipsum',
+            'detail_information' => 'this is link',
+            'image' => '/storage/scholarship_picture/example.svg'
+        ]);
+        Scholarship::create([
+            'tag_level_id' => 1,
+            'tag_cost_id' => 2,
+            'name' => "Scholarship A",
+            'scholarship_provider' => "lorem",
+            'open_registration' => "2023-03-10",
+            'close_registration' => "2023-04-15",
+            'description' => 'Lorem Ipsum',
+            'university' => 'Lorem Ipsum',
+            'study_program' => 'Lorem Ipsum',
+            'benefit' => 'lorem ipsum',
+            'age' => 20,
+            'gpa' => 3.50,
+            'english_test' => 'Lorem Ipsum',
+            // 'other_language_test' => 'lorem ipsum',
+            // 'standarized_test' => 'lorem ipsum',
+            'documents' => 'Lorem Ipsum',
+            'detail_information' => 'this is link',
+            'image' => '/storage/scholarship_picture/example.svg'
+        ]);
+        Scholarship::create([
+            'tag_level_id' => 1,
+            'tag_cost_id' => 2,
+            'name' => "Scholarship A",
+            'scholarship_provider' => "lorem",
+            'open_registration' => "2023-03-10",
+            'close_registration' => "2023-04-15",
+            'description' => 'Lorem Ipsum',
+            'university' => 'Lorem Ipsum',
+            'study_program' => 'Lorem Ipsum',
+            'benefit' => 'lorem ipsum',
+            'age' => 20,
+            'gpa' => 3.50,
+            'english_test' => 'Lorem Ipsum',
+            // 'other_language_test' => 'lorem ipsum',
+            // 'standarized_test' => 'lorem ipsum',
+            'documents' => 'Lorem Ipsum',
+            'detail_information' => 'this is link',
+            'image' => '/storage/scholarship_picture/example.svg'
+        ]);
+        Scholarship::create([
+            'tag_level_id' => 1,
+            'tag_cost_id' => 2,
+            'name' => "Scholarship A",
+            'scholarship_provider' => "lorem",
+            'open_registration' => "2023-03-10",
+            'close_registration' => "2023-04-15",
+            'description' => 'Lorem Ipsum',
+            'university' => 'Lorem Ipsum',
+            'study_program' => 'Lorem Ipsum',
+            'benefit' => 'lorem ipsum',
+            'age' => 20,
+            'gpa' => 3.50,
+            'english_test' => 'Lorem Ipsum',
+            // 'other_language_test' => 'lorem ipsum',
+            // 'standarized_test' => 'lorem ipsum',
+            'documents' => 'Lorem Ipsum',
+            'detail_information' => 'this is link',
+            'image' => '/storage/scholarship_picture/example.svg'
+        ]);
+        Scholarship::create([
+            'tag_level_id' => 1,
+            'tag_cost_id' => 2,
+            'name' => "Scholarship A",
+            'scholarship_provider' => "lorem",
+            'open_registration' => "2023-03-10",
+            'close_registration' => "2023-04-15",
+            'description' => 'Lorem Ipsum',
+            'university' => 'Lorem Ipsum',
+            'study_program' => 'Lorem Ipsum',
+            'benefit' => 'lorem ipsum',
+            'age' => 20,
+            'gpa' => 3.50,
+            'english_test' => 'Lorem Ipsum',
+            // 'other_language_test' => 'lorem ipsum',
+            // 'standarized_test' => 'lorem ipsum',
+            'documents' => 'Lorem Ipsum',
+            'detail_information' => 'this is link',
+            'image' => '/storage/scholarship_picture/example.svg'
+        ]);
+        Scholarship::create([
+            'tag_level_id' => 1,
+            'tag_cost_id' => 2,
+            'name' => "Scholarship A",
+            'scholarship_provider' => "lorem",
+            'open_registration' => "2023-03-10",
+            'close_registration' => "2023-04-15",
+            'description' => 'Lorem Ipsum',
+            'university' => 'Lorem Ipsum',
+            'study_program' => 'Lorem Ipsum',
+            'benefit' => 'lorem ipsum',
+            'age' => 20,
+            'gpa' => 3.50,
+            'english_test' => 'Lorem Ipsum',
+            // 'other_language_test' => 'lorem ipsum',
+            // 'standarized_test' => 'lorem ipsum',
+            'documents' => 'Lorem Ipsum',
+            'detail_information' => 'this is link',
+            'image' => '/storage/scholarship_picture/example.svg'
+        ]);
+        Scholarship::create([
+            'tag_level_id' => 1,
+            'tag_cost_id' => 2,
+            'name' => "Scholarship A",
+            'scholarship_provider' => "lorem",
+            'open_registration' => "2023-03-10",
+            'close_registration' => "2023-04-15",
+            'description' => 'Lorem Ipsum',
+            'university' => 'Lorem Ipsum',
+            'study_program' => 'Lorem Ipsum',
+            'benefit' => 'lorem ipsum',
+            'age' => 20,
+            'gpa' => 3.50,
+            'english_test' => 'Lorem Ipsum',
+            // 'other_language_test' => 'lorem ipsum',
+            // 'standarized_test' => 'lorem ipsum',
+            'documents' => 'Lorem Ipsum',
+            'detail_information' => 'this is link',
+            'image' => '/storage/scholarship_picture/example.svg'
+        ]);
+        Scholarship::create([
+            'tag_level_id' => 1,
+            'tag_cost_id' => 2,
+            'name' => "Scholarship A",
+            'scholarship_provider' => "lorem",
+            'open_registration' => "2023-03-10",
+            'close_registration' => "2023-04-15",
+            'description' => 'Lorem Ipsum',
+            'university' => 'Lorem Ipsum',
+            'study_program' => 'Lorem Ipsum',
+            'benefit' => 'lorem ipsum',
+            'age' => 20,
+            'gpa' => 3.50,
+            'english_test' => 'Lorem Ipsum',
+            // 'other_language_test' => 'lorem ipsum',
+            // 'standarized_test' => 'lorem ipsum',
+            'documents' => 'Lorem Ipsum',
+            'detail_information' => 'this is link',
+            'image' => '/storage/scholarship_picture/example.svg'
+        ]);
         Scholarship::create([
             'tag_level_id' => 1,
             'tag_cost_id' => 2,
@@ -790,6 +1112,142 @@ class DatabaseSeeder extends Seeder
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
             'price' => 1000,
             'image' => "/storage//program_picture/example.svg"
+        ]);
+        Program::create([
+            'tag_level_id' => 3,
+            'tag_cost_id' => 1,
+            'mentor_id' => 2,
+            'name' => "lorem",
+            'scholarship_id' => 10,
+            'description' => 'lorem',
+            'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
+            'price' => 1000,
+            'image' => "/storage//program_picture/example.svg"
+        ]);
+        Program::create([
+            'tag_level_id' => 3,
+            'tag_cost_id' => 1,
+            'mentor_id' => 2,
+            'name' => "lorem",
+            'scholarship_id' => 11,
+            'description' => 'lorem',
+            'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
+            'price' => 1000,
+            'image' => "/storage//program_picture/example.svg"
+        ]);
+        Program::create([
+            'tag_level_id' => 3,
+            'tag_cost_id' => 1,
+            'mentor_id' => 2,
+            'name' => "lorem",
+            'scholarship_id' => 12,
+            'description' => 'lorem',
+            'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
+            'price' => 1000,
+            'image' => "/storage//program_picture/example.svg"
+        ]);
+        Program::create([
+            'tag_level_id' => 3,
+            'tag_cost_id' => 1,
+            'mentor_id' => 2,
+            'name' => "lorem",
+            'scholarship_id' => 13,
+            'description' => 'lorem',
+            'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
+            'price' => 1000,
+            'image' => "/storage//program_picture/example.svg"
+        ]);
+        Program::create([
+            'tag_level_id' => 3,
+            'tag_cost_id' => 1,
+            'mentor_id' => 2,
+            'name' => "lorem",
+            'scholarship_id' => 14,
+            'description' => 'lorem',
+            'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
+            'price' => 1000,
+            'image' => "/storage//program_picture/example.svg"
+        ]);
+        Program::create([
+            'tag_level_id' => 3,
+            'tag_cost_id' => 1,
+            'mentor_id' => 2,
+            'name' => "lorem",
+            'scholarship_id' => 15,
+            'description' => 'lorem',
+            'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
+            'price' => 1000,
+            'image' => "/storage//program_picture/example.svg"
+        ]);
+        Program::create([
+            'tag_level_id' => 3,
+            'tag_cost_id' => 1,
+            'mentor_id' => 2,
+            'name' => "lorem",
+            'scholarship_id' => 16,
+            'description' => 'lorem',
+            'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
+            'price' => 1000,
+            'image' => "/storage//program_picture/example.svg"
+        ]);
+        Program::create([
+            'tag_level_id' => 3,
+            'tag_cost_id' => 1,
+            'mentor_id' => 2,
+            'name' => "lorem",
+            'scholarship_id' => 17,
+            'description' => 'lorem',
+            'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
+            'price' => 1000,
+            'image' => "/storage//program_picture/example.svg"
+        ]);
+        Program::create([
+            'tag_level_id' => 3,
+            'tag_cost_id' => 1,
+            'mentor_id' => 2,
+            'name' => "lorem",
+            'scholarship_id' => 18,
+            'description' => 'lorem',
+            'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
+            'price' => 1000,
+            'image' => "/storage//program_picture/example.svg"
+        ]);
+
+        Mentor::create([
+            'name' => 'Mentor C',
+            'study_track' => 'lorem',
+            'scholar_history' => 'lorem',
+            'image' => '/storage//profile_picture_mentor/example.svg'
+        ]);
+        Mentor::create([
+            'name' => 'Mentor D',
+            'study_track' => 'lorem',
+            'scholar_history' => 'lorem',
+            'image' => '/storage//profile_picture_mentor/example.svg'
+        ]);
+        Mentor::create([
+            'name' => 'Mentor E',
+            'study_track' => 'lorem',
+            'scholar_history' => 'lorem',
+            'image' => '/storage//profile_picture_mentor/example.svg'
+        ]);
+        Mentor::create([
+            'name' => 'Mentor F',
+            'study_track' => 'lorem',
+            'scholar_history' => 'lorem',
+            'image' => '/storage//profile_picture_mentor/example.svg'
+        ]);
+        Mentor::create([
+            'name' => 'Mentor G',
+            'study_track' => 'lorem',
+            'scholar_history' => 'lorem',
+            'image' => '/storage//profile_picture_mentor/example.svg'
+        ]);
+        Mentor::create([
+            'name' => 'Mentor H',
+            'study_track' => 'lorem',
+            'scholar_history' => 'lorem',
+            'image' => '/storage//profile_picture_mentor/example.svg'
         ]);
 
         // Scholarship::create([
