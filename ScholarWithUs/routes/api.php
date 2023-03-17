@@ -174,8 +174,8 @@ Route::controller(ProgramController::class)->group(function () {
     Route::get('/programs/search', 'searchByName');
     Route::get('/programs/filter', 'filterByTag');
     Route::get('/programs/{program}', 'show');
-    Route::post('/midtrans/notif-hook');
 });
+Route::post('midtrans/notif-hook', ProgramController::class);
 
 Route::controller(ScholarshipController::class)->group(function () {
     Route::get('/scholarships', 'index');
