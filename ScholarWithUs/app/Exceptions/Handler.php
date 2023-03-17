@@ -4,9 +4,8 @@ namespace App\Exceptions;
 
 use App\Libraries\ApiResponse;
 use Exception;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Support\Facades\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
@@ -47,7 +46,7 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->renderable(function (Exception $e) {
-
+            
             if ($e instanceof NotFoundHttpException && str_contains($e->getMessage(), 'model')) {
                 $firstIndex = strpos($e->getMessage(), "Models\\") + 7;
                 $lastIndex = strpos($e->getMessage(), "]");

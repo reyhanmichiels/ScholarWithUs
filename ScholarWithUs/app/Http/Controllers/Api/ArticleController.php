@@ -10,13 +10,14 @@ use App\Models\Article;
 use App\Models\TagArticle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ArticleController extends Controller
 {
     public function index(Article $article)
-    {   
+    {
         if (Cache::has('article')) {
             $response = Cache::get('article');
         } else {
@@ -44,11 +45,15 @@ class ArticleController extends Controller
 
     public function store(Request $request)
     {
+        if (! Gate::allows('only-admin')) {
+            return ApiResponse::error("Unauthoried", 403);
+        };
+
         $validate = Validator::make($request->all(), [
             'title' => 'string|required|unique:articles|max:20',
             'brief_description' => 'string|required',
             'description' => 'string|required',
-            'tag_article_id' => 'int|required',
+            'tag_article_id' => 'numeric|required',
             'article_picture' => 'file|required',
         ]);
 
@@ -72,17 +77,17 @@ class ArticleController extends Controller
             $image = [
                 'file' => $request->file('article_picture'),
                 'file_name' =>  "$article->id." . $request->file('article_picture')->extension(),
-                'file_path' => '/article_picture'
+                'file_path' => 'article_picture'
             ];
-
             $url = FileController::manage($image);
 
             $article->image = $url;
             $article->save();
+
+            Cache::forget('article');
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
         }
-
         $data = [
             'message' => 'Successfully created article',
             'data' => new ArticleResource($article)
@@ -92,12 +97,16 @@ class ArticleController extends Controller
     }
 
     public function update(Request $request, Article $article)
-    {
+    {   
+        if (! Gate::allows('only-admin')) {
+            return ApiResponse::error("Unauthoried", 403);
+        };
+        
         $validate = Validator::make($request->all(), [
             'title' => 'string|required|max:20|unique:articles,title,' . $article->id,
             'brief_description' => 'string|required',
             'description' => 'string|required',
-            'tag_article_id' => 'int|required',
+            'tag_article_id' => 'numeric|required',
             'article_picture' => 'file|sometimes',
         ]);
 
@@ -113,10 +122,9 @@ class ArticleController extends Controller
             $data = [
                 'file' => $request->file('article_picture'),
                 'file_name' =>  $article->id . "." . $request->file('article_picture')->extension(),
-                'file_path' => '/article_picture',
-                'delete_file' => substr($article->image, 9)
+                'file_path' => 'article_picture',
+                'delete_file' => substr($article->image, 8)
             ];
-
             $url = FileController::manage($data);
         }
 
@@ -127,6 +135,8 @@ class ArticleController extends Controller
             $article->tag_article_id = $request->tag_article_id;
             $article->image = $url ?? $article->image;
             $article->save();
+
+            Cache::forget('article');
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
         }
@@ -142,7 +152,7 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         try {
-            Storage::delete('/article_picture/7.svg');
+            Storage::delete(substr($article->image, 8));
             $article->delete();
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
@@ -165,7 +175,7 @@ class ArticleController extends Controller
     }
 
     public function recomend(Article $article)
-    {   
+    {
         $tag = TagArticle::find($article->tagArticles->id);
 
         $data = [

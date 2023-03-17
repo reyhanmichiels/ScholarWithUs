@@ -11,14 +11,10 @@ class ArticleTagArticleController extends Controller
 {
     public function index(TagArticle $tagArticle)
     {
-        try {
-            $data = [
-                'message' => "Show all article with tag $tagArticle->name",
-                'data' => $tagArticle->articles
-            ];
-        } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 400);
-        }
+        $data = [
+            'message' => "Show all article with tag $tagArticle->name",
+            'data' => $tagArticle->articles
+        ];
 
         return ApiResponse::success($data, 200);
     }
