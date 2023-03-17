@@ -9,16 +9,24 @@ use App\Libraries\ApiResponse;
 use App\Models\Article;
 use App\Models\TagArticle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ArticleController extends Controller
 {
     public function index(Article $article)
-    {
+    {   
+        if (Cache::has('article')) {
+            $response = Cache::get('article');
+        } else {
+            $response = $article->all();
+            Cache::put('article', $response, 3600);
+        }
+
         $data = [
             'message' => "Show all article",
-            'data' => ArticleResource::collection($article->all())
+            'data' => ArticleResource::collection($response)
         ];
 
         return ApiResponse::success($data, 200);
