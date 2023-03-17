@@ -9,40 +9,32 @@ use App\Models\Discussion;
 use App\Models\Reply;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
 class ReplyController extends Controller
 {
     public function index(Discussion $discussion)
     {
-        try {
-            $data = [
-                'message' => "Get all discussion replies with discussion id $discussion->id",
-                'data' => ReplyResource::collection($discussion->replies)
-            ];
-        } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() != 0 ? $e->getCode() : 500);
-        }
+        $data = [
+            'message' => "Show all replies with discussion id $discussion->id",
+            'data' => ReplyResource::collection($discussion->replies)
+        ];
 
         return ApiResponse::success($data, 200);
     }
 
     public function show(Discussion $discussion, Reply $reply)
-    {   
-        if ($reply->discussion_id != $discussion->id) {
-            return ApiResponse::error('not found', 404);
+    {
+        if (!$discussion->replies->find($reply->id)) {
+            return ApiResponse::error('Replies not found', 404);
         }
 
-        try {
-            $data = [
-                'message' => "Reply with id $reply->id",
-                'data' => new ReplyResource($reply)
-            ];
-        } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() != 0 ? $e->getCode() : 500);
-        }
+        $data = [
+            'message' => "Show reply with id $reply->id",
+            'data' => new ReplyResource($reply)
+        ];
 
-        $response = $discussion->replies->where('id', $reply->id);
         return ApiResponse::success($data, 200);
     }
 
@@ -62,12 +54,14 @@ class ReplyController extends Controller
             $reply->discussion_id = $discussion->id;
             $reply->comment = $request->comment;
             $reply->save();
+
+            Cache::forget('discussion');
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() != 0 ? $e->getCode() : 500);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         $data = [
-            'message' => 'Reply created',
+            'message' => 'Successfully created reply',
             'data' => new ReplyResource($reply)
         ];
 
@@ -75,18 +69,18 @@ class ReplyController extends Controller
     }
 
     public function destroy(Discussion $discussion, Reply $reply)
-    {   
-        if ($reply->discussion_id != $discussion->id) {
-            return ApiResponse::error('not found', 404);
+    {
+        if (!$discussion->replies->find($reply->id)) {
+            return ApiResponse::error('Replies not found', 404);
         }
 
         try {
             $reply->delete();
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() != 0 ? $e->getCode() : 500);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
-        $data['message'] = "Reply Deleted";
+        $data['message'] = "Successfully deleted reply";
 
         return ApiResponse::success($data, 200);
     }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('program_id');
             $table->foreignId('user_id');
             $table->string('type');
-            $table->string('zoom')->nullable('this is link zoom');
+            $table->string('zoom')->default('this is link zoom');
             $table->date('date');
             $table->time('start');
             $table->time('finish');

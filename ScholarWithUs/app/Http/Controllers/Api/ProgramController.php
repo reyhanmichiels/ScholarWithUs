@@ -357,7 +357,6 @@ class ProgramController extends Controller
             }
 
             DB::commit();
-
             return ApiResponse::success($data, 201);
         } catch (\Exception $e) {
             DB::rollBack();
