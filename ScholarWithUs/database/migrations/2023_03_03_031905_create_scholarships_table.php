@@ -24,8 +24,8 @@ return new class extends Migration
             $table->integer('age');
             $table->float('gpa', 3,2);
             $table->string('english_test');
-            $table->string('other_language_test');
-            $table->string('standarized_test');
+            $table->string('other_language_test')->default('Not Required');
+            $table->string('standarized_test')->default('Not Required');
             $table->string('documents');
             $table->string('other')->nullable();
             $table->string('detail_information');

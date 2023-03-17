@@ -14,10 +14,10 @@ class Mentor extends Model
         return $this->hasMany(Program::class);
     }
 
-    public function courses()
-    {
-        return $this->hasOne(Course::class);
-    }
+    // public function courses()
+    // {
+    //     return $this->hasOne(Course::class);
+    // }
 
     public function userProgresses()
     {

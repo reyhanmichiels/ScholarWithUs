@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Api\Controllers;
 
 use App\Http\Controllers\Api\FileController;
+use App\Http\Controllers\Controller;
 use App\Libraries\ApiResponse;
 use App\Models\Consultation;
 use App\Models\Program;
-use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
