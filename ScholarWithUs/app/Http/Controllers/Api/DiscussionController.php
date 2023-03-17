@@ -4,42 +4,39 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Api\TagDiscussionController;
-use App\Http\Resources\ArticleResource;
-use App\Http\Resources\DiscussionCollection;
 use App\Http\Resources\DiscussionResource;
 use App\Libraries\ApiResponse;
 use App\Models\Discussion;
-use App\Models\TagDiscussion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
 class DiscussionController extends Controller
 {
     public function index(Discussion $discussion)
-    {
-        try {
-            $data = [
-                'message' => "Get all discussion",
-                'data' => DiscussionResource::collection($discussion->all())
-            ];
-        } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() != 0 ? $e->getCode() : 500);
+    {      
+        if (Cache::has('discussion')) {
+            $response = Cache::get('discussion');
+        } else {
+            $response = $discussion->all();
+            Cache::put('discussion', $response, 3600);
         }
+
+        $data = [
+            'message' => "Show all discussion",
+            'data' => DiscussionResource::collection($discussion->all())
+        ];
 
         return ApiResponse::success($data, 200);
     }
 
     public function show(Discussion $discussion)
     {
-        try {
-            $data = [
-                'message' => "Discussion with id $discussion->id",
-                'data' => new DiscussionResource($discussion)
-            ];
-        } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() != 0 ? $e->getCode() : 500);
-        }
+        $data = [
+            'message' => "Show discussion with id $discussion->id",
+            'data' => new DiscussionResource($discussion)
+        ];
 
         return ApiResponse::success($data, 200);
     }
@@ -47,9 +44,9 @@ class DiscussionController extends Controller
     public function store(Request $request)
     {
         $validate = Validator::make($request->all(), [
-            'title' => 'string|required',
-            'comment' => 'string|required',
-            'tag' => 'string|required'
+            'title' => 'string|required|min:10',
+            'comment' => 'string|required|min:20',
+            'tag' => 'string|required|min:3'
         ]);
 
         if ($validate->fails()) {
@@ -76,12 +73,14 @@ class DiscussionController extends Controller
                 $id = TagDiscussionController::store($tag);
                 $discussion->tagDiscussions()->attach($id);
             }
+
+            Cache::forget('discussion');
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() != 0 ? $e->getCode() : 500);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
         $data = [
-            'message' => 'Discussion created',
+            'message' => 'Successfully created discussion',
             'data' => new DiscussionResource($discussion)
         ];
 
@@ -92,11 +91,12 @@ class DiscussionController extends Controller
     {
         try {
             $discussion->delete();
+            Cache::forget('discussion');
         } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() != 0 ? $e->getCode() : 500);
+            return ApiResponse::error($e->getMessage(), 500);
         }
 
-        $data['message'] = "Discussion Deleted";
+        $data['message'] = "Succesfully deleted discussion";
 
         return ApiResponse::success($data, 200);
     }
@@ -132,7 +132,7 @@ class DiscussionController extends Controller
 
         $data = [
             'message' => 'Show all discussion that matching key',
-            'data' => DiscussionResource::collection($discussion->all()->only($id->toArray()))
+            'data' => DiscussionResource::collection($discussion->get()->only($id->toArray()))
         ];
 
         return ApiResponse::success($data, 200);

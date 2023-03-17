@@ -46,7 +46,7 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         if (! Gate::allows('only-admin')) {
-            return ApiResponse::error("Unauthoried", 403);
+            return ApiResponse::error("Unauthorized", 403);
         };
 
         $validate = Validator::make($request->all(), [
@@ -99,7 +99,7 @@ class ArticleController extends Controller
     public function update(Request $request, Article $article)
     {   
         if (! Gate::allows('only-admin')) {
-            return ApiResponse::error("Unauthoried", 403);
+            return ApiResponse::error("Unauthorized", 403);
         };
         
         $validate = Validator::make($request->all(), [
@@ -150,7 +150,11 @@ class ArticleController extends Controller
     }
 
     public function destroy(Article $article)
-    {
+    {   
+        if (! Gate::allows('only-admin')) {
+            return ApiResponse::error("Unauthorized", 403);
+        };
+        
         try {
             Storage::delete(substr($article->image, 8));
             $article->delete();

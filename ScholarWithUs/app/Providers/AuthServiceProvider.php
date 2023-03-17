@@ -30,7 +30,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('user-program', function(User $user, Program $program){
-            if ($user->programs->find($program->id == null)) {
+            if ($user->programs->find($program->id) == null) {
                 return false;
             }
 

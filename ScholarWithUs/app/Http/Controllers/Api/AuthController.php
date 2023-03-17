@@ -15,8 +15,8 @@ class AuthController extends Controller
     {
         $validate = Validator::make($request->all(), [
             'name' => 'required|string',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|string|confirmed',
+            'email' => 'required|email|unique',
+            'password' => 'required|string|confirmed|min:8',
         ]);
 
         if ($validate->fails()) {
@@ -63,7 +63,7 @@ class AuthController extends Controller
         $data = [
             'message' => "Login successed",
             'data' => [
-                "token" => $token 
+                "token" => $token
             ]
         ];
 

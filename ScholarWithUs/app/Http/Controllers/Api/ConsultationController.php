@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Api\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\FileController;
 use App\Http\Controllers\Controller;
@@ -10,6 +10,7 @@ use App\Models\Program;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 class ConsultationController extends Controller
@@ -17,7 +18,7 @@ class ConsultationController extends Controller
     public function store(Request $request)
     {
         $validate = Validator::make($request->all(), [
-            'program_id' => 'required|int',
+            'program_id' => 'required|numeric',
             'type' => 'required|string|in:asking_mentor,review_document',
             'date' => 'required|date',
             'start' => 'required|string|in:09:00,13:00,15:00',
@@ -34,6 +35,10 @@ class ConsultationController extends Controller
             return ApiResponse::error("Program not found", 404);
         }
 
+        if (!Gate::allows('user-program', $program)) {
+            return ApiResponse::error("Unauthorized", 403);
+        }
+
         try {
             $consultation = new Consultation;
             $consultation->program_id = $request->program_id;
@@ -42,16 +47,18 @@ class ConsultationController extends Controller
             $consultation->date = $request->date;
             $consultation->start = $request->start;
             $consultation->finish = Carbon::parse($request->start)->addHour();
+            $consultation->save();
             if ($request->type == "review_document") {
                 $data = [
                     'file' => $request->file('document'),
                     'file_name' =>  $consultation->id . "." . $request->file('document')->extension(),
-                    'file_path' => '/consultation_document',
-                    'delete_file' => substr($consultation->image, 9)
+                    'file_path' => 'consultation_document',
+                    'delete_file' => substr($consultation->image, 8)
                 ];
 
                 $url = FileController::manage($data);
-                $consultation->document = $request->document;
+                $consultation->document = $url;
+                $consultation->save();
             }
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
@@ -68,7 +75,7 @@ class ConsultationController extends Controller
     public function available(Request $request)
     {
         $validate = Validator::make($request->all(), [
-            'program_id' => 'required|int'
+            'program_id' => 'required|numeric'
         ]);
 
         if ($validate->fails()) {
@@ -79,6 +86,10 @@ class ConsultationController extends Controller
 
         if (!$program) {
             return ApiResponse::error("Program not found", 404);
+        }
+
+        if (!Gate::allows('user-program', $program)) {
+            return ApiResponse::error("Unauthorized", 403);
         }
 
         $date = collect();

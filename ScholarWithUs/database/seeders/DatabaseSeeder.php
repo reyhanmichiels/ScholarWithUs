@@ -717,7 +717,7 @@ class DatabaseSeeder extends Seeder
         Scholarship::create([
             'tag_level_id' => 1,
             'tag_cost_id' => 2,
-            'name' => "Scholarship A",
+            'name' => "Scholarship C",
             'scholarship_provider' => "lorem",
             'open_registration' => "2023-03-10",
             'close_registration' => "2023-04-15",
@@ -737,7 +737,7 @@ class DatabaseSeeder extends Seeder
         Scholarship::create([
             'tag_level_id' => 1,
             'tag_cost_id' => 2,
-            'name' => "Scholarship A",
+            'name' => "Scholarship D",
             'scholarship_provider' => "lorem",
             'open_registration' => "2023-03-10",
             'close_registration' => "2023-04-15",
@@ -757,7 +757,7 @@ class DatabaseSeeder extends Seeder
         Scholarship::create([
             'tag_level_id' => 1,
             'tag_cost_id' => 2,
-            'name' => "Scholarship A",
+            'name' => "Scholarship E",
             'scholarship_provider' => "lorem",
             'open_registration' => "2023-03-10",
             'close_registration' => "2023-04-15",
@@ -777,7 +777,7 @@ class DatabaseSeeder extends Seeder
         Scholarship::create([
             'tag_level_id' => 1,
             'tag_cost_id' => 2,
-            'name' => "Scholarship A",
+            'name' => "Scholarship F",
             'scholarship_provider' => "lorem",
             'open_registration' => "2023-03-10",
             'close_registration' => "2023-04-15",
@@ -797,7 +797,7 @@ class DatabaseSeeder extends Seeder
         Scholarship::create([
             'tag_level_id' => 1,
             'tag_cost_id' => 2,
-            'name' => "Scholarship A",
+            'name' => "Scholarship G",
             'scholarship_provider' => "lorem",
             'open_registration' => "2023-03-10",
             'close_registration' => "2023-04-15",
@@ -817,7 +817,7 @@ class DatabaseSeeder extends Seeder
         Scholarship::create([
             'tag_level_id' => 1,
             'tag_cost_id' => 2,
-            'name' => "Scholarship A",
+            'name' => "Scholarship H",
             'scholarship_provider' => "lorem",
             'open_registration' => "2023-03-10",
             'close_registration' => "2023-04-15",
@@ -837,7 +837,7 @@ class DatabaseSeeder extends Seeder
         Scholarship::create([
             'tag_level_id' => 1,
             'tag_cost_id' => 2,
-            'name' => "Scholarship A",
+            'name' => "Scholarship I",
             'scholarship_provider' => "lorem",
             'open_registration' => "2023-03-10",
             'close_registration' => "2023-04-15",
@@ -857,7 +857,7 @@ class DatabaseSeeder extends Seeder
         Scholarship::create([
             'tag_level_id' => 1,
             'tag_cost_id' => 2,
-            'name' => "Scholarship A",
+            'name' => "Scholarship J",
             'scholarship_provider' => "lorem",
             'open_registration' => "2023-03-10",
             'close_registration' => "2023-04-15",
@@ -877,7 +877,7 @@ class DatabaseSeeder extends Seeder
         Scholarship::create([
             'tag_level_id' => 1,
             'tag_cost_id' => 2,
-            'name' => "Scholarship A",
+            'name' => "Scholarship K",
             'scholarship_provider' => "lorem",
             'open_registration' => "2023-03-10",
             'close_registration' => "2023-04-15",
@@ -897,7 +897,7 @@ class DatabaseSeeder extends Seeder
         Scholarship::create([
             'tag_level_id' => 1,
             'tag_cost_id' => 2,
-            'name' => "Scholarship A",
+            'name' => "Scholarship L",
             'scholarship_provider' => "lorem",
             'open_registration' => "2023-03-10",
             'close_registration' => "2023-04-15",
@@ -917,7 +917,7 @@ class DatabaseSeeder extends Seeder
         Scholarship::create([
             'tag_level_id' => 1,
             'tag_cost_id' => 2,
-            'name' => "Scholarship A",
+            'name' => "Scholarship M",
             'scholarship_provider' => "lorem",
             'open_registration' => "2023-03-10",
             'close_registration' => "2023-04-15",
@@ -937,7 +937,7 @@ class DatabaseSeeder extends Seeder
         Scholarship::create([
             'tag_level_id' => 1,
             'tag_cost_id' => 2,
-            'name' => "Scholarship A",
+            'name' => "Scholarship N",
             'scholarship_provider' => "lorem",
             'open_registration' => "2023-03-10",
             'close_registration' => "2023-04-15",
@@ -957,7 +957,7 @@ class DatabaseSeeder extends Seeder
         Scholarship::create([
             'tag_level_id' => 1,
             'tag_cost_id' => 2,
-            'name' => "Scholarship A",
+            'name' => "Scholarship O",
             'scholarship_provider' => "lorem",
             'open_registration' => "2023-03-10",
             'close_registration' => "2023-04-15",
@@ -977,7 +977,7 @@ class DatabaseSeeder extends Seeder
         Scholarship::create([
             'tag_level_id' => 1,
             'tag_cost_id' => 2,
-            'name' => "Scholarship A",
+            'name' => "Scholarship P",
             'scholarship_provider' => "lorem",
             'open_registration' => "2023-03-10",
             'close_registration' => "2023-04-15",
@@ -997,7 +997,7 @@ class DatabaseSeeder extends Seeder
         Scholarship::create([
             'tag_level_id' => 1,
             'tag_cost_id' => 2,
-            'name' => "Scholarship A",
+            'name' => "Scholarship Q",
             'scholarship_provider' => "lorem",
             'open_registration' => "2023-03-10",
             'close_registration' => "2023-04-15",
@@ -1017,7 +1017,7 @@ class DatabaseSeeder extends Seeder
         Scholarship::create([
             'tag_level_id' => 1,
             'tag_cost_id' => 2,
-            'name' => "Scholarship A",
+            'name' => "Scholarship R",
             'scholarship_provider' => "lorem",
             'open_registration' => "2023-03-10",
             'close_registration' => "2023-04-15",

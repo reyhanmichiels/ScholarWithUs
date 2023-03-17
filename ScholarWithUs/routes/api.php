@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\Api\ConsultationController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProgramController;
 use App\Http\Controllers\Api\ReplyController;
 use App\Http\Controllers\Api\ScholarshipController;
-use App\Http\Controllers\Api\TagController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\ArticleTagArticleController;
@@ -18,9 +18,7 @@ use App\Http\Controllers\Api\MaterialController;
 use App\Http\Controllers\Api\MentorController;
 use App\Http\Controllers\Api\TransactionController;
 use App\Http\Controllers\Api\UserProgressController;
-use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\InteractiveController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
