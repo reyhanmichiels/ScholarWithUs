@@ -712,65 +712,84 @@ class DatabaseSeeder extends Seeder
             'detail_information' => 'this is link',
             'image' => '/storage/scholarship_picture/example.svg'
         ]);
-        Scholarship::create([
-            'tag_level_id' => 1,
-            'tag_cost_id' => 2,
-            'name' => "Scholarship A",
-            'scholarship_provider' => "lorem",
-            'open_registration' => "2023-03-10",
-            'close_registration' => "2023-04-15",
-            'description' => 'Lorem Ipsum',
-            'university' => 'Lorem Ipsum',
-            'study_program' => 'Lorem Ipsum',
-            'benefit' => 'lorem ipsum',
-            'age' => 20,
-            'gpa' => 3.50,
-            'english_test' => 'Lorem Ipsum',
-            // 'other_language_test' => 'lorem ipsum',
-            // 'standarized_test' => 'lorem ipsum',
-            'documents' => 'Lorem Ipsum',
-            'detail_information' => 'this is link',
-            'image' => '/storage/scholarship_picture/example.svg'
+        
+
+        Program::create([
+            'tag_level_id' => 3,
+            'tag_cost_id' => 1,
+            'mentor_id' => 2,
+            'name' => "lorem",
+            'scholarship_id' => 3,
+            'description' => 'lorem',
+            'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
+            'price' => 1000,
+            'image' => "/storage//program_picture/example.svg"
         ]);
-        Scholarship::create([
-            'tag_level_id' => 1,
-            'tag_cost_id' => 2,
-            'name' => "Scholarship A",
-            'scholarship_provider' => "lorem",
-            'open_registration' => "2023-03-10",
-            'close_registration' => "2023-04-15",
-            'description' => 'Lorem Ipsum',
-            'university' => 'Lorem Ipsum',
-            'study_program' => 'Lorem Ipsum',
-            'benefit' => 'lorem ipsum',
-            'age' => 20,
-            'gpa' => 3.50,
-            'english_test' => 'Lorem Ipsum',
-            // 'other_language_test' => 'lorem ipsum',
-            // 'standarized_test' => 'lorem ipsum',
-            'documents' => 'Lorem Ipsum',
-            'detail_information' => 'this is link',
-            'image' => '/storage/scholarship_picture/example.svg'
+        Program::create([
+            'tag_level_id' => 3,
+            'tag_cost_id' => 1,
+            'mentor_id' => 2,
+            'name' => "lorem",
+            'scholarship_id' => 4,
+            'description' => 'lorem',
+            'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
+            'price' => 1000,
+            'image' => "/storage//program_picture/example.svg"
         ]);
-        Scholarship::create([
-            'tag_level_id' => 1,
-            'tag_cost_id' => 2,
-            'name' => "Scholarship A",
-            'scholarship_provider' => "lorem",
-            'open_registration' => "2023-03-10",
-            'close_registration' => "2023-04-15",
-            'description' => 'Lorem Ipsum',
-            'university' => 'Lorem Ipsum',
-            'study_program' => 'Lorem Ipsum',
-            'benefit' => 'lorem ipsum',
-            'age' => 20,
-            'gpa' => 3.50,
-            'english_test' => 'Lorem Ipsum',
-            // 'other_language_test' => 'lorem ipsum',
-            // 'standarized_test' => 'lorem ipsum',
-            'documents' => 'Lorem Ipsum',
-            'detail_information' => 'this is link',
-            'image' => '/storage/scholarship_picture/example.svg'
+        Program::create([
+            'tag_level_id' => 3,
+            'tag_cost_id' => 1,
+            'mentor_id' => 2,
+            'name' => "lorem",
+            'scholarship_id' => 5,
+            'description' => 'lorem',
+            'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
+            'price' => 1000,
+            'image' => "/storage//program_picture/example.svg"
+        ]);
+        Program::create([
+            'tag_level_id' => 3,
+            'tag_cost_id' => 1,
+            'mentor_id' => 2,
+            'name' => "lorem",
+            'scholarship_id' => 6,
+            'description' => 'lorem',
+            'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
+            'price' => 1000,
+            'image' => "/storage//program_picture/example.svg"
+        ]);
+        Program::create([
+            'tag_level_id' => 3,
+            'tag_cost_id' => 1,
+            'mentor_id' => 2,
+            'name' => "lorem",
+            'scholarship_id' => 7,
+            'description' => 'lorem',
+            'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
+            'price' => 1000,
+            'image' => "/storage//program_picture/example.svg"
+        ]);
+        Program::create([
+            'tag_level_id' => 3,
+            'tag_cost_id' => 1,
+            'mentor_id' => 2,
+            'name' => "lorem",
+            'scholarship_id' => 8,
+            'description' => 'lorem',
+            'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
+            'price' => 1000,
+            'image' => "/storage//program_picture/example.svg"
+        ]);
+        Program::create([
+            'tag_level_id' => 3,
+            'tag_cost_id' => 1,
+            'mentor_id' => 2,
+            'name' => "lorem",
+            'scholarship_id' => 9,
+            'description' => 'lorem',
+            'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
+            'price' => 1000,
+            'image' => "/storage//program_picture/example.svg"
         ]);
 
         // Scholarship::create([
