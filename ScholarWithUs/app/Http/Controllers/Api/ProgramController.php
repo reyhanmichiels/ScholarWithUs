@@ -271,6 +271,11 @@ class ProgramController extends Controller
                     "payment_type" => "qris",
                     "transaction_details" => $transaction_detail,
                 ]);
+            } else if ($request->payment_type == 'permata') {
+                $response = Http::withBasicAuth($key, " ")->post("https://api.sandbox.midtrans.com/v2/charge", [
+                    "payment_type" => "permata",
+                    "transaction_details" => $transaction_detail,
+                ]);
             } else {
                 $response = Http::withBasicAuth($key, " ")->post("https://api.sandbox.midtrans.com/v2/charge", [
                     "payment_type" => "bank_transfer",
