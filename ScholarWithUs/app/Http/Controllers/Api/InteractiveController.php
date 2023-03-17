@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Api\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\InteractiveResource;
 use App\Libraries\ApiResponse;
 use App\Models\Interactive;
