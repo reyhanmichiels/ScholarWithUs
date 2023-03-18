@@ -11,14 +11,10 @@ class TagCostController extends Controller
 {
     public function index(TagCost $tagCost)
     {
-        try {
-            $data = [
-                'message' => "All Tag Cost",
-                'data' => $tagCost->all()
-            ];
-        } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() == "" ? $e->getCode() : 500);
-        }
+        $data = [
+            'message' => "All Tag Cost",
+            'data' => $tagCost->all()
+        ];
 
         return ApiResponse::success($data, 200);
     }

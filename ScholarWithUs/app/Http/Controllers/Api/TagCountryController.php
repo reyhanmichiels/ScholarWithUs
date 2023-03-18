@@ -7,33 +7,34 @@ use App\Libraries\ApiResponse;
 use App\Models\TagCountry;
 use App\Models\TagLevel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 class TagCountryController extends Controller
 {
     public function index(TagCountry $tagCountry)
     {
-        try {
-            $data = [
-                'message' => "All Tag Country",
-                'data' => $tagCountry->all()
-            ];
-        } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), 500);
-        }
+        $data = [
+            'message' => "All Tag Country",
+            'data' => $tagCountry->all()
+        ];
 
         return ApiResponse::success($data, 200);
     }
 
     public function store(Request $request)
-    {   
+    {
+        if (!Gate::allows('only-admin')) {
+            return ApiResponse::error("Unauthorized", 403);
+        };
+
         $validate = Validator::make($request->all(), [
             'name' => 'string|required|unique'
         ]);
 
         try {
             $tagCountry = new TagCountry;
-            $tagCountry-> name = $request->name;
+            $tagCountry->name = $request->name;
             $tagCountry->save();
         } catch (\Exception $e) {
             ApiResponse::error($e->getMessage(), 500);
@@ -48,13 +49,17 @@ class TagCountryController extends Controller
     }
 
     public function update(Request $request, TagCountry $tagCountry)
-    {   
+    {
+        if (!Gate::allows('only-admin')) {
+            return ApiResponse::error("Unauthorized", 403);
+        };
+        
         $validate = Validator::make($request->all(), [
             'name' => 'string|required|unique'
         ]);
 
         try {
-            $tagCountry-> name = $request->name;
+            $tagCountry->name = $request->name;
             $tagCountry->save();
         } catch (\Exception $e) {
             ApiResponse::error($e->getMessage(), 500);
@@ -70,6 +75,10 @@ class TagCountryController extends Controller
 
     public function destroy(TagLevel $tagLevel)
     {
+        if (!Gate::allows('only-admin')) {
+            return ApiResponse::error("Unauthorized", 403);
+        };
+
         try {
             $tagLevel->delete();
         } catch (\Exception $e) {

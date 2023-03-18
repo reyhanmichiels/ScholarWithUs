@@ -20,12 +20,7 @@ class Course extends Model
     {
         return $this->hasMany(Material::class);
     }
-
-    // public function mentor()
-    // {
-    //     return $this->belongsTo(Mentor::class);
-    // }
-
+    
     public function userProgresses()
     {
         return $this->hasMany(UserProgress::class);

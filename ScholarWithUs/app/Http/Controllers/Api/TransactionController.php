@@ -8,43 +8,45 @@ use App\Libraries\ApiResponse;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class TransactionController extends Controller
 {
     public function index()
     {
-        try {
-            $user = Auth::user();
+        if (!Gate::allows('only-admin')) {
+            return ApiResponse::error("Unauthorized", 403);
+        };
 
-            $data = [
-                'message' => "All $user->name transaction",
-                'data' => TransactionResource::collection($user->transactions)
-            ];
-        } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() != 0 ? $e->getCode() : 500);
-        }
+        $user = Auth::user();
+
+        $data = [
+            'message' => "All $user->name transaction",
+            'data' => TransactionResource::collection($user->transactions)
+        ];
 
         return ApiResponse::success($data, 200);
     }
 
     public function show(Transaction $transaction)
     {
+        if (!Gate::allows('only-admin')) {
+            return ApiResponse::error("Unauthorized", 403);
+        };
+        
         $user = Auth::user();
 
         if ($user->id != $transaction->user_id) {
             return ApiResponse::error('not found', 404);
         }
 
-        try {
-            $user = Auth::user();
+        $user = Auth::user();
 
-            $data = [
-                'message' => "All $user->name transaction",
-                'data' => new TransactionResource($transaction)
-            ];
-        } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), $e->getCode() != 0 ? $e->getCode() : 500);
-        }
+        $data = [
+            'message' => "All $user->name transaction",
+            'data' => new TransactionResource($transaction)
+        ];
+
 
         return ApiResponse::success($data, 200);
     }

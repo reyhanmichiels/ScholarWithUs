@@ -16,17 +16,13 @@ use Illuminate\Validation\Rules\Enum;
 class UserController extends Controller
 {
     public function show()
-    {   
-        try {
-            $user = User::find(Auth::user()->id);
+    {
+        $user = User::find(Auth::user()->id);
 
-            $data = [
-                'message' => "user with id $user->id",
-                'data' => $user
-            ];
-        } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), 500);
-        }
+        $data = [
+            'message' => "user with id $user->id",
+            'data' => $user
+        ];
 
         return ApiResponse::success($data, 200);
     }
@@ -38,7 +34,7 @@ class UserController extends Controller
         $validate = Validator::make($request->all(), [
             'name' => 'string|required',
             'phone_number' => 'string|required',
-            'age' => 'int|required',
+            'age' => 'numeric|required',
             'gender' => 'required|in:male,female',
             'profile_picture' => 'sometimes|file'
         ]);
@@ -49,15 +45,15 @@ class UserController extends Controller
 
         $image = $request->file('profile_picture');
 
-        if (! empty($image)) {
+        if (!empty($image)) {
             $data = [
                 'file' => $image,
                 'file_name' => "$user->id." . $image->extension(),
-                'file_path' => '/profile_picture_user'
+                'file_path' => 'profile_picture_user'
             ];
-    
+
             $url = FileController::manage($data);
-    
+
             $user->image = $url;
         }
 

@@ -9,6 +9,8 @@ use App\Models\Scholarship;
 use App\Models\TagCost;
 use App\Models\TagLevel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,43 +18,46 @@ class ScholarshipController extends Controller
 {
     public function index(Scholarship $scholarship)
     {
-        try {
-            $data = [
-                'message' => "Get all scholarship",
-                'data' => ScholarshipResource::collection($scholarship->all())
-            ];
-        } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), 500);
+        if (Cache::has('scholar')) {
+            $response = Cache::get('scholar');
+        } else {
+            $response = $scholarship->all();
+            Cache::put('scholar', $response, 3600);
         }
+
+        $data = [
+            'message' => "Show all scholarship",
+            'data' => ScholarshipResource::collection($response)
+        ];
 
         return ApiResponse::success($data, 200);
     }
 
     public function show(Scholarship $scholarship)
     {
-        try {
-            $data = [
-                'message' => "Scholarship with id $scholarship->id",
-                'data' => new ScholarshipResource($scholarship)
-            ];
-        } catch (\Exception $e) {
-            return ApiResponse::error($e->getMessage(), 500);
-        }
+        $data = [
+            'message' => "Show scholarship with id $scholarship->id",
+            'data' => new ScholarshipResource($scholarship)
+        ];
 
         return ApiResponse::success($data, 200);
     }
 
     public function store(Request $request)
     {
+        if (!Gate::allows('only-admin')) {
+            return ApiResponse::error("Unauthorized", 403);
+        };
+
         $validate = Validator::make($request->all(), [
             'name'                  => 'string|required|unique:scholarships',
-            'tag_level_id'          => 'int|required',
-            'tag_cost_id'           => 'int|required',
+            'tag_level_id'          => 'numeric|required',
+            'tag_cost_id'           => 'numeric|required',
             'description'           => 'string|required',
             'university'            => 'string|required',
             'study_program'         => 'string|required',
             'benefit'               => 'string|required',
-            'age'                   => 'integer|required',
+            'age'                   => 'numeric|required',
             'gpa'                   => 'decimal:2|required',
             'english_test'          => 'string|required',
             'other_language_test'   => 'string|required',
@@ -113,12 +118,13 @@ class ScholarshipController extends Controller
 
             $scholarship->image = $url;
             $scholarship->save();
+            Cache::forget('scholar');
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
         }
 
         $data = [
-            'message' => 'Scholarship created',
+            'message' => 'Successfully created scholarship',
             'data' => new ScholarshipResource($scholarship)
         ];
 
@@ -127,6 +133,10 @@ class ScholarshipController extends Controller
 
     public function update(Request $request, Scholarship $scholarship)
     {
+        if (!Gate::allows('only-admin')) {
+            return ApiResponse::error("Unauthorized", 403);
+        };
+
         $validate = Validator::make($request->all(), [
             'name'                  => 'string|required|unique:scholarships,name,' . $scholarship->id,
             'tag_level_id'          => 'int|required',
@@ -195,6 +205,7 @@ class ScholarshipController extends Controller
             $scholarship->close_registration = $request->close_registration;
             $scholarship->image = $url ?? $scholarship->image;
             $scholarship->save();
+            Cache::forget('scholar');
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
         }
@@ -209,14 +220,19 @@ class ScholarshipController extends Controller
 
     public function destroy(Scholarship $scholarship)
     {
+        if (!Gate::allows('only-admin')) {
+            return ApiResponse::error("Unauthorized", 403);
+        };
+
         try {
             Storage::delete(substr($scholarship->image, 8));
             $scholarship->delete();
+            Cache::forget('scholar');
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
         }
 
-        $data['message'] = "scholarship Deleted";
+        $data['message'] = "Successfully deleted scholarship";
 
         return ApiResponse::success($data, 200);
     }
@@ -224,7 +240,7 @@ class ScholarshipController extends Controller
     public function showNew(Scholarship $scholarship)
     {
         try {
-            $response = $scholarship->all()->sortBy('open_registration')->take(9);
+            $response = $scholarship->orderByDesc('open_registration')->take(9)->get();
 
             $data = [
                 'message' => "9 newest scholarship",
