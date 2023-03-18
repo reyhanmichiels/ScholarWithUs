@@ -249,7 +249,7 @@ class ScholarshipController extends Controller
             return ApiResponse::error($validate->errors(), 409);
         }
 
-        $country_boolean = $request->tag_country_id;
+        $country_boolean = $request->tagsd;
         $cost_boolean = $request->tag_cost_id;
         $level_boolean = $request->tag_level_id;
 

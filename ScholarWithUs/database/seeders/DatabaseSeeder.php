@@ -137,7 +137,7 @@ class DatabaseSeeder extends Seeder
             'scholarship_id' => 1,
             'description' => 'Beasiswa Australian Government Research Training Program (AGRTP) International Fee Offset Scholarship - Australian National University untuk jenjang S2/S3 dengan tipe Fully Funded di Australia',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
-            'price' => 2500,
+            'price' => 2500000,
             'image' => "/storage/program_picture/example.svg"
         ]);
 
@@ -299,7 +299,7 @@ class DatabaseSeeder extends Seeder
             'scholarship_id' => 1,
             'description' => 'Beasiswa Monbukagakusho (MEXT) Graduate School of International Development (GSID) - Nagoya University untuk jenjang S3 dengan tipe Fully Funded di Jepang',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
-            'price' => 1000,
+            'price' => 1000000,
             'image' => "/storage/program_picture/example.svg"
         ]);
 
@@ -1044,7 +1044,7 @@ class DatabaseSeeder extends Seeder
             'scholarship_id' => 3,
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
-            'price' => 1000,
+            'price' => 1000000,
             'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
@@ -1055,7 +1055,7 @@ class DatabaseSeeder extends Seeder
             'scholarship_id' => 4,
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
-            'price' => 1000,
+            'price' => 1000000,
             'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
@@ -1066,7 +1066,7 @@ class DatabaseSeeder extends Seeder
             'scholarship_id' => 5,
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
-            'price' => 1000,
+            'price' => 1000000,
             'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
@@ -1077,7 +1077,7 @@ class DatabaseSeeder extends Seeder
             'scholarship_id' => 6,
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
-            'price' => 1000,
+            'price' => 1000000,
             'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
@@ -1088,7 +1088,7 @@ class DatabaseSeeder extends Seeder
             'scholarship_id' => 7,
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
-            'price' => 1000,
+            'price' => 1000000,
             'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
@@ -1099,7 +1099,7 @@ class DatabaseSeeder extends Seeder
             'scholarship_id' => 8,
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
-            'price' => 1000,
+            'price' => 1000000,
             'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
@@ -1110,7 +1110,7 @@ class DatabaseSeeder extends Seeder
             'scholarship_id' => 9,
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
-            'price' => 1000,
+            'price' => 1000000,
             'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
@@ -1121,7 +1121,7 @@ class DatabaseSeeder extends Seeder
             'scholarship_id' => 10,
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
-            'price' => 1000,
+            'price' => 1000000,
             'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
@@ -1132,7 +1132,7 @@ class DatabaseSeeder extends Seeder
             'scholarship_id' => 11,
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
-            'price' => 1000,
+            'price' => 1000000,
             'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
@@ -1143,7 +1143,7 @@ class DatabaseSeeder extends Seeder
             'scholarship_id' => 12,
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
-            'price' => 1000,
+            'price' => 1000000,
             'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
@@ -1154,7 +1154,7 @@ class DatabaseSeeder extends Seeder
             'scholarship_id' => 13,
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
-            'price' => 1000,
+            'price' => 1000000,
             'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
@@ -1165,7 +1165,7 @@ class DatabaseSeeder extends Seeder
             'scholarship_id' => 14,
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
-            'price' => 1000,
+            'price' => 1000000,
             'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
@@ -1176,7 +1176,7 @@ class DatabaseSeeder extends Seeder
             'scholarship_id' => 15,
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
-            'price' => 1000,
+            'price' => 1000000,
             'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
@@ -1187,7 +1187,7 @@ class DatabaseSeeder extends Seeder
             'scholarship_id' => 16,
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
-            'price' => 1000,
+            'price' => 1000000,
             'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
@@ -1198,7 +1198,7 @@ class DatabaseSeeder extends Seeder
             'scholarship_id' => 17,
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
-            'price' => 1000,
+            'price' => 1000000,
             'image' => "/storage/program_picture/example.svg"
         ]);
         Program::create([
@@ -1209,7 +1209,7 @@ class DatabaseSeeder extends Seeder
             'scholarship_id' => 18,
             'description' => 'lorem',
             'content' => "Modul Pembelajaran, Tanya Mentor, Video Pembelajaran, Review Dokumen, Kelas Interaktif",
-            'price' => 1000,
+            'price' => 1000000,
             'image' => "/storage/program_picture/example.svg"
         ]);
 
