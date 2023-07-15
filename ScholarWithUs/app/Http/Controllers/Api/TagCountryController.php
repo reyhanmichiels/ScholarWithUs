@@ -24,7 +24,7 @@ class TagCountryController extends Controller
 
     public function store(Request $request)
     {
-        if (!Gate::allows('only-admin')) {
+        if (!Gate::allows('isAdmin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 
@@ -50,7 +50,7 @@ class TagCountryController extends Controller
 
     public function update(Request $request, TagCountry $tagCountry)
     {
-        if (!Gate::allows('only-admin')) {
+        if (!Gate::allows('isAdmin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
         
@@ -75,7 +75,7 @@ class TagCountryController extends Controller
 
     public function destroy(TagLevel $tagLevel)
     {
-        if (!Gate::allows('only-admin')) {
+        if (!Gate::allows('isAdmin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 

@@ -38,7 +38,7 @@ class InteractiveController extends Controller
 
     public function store(Request $request)
     {   
-        if (! Gate::allows('only-admin')) {
+        if (! Gate::allows('isAdmin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 
@@ -79,7 +79,7 @@ class InteractiveController extends Controller
 
     public function destroy(Interactive $interactive)
     {
-        if (! Gate::allows('only-admin')) {
+        if (! Gate::allows('isAdmin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 

@@ -42,7 +42,7 @@ class MentorController extends Controller
 
     public function store(Request $request)
     {
-        if (!Gate::allows('only-admin')) {
+        if (!Gate::allows('isAdmin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 
@@ -91,7 +91,7 @@ class MentorController extends Controller
 
     public function update(Request $request, Mentor $mentor)
     {
-        if (!Gate::allows('only-admin')) {
+        if (!Gate::allows('isAdmin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 
@@ -141,7 +141,7 @@ class MentorController extends Controller
 
     public function destroy(Mentor $mentor)
     {
-        if (!Gate::allows('only-admin')) {
+        if (!Gate::allows('isAdmin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 

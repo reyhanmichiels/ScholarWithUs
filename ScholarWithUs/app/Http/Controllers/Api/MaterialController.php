@@ -40,7 +40,7 @@ class MaterialController extends Controller
 
     public function store(Request $request, Course $course)
     {
-        if (!Gate::allows('only-admin')) {
+        if (!Gate::allows('isAdmin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 
@@ -89,7 +89,7 @@ class MaterialController extends Controller
 
     public function update(Request $request, Course $course, Material $material)
     {
-        if (!Gate::allows('only-admin')) {
+        if (!Gate::allows('isAdmin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 
@@ -137,7 +137,7 @@ class MaterialController extends Controller
 
     public function destroy(Course $course, Material $material)
     {
-        if (!Gate::allows('only-admin')) {
+        if (!Gate::allows('isAdmin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 

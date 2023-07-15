@@ -88,7 +88,7 @@ class ProgramController extends Controller
 
     public function store(Request $request)
     {
-        if (!Gate::allows('only-admin')) {
+        if (!Gate::allows('isAdmin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 
@@ -166,7 +166,7 @@ class ProgramController extends Controller
 
     public function update(Request $request, Program $program)
     {
-        if (!Gate::allows('only-admin')) {
+        if (!Gate::allows('isAdmin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 
@@ -238,7 +238,7 @@ class ProgramController extends Controller
 
     public function destroy(Program $program)
     {
-        if (!Gate::allows('only-admin')) {
+        if (!Gate::allows('isAdmin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
         try {

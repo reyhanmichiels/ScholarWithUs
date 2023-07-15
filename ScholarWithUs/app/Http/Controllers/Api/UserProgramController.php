@@ -39,7 +39,7 @@ class UserProgramController extends Controller
 
     public function attach(Program $program)
     {
-        if (!Gate::allows('only-admin')) {
+        if (!Gate::allows('isAdmin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 
@@ -66,7 +66,7 @@ class UserProgramController extends Controller
 
     public function detach(Program $program)
     {
-        if (!Gate::allows('only-admin')) {
+        if (!Gate::allows('isAdmin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 

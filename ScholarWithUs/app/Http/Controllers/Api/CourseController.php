@@ -47,7 +47,7 @@ class CourseController extends Controller
 
     public function store(Request $request)
     {
-        if (!Gate::allows('only-admin')) {
+        if (!Gate::allows('isAdmin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 
@@ -77,7 +77,7 @@ class CourseController extends Controller
 
     public function update(Request $request, Course $course)
     {
-        if (!Gate::allows('only-admin')) {
+        if (!Gate::allows('isAdmin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 
@@ -106,7 +106,7 @@ class CourseController extends Controller
 
     public function destroy(Course $course)
     {
-        if (!Gate::allows('only-admin')) {
+        if (!Gate::allows('isAdmin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 
@@ -123,7 +123,7 @@ class CourseController extends Controller
 
     public function attach(Program $program, Course $course)
     {
-        if (!Gate::allows('only-admin')) {
+        if (!Gate::allows('isAdmin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 
@@ -148,7 +148,7 @@ class CourseController extends Controller
 
     public function detach(Program $program, Course $course)
     {
-        if (!Gate::allows('only-admin')) {
+        if (!Gate::allows('isAdmin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 

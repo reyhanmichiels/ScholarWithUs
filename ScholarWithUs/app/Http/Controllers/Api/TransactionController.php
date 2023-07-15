@@ -14,7 +14,7 @@ class TransactionController extends Controller
 {
     public function index()
     {
-        if (!Gate::allows('only-admin')) {
+        if (!Gate::allows('isAdmin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 
@@ -30,7 +30,7 @@ class TransactionController extends Controller
 
     public function show(Transaction $transaction)
     {
-        if (!Gate::allows('only-admin')) {
+        if (!Gate::allows('isAdmin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
         

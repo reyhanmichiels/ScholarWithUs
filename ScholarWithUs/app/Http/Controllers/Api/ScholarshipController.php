@@ -45,7 +45,7 @@ class ScholarshipController extends Controller
 
     public function store(Request $request)
     {
-        if (!Gate::allows('only-admin')) {
+        if (!Gate::allows('isAdmin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 
@@ -133,7 +133,7 @@ class ScholarshipController extends Controller
 
     public function update(Request $request, Scholarship $scholarship)
     {
-        if (!Gate::allows('only-admin')) {
+        if (!Gate::allows('isAdmin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 
@@ -220,7 +220,7 @@ class ScholarshipController extends Controller
 
     public function destroy(Scholarship $scholarship)
     {
-        if (!Gate::allows('only-admin')) {
+        if (!Gate::allows('isAdmin')) {
             return ApiResponse::error("Unauthorized", 403);
         };
 
