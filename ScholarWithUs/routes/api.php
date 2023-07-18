@@ -159,7 +159,6 @@ Route::controller(ArticleController::class)->group(function () {
     Route::get('/articles', 'index');
     Route::get('/articles/{article}', 'show');
     Route::get('/articles/{article}/recomend', 'recomend');
-    Route::get('/articles/tagArticles/{tagArticle}', 'filterByTag');
 });
 
 Route::controller(MentorController::class)->group(function () {
